@@ -41,7 +41,7 @@ type CategoryForm = {
   status: string;
 };
 
-const localUploadOrigin = 'http://localhost:3000';
+const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const categories = ref<Category[]>([
   { id: 1, name: '电子产品', parent: '根', status: '1' },
@@ -119,7 +119,7 @@ function resolveImageUrl(url?: string) {
   }
 
   if (url.startsWith('/uploads')) {
-    return `${localUploadOrigin}${url}`;
+    return `${uploadOrigin}${url}`;
   }
 
   return url.startsWith('/') ? url : `/${url}`;
@@ -291,9 +291,7 @@ onMounted(() => {
             :src="resolveImageUrl(record.icon)"
             :width="32"
             class="category-icon"
-            @error="
-              message.error('图片加载失败，请确认 localhost:3000 可以访问图片')
-            "
+            @error="message.error('图片加载失败，请确认文件服务可以正常访问')"
           />
           <span v-else>-</span>
         </template>

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { UploadProps } from 'ant-design-vue';
 
+import type { ProductApi } from '#/api';
+
 import { onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
@@ -8,6 +10,7 @@ import { Page } from '@vben/common-ui';
 import {
   Image as AntImage,
   Button,
+  Empty,
   Form,
   Input,
   InputNumber,
@@ -22,9 +25,14 @@ import {
 } from 'ant-design-vue';
 
 import {
+  addProductContactPermissionApi,
   createProductApi,
+  deleteProductContactPermissionApi,
+  getAdminUserListApi,
   getCategoryListApi,
+  getProductContactPermissionsApi,
   getProductListApi,
+  updateProductApi,
   uploadProductImageApi,
 } from '#/api';
 
@@ -40,15 +48,25 @@ type Product = {
   profit: number;
   sales: number;
   shippingFee: number;
+  showSupplierContact: number;
   status: number;
   stock: number;
   subtitle: string;
+  supplierName: string;
+  supplierPhone: string;
+  supplierWechat: string;
+  supplierWhatsapp: string;
   title: string;
 };
 
 type ProductForm = Omit<Product, 'id'>;
 
 type CategoryOption = {
+  label: string;
+  value: number;
+};
+
+type UserOption = {
   label: string;
   value: number;
 };
@@ -64,23 +82,39 @@ const defaultForm: ProductForm = {
   profit: 60,
   sales: 0,
   shippingFee: 20,
+  showSupplierContact: 0,
   status: 1,
   stock: 99,
   subtitle: '',
+  supplierName: '',
+  supplierPhone: '',
+  supplierWechat: '',
+  supplierWhatsapp: '',
   title: '',
 };
 
-const localUploadOrigin = 'http://localhost:3000';
+const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const products = ref<Product[]>([]);
+const queryTitle = ref('');
 const queryLoading = ref(false);
 const createVisible = ref(false);
 const createLoading = ref(false);
 const createForm = ref<ProductForm>({ ...defaultForm, images: [] });
+const editVisible = ref(false);
+const editLoading = ref(false);
+const editForm = ref<Product>({ ...defaultForm, id: '', images: [] });
 const coverFileList = ref<UploadProps['fileList']>([]);
 const imageFileList = ref<UploadProps['fileList']>([]);
+const editCoverFileList = ref<UploadProps['fileList']>([]);
+const editImageFileList = ref<UploadProps['fileList']>([]);
 const categoryLoading = ref(false);
 const categoryOptions = ref<CategoryOption[]>([]);
+const contactPermissionLoading = ref(false);
+const originalAuthorizedUserIds = ref<number[]>([]);
+const selectedAuthorizedUserIds = ref<number[]>([]);
+const userOptions = ref<UserOption[]>([]);
+let contactPermissionLoadVersion = 0;
 
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
@@ -118,9 +152,14 @@ function normalizeProducts(data: any): Product[] {
     profit: Number(item.profit ?? 0),
     sales: Number(item.sales ?? 0),
     shippingFee: Number(item.shippingFee ?? 0),
+    showSupplierContact: Number(item.showSupplierContact ?? 0),
     status: Number(item.status ?? 1),
     stock: Number(item.stock ?? 0),
     subtitle: item.subtitle ?? '',
+    supplierName: item.supplierName ?? '',
+    supplierPhone: item.supplierPhone ?? '',
+    supplierWechat: item.supplierWechat ?? '',
+    supplierWhatsapp: item.supplierWhatsapp ?? '',
     title: item.title ?? '',
   }));
 }
@@ -167,6 +206,33 @@ function normalizeCategoryOptions(data: any): CategoryOption[] {
     .filter((item: CategoryOption) => Number.isFinite(item.value));
 }
 
+function normalizeContactPermissions(
+  data: unknown,
+): ProductApi.ContactPermission[] {
+  return Array.isArray(data)
+    ? data
+        .map((item: any) => ({
+          createdAt: String(item.createdAt ?? ''),
+          email: String(item.email ?? ''),
+          userId: Number(item.userId),
+        }))
+        .filter((item) => Number.isFinite(item.userId))
+    : [];
+}
+
+function normalizeUserOptions(data: any): UserOption[] {
+  const list = Array.isArray(data)
+    ? data
+    : data?.list || data?.records || data?.rows || data?.data || [];
+
+  return list
+    .map((item: any) => ({
+      label: String(item.email ?? ''),
+      value: Number(item.id ?? item.userId),
+    }))
+    .filter((item: UserOption) => item.label && Number.isFinite(item.value));
+}
+
 function getUploadedImageUrl(data: any) {
   if (typeof data === 'string') {
     return data;
@@ -194,7 +260,7 @@ function resolveImageUrl(url?: string) {
   }
 
   if (url.startsWith('/uploads')) {
-    return `${localUploadOrigin}${url}`;
+    return `${uploadOrigin}${url}`;
   }
 
   return url.startsWith('/') ? url : `/${url}`;
@@ -210,10 +276,22 @@ function buildUploadFile(file: File, url: string) {
   };
 }
 
+function buildExistingUploadFile(url: string, uid: string) {
+  return {
+    name: url.split('/').pop() || 'image',
+    response: url,
+    status: 'done' as const,
+    uid,
+    url: resolveImageUrl(url),
+  };
+}
+
 async function queryProducts() {
   try {
     queryLoading.value = true;
-    const responseData = await getProductListApi();
+    const responseData = await getProductListApi({
+      title: queryTitle.value.trim() || undefined,
+    });
     products.value = normalizeProducts(responseData);
   } catch (error: any) {
     message.error(error?.message || '查询失败');
@@ -248,6 +326,64 @@ function openCreate() {
   imageFileList.value = [];
   createVisible.value = true;
   queryCategoryOptions();
+}
+
+async function openEdit(record: Product) {
+  const loadVersion = ++contactPermissionLoadVersion;
+
+  editForm.value = {
+    ...record,
+    images: [...(record.images || [])],
+  };
+  editCoverFileList.value = record.cover
+    ? [buildExistingUploadFile(record.cover, `${record.id}-cover`)]
+    : [];
+  editImageFileList.value = (record.images || []).map((image, index) =>
+    buildExistingUploadFile(image, `${record.id}-image-${index}`),
+  );
+  originalAuthorizedUserIds.value = [];
+  selectedAuthorizedUserIds.value = [];
+  userOptions.value = [];
+  editVisible.value = true;
+  queryCategoryOptions();
+
+  try {
+    contactPermissionLoading.value = true;
+    const [permissionData, userData] = await Promise.all([
+      getProductContactPermissionsApi(record.id),
+      getAdminUserListApi({ page: 1, pageSize: 100 }),
+    ]);
+
+    if (loadVersion !== contactPermissionLoadVersion) {
+      return;
+    }
+
+    const permissions = normalizeContactPermissions(permissionData);
+    const options = normalizeUserOptions(userData);
+    const optionUserIds = new Set(options.map((item) => item.value));
+
+    permissions.forEach((permission) => {
+      if (!optionUserIds.has(permission.userId)) {
+        options.push({
+          label: permission.email || `用户 ${permission.userId}`,
+          value: permission.userId,
+        });
+      }
+    });
+
+    const authorizedUserIds = permissions.map((item) => item.userId);
+    userOptions.value = options;
+    originalAuthorizedUserIds.value = [...authorizedUserIds];
+    selectedAuthorizedUserIds.value = [...authorizedUserIds];
+  } catch (error: any) {
+    if (loadVersion === contactPermissionLoadVersion) {
+      message.error(error?.message || '授权用户加载失败');
+    }
+  } finally {
+    if (loadVersion === contactPermissionLoadVersion) {
+      contactPermissionLoading.value = false;
+    }
+  }
 }
 
 function beforeImageUpload(file: File) {
@@ -305,6 +441,55 @@ const uploadProductImage: UploadProps['customRequest'] = async (options) => {
   }
 };
 
+const uploadEditCover: UploadProps['customRequest'] = async (options) => {
+  const file = options.file as File;
+
+  try {
+    const responseData = await uploadProductImageApi(file);
+    const imageUrl = getUploadedImageUrl(responseData);
+
+    if (!imageUrl) {
+      throw new Error('上传接口未返回图片地址');
+    }
+
+    editForm.value.cover = imageUrl;
+    editCoverFileList.value = [buildUploadFile(file, imageUrl)];
+    options.onSuccess?.(responseData);
+    message.success('封面上传成功');
+  } catch (error: any) {
+    editForm.value.cover = '';
+    editCoverFileList.value = [];
+    options.onError?.(error);
+    message.error(error?.message || '上传失败');
+  }
+};
+
+const uploadEditProductImage: UploadProps['customRequest'] = async (
+  options,
+) => {
+  const file = options.file as File;
+
+  try {
+    const responseData = await uploadProductImageApi(file);
+    const imageUrl = getUploadedImageUrl(responseData);
+
+    if (!imageUrl) {
+      throw new Error('上传接口未返回图片地址');
+    }
+
+    editForm.value.images = [...editForm.value.images, imageUrl];
+    editImageFileList.value = [
+      ...(editImageFileList.value || []),
+      buildUploadFile(file, imageUrl),
+    ];
+    options.onSuccess?.(responseData);
+    message.success('图片上传成功');
+  } catch (error: any) {
+    options.onError?.(error);
+    message.error(error?.message || '上传失败');
+  }
+};
+
 function removeCover() {
   createForm.value.cover = '';
   coverFileList.value = [];
@@ -323,6 +508,59 @@ function removeProductImage(
   return true;
 }
 
+function removeEditCover() {
+  editForm.value.cover = '';
+  editCoverFileList.value = [];
+}
+
+function removeEditProductImage(
+  file: NonNullable<UploadProps['fileList']>[number],
+) {
+  const rawUrl = typeof file.response === 'string' ? file.response : '';
+  editForm.value.images = editForm.value.images.filter(
+    (url) => url !== rawUrl && resolveImageUrl(url) !== file.url,
+  );
+  editImageFileList.value = (editImageFileList.value || []).filter(
+    (item) => item.uid !== file.uid,
+  );
+  return true;
+}
+
+function buildProductPayload(form: ProductForm) {
+  return {
+    categoryId: Number(form.categoryId),
+    chinaPrice: Number(form.chinaPrice),
+    cover: form.cover.trim(),
+    description: form.description.trim(),
+    images: form.images,
+    minimumOrderQuantity: Number(form.minimumOrderQuantity),
+    phPrice: Number(form.phPrice),
+    profit: Number(form.profit),
+    sales: Number(form.sales),
+    shippingFee: Number(form.shippingFee),
+    showSupplierContact: Number(form.showSupplierContact),
+    status: Number(form.status),
+    stock: Number(form.stock),
+    subtitle: form.subtitle.trim(),
+    supplierName: form.supplierName.trim(),
+    supplierPhone: form.supplierPhone.trim(),
+    supplierWechat: form.supplierWechat.trim(),
+    supplierWhatsapp: form.supplierWhatsapp.trim(),
+    title: form.title.trim(),
+  };
+}
+
+function validateProductPayload(
+  payload: ReturnType<typeof buildProductPayload>,
+) {
+  if (!payload.title) {
+    message.error('请输入商品标题');
+    return false;
+  }
+
+  return true;
+}
+
 async function createProduct() {
   const form = createForm.value;
   const payload = {
@@ -336,9 +574,14 @@ async function createProduct() {
     profit: Number(form.profit),
     sales: Number(form.sales),
     shippingFee: Number(form.shippingFee),
+    showSupplierContact: Number(form.showSupplierContact),
     status: Number(form.status),
     stock: Number(form.stock),
     subtitle: form.subtitle.trim(),
+    supplierName: form.supplierName.trim(),
+    supplierPhone: form.supplierPhone.trim(),
+    supplierWechat: form.supplierWechat.trim(),
+    supplierWhatsapp: form.supplierWhatsapp.trim(),
     title: form.title.trim(),
   };
 
@@ -366,6 +609,52 @@ async function createProduct() {
   }
 }
 
+async function updateProduct() {
+  if (contactPermissionLoading.value) {
+    return;
+  }
+
+  const payload = buildProductPayload(editForm.value);
+
+  if (!validateProductPayload(payload)) {
+    return;
+  }
+
+  try {
+    editLoading.value = true;
+    await updateProductApi({
+      ...payload,
+      id: editForm.value.id,
+    });
+
+    const originalUserIds = new Set(originalAuthorizedUserIds.value);
+    const selectedUserIds = new Set(selectedAuthorizedUserIds.value);
+    const addedUserIds = selectedAuthorizedUserIds.value.filter(
+      (userId) => !originalUserIds.has(userId),
+    );
+    const deletedUserIds = originalAuthorizedUserIds.value.filter(
+      (userId) => !selectedUserIds.has(userId),
+    );
+
+    await Promise.all([
+      ...addedUserIds.map((userId) =>
+        addProductContactPermissionApi(editForm.value.id, userId),
+      ),
+      ...deletedUserIds.map((userId) =>
+        deleteProductContactPermissionApi(editForm.value.id, userId),
+      ),
+    ]);
+
+    editVisible.value = false;
+    message.success('保存成功');
+    await queryProducts();
+  } catch (error: any) {
+    message.error(error?.message || '更新失败');
+  } finally {
+    editLoading.value = false;
+  }
+}
+
 function remove(id: number | string) {
   products.value = products.value.filter((i) => i.id !== id);
   message.success('已删除');
@@ -380,6 +669,13 @@ onMounted(() => {
 <template>
   <Page title="商品管理">
     <div class="mb-4 flex gap-2">
+      <Input
+        v-model:value="queryTitle"
+        allow-clear
+        placeholder="请输入商品标题"
+        style="width: 240px"
+        @press-enter="queryProducts"
+      />
       <Button :loading="queryLoading" @click="queryProducts">查询</Button>
       <Button type="primary" @click="openCreate">新增商品</Button>
     </div>
@@ -388,6 +684,7 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
+            <a @click="openEdit(record as Product)">编辑</a>
             <Popconfirm title="确定删除？" @confirm="() => remove(record.id)">
               <a>删除</a>
             </Popconfirm>
@@ -539,6 +836,146 @@ onMounted(() => {
         </div>
       </Form>
     </Modal>
+
+    <Modal
+      v-model:open="editVisible"
+      :confirm-loading="editLoading || contactPermissionLoading"
+      title="编辑商品"
+      width="820px"
+      @ok="updateProduct"
+    >
+      <Form layout="vertical">
+        <div class="product-form-grid">
+          <Form.Item class="product-form-full" label="商品标题" required>
+            <Input v-model:value="editForm.title" />
+          </Form.Item>
+          <Form.Item class="product-form-full" label="副标题">
+            <Input v-model:value="editForm.subtitle" />
+          </Form.Item>
+          <Form.Item label="产品类型" required>
+            <Select
+              v-model:value="editForm.categoryId"
+              :loading="categoryLoading"
+              :options="categoryOptions"
+              class="w-full"
+              placeholder="请选择分类"
+            />
+          </Form.Item>
+          <Form.Item label="封面图">
+            <Upload
+              v-model:file-list="editCoverFileList"
+              :before-upload="beforeImageUpload"
+              :custom-request="uploadEditCover"
+              :max-count="1"
+              @remove="removeEditCover"
+              accept="image/*"
+              list-type="picture-card"
+            >
+              <div>上传</div>
+            </Upload>
+          </Form.Item>
+          <Form.Item label="产品图片">
+            <Upload
+              v-model:file-list="editImageFileList"
+              :before-upload="beforeImageUpload"
+              :custom-request="uploadEditProductImage"
+              @remove="removeEditProductImage"
+              accept="image/*"
+              list-type="picture-card"
+              multiple
+            >
+              <div>上传</div>
+            </Upload>
+          </Form.Item>
+          <Form.Item class="product-form-full" label="商品描述">
+            <Input.TextArea
+              v-model:value="editForm.description"
+              :auto-size="{ minRows: 3, maxRows: 6 }"
+            />
+          </Form.Item>
+          <Form.Item label="中国价格">
+            <InputNumber v-model:value="editForm.chinaPrice" class="w-full" />
+          </Form.Item>
+          <Form.Item label="运费">
+            <InputNumber v-model:value="editForm.shippingFee" class="w-full" />
+          </Form.Item>
+          <Form.Item label="菲律宾价格">
+            <InputNumber v-model:value="editForm.phPrice" class="w-full" />
+          </Form.Item>
+          <Form.Item label="利润">
+            <InputNumber v-model:value="editForm.profit" class="w-full" />
+          </Form.Item>
+          <Form.Item label="库存">
+            <InputNumber v-model:value="editForm.stock" class="w-full" />
+          </Form.Item>
+          <Form.Item label="最低起订量">
+            <InputNumber
+              v-model:value="editForm.minimumOrderQuantity"
+              :min="1"
+              class="w-full"
+            />
+          </Form.Item>
+          <Form.Item label="销量">
+            <InputNumber v-model:value="editForm.sales" class="w-full" />
+          </Form.Item>
+          <Form.Item label="启用">
+            <Switch
+              v-model:checked="editForm.status"
+              :checked-value="1"
+              :un-checked-value="0"
+            />
+          </Form.Item>
+          <div class="product-form-full supplier-contact-section">
+            <div class="supplier-contact-title">供应商联系方式</div>
+            <Form.Item label="开启供应商联系方式">
+              <Switch
+                v-model:checked="editForm.showSupplierContact"
+                :checked-value="1"
+                :un-checked-value="0"
+              />
+            </Form.Item>
+
+            <div
+              v-if="editForm.showSupplierContact === 1"
+              class="supplier-contact-grid"
+            >
+              <Form.Item label="供应商名称">
+                <Input v-model:value="editForm.supplierName" />
+              </Form.Item>
+              <Form.Item label="WhatsApp">
+                <Input v-model:value="editForm.supplierWhatsapp" />
+              </Form.Item>
+              <Form.Item label="微信">
+                <Input v-model:value="editForm.supplierWechat" />
+              </Form.Item>
+              <Form.Item label="电话">
+                <Input v-model:value="editForm.supplierPhone" />
+              </Form.Item>
+              <Form.Item class="product-form-full" label="授权用户">
+                <Select
+                  v-model:value="selectedAuthorizedUserIds"
+                  :filter-option="true"
+                  :loading="contactPermissionLoading"
+                  :options="userOptions"
+                  allow-clear
+                  mode="multiple"
+                  option-filter-prop="label"
+                  placeholder="请选择可查看供应商联系方式的用户"
+                  show-search
+                >
+                  <template #notFoundContent>
+                    <Empty
+                      :image="Empty.PRESENTED_IMAGE_SIMPLE"
+                      description="暂无用户"
+                    />
+                  </template>
+                </Select>
+              </Form.Item>
+            </div>
+          </div>
+        </div>
+      </Form>
+    </Modal>
   </Page>
 </template>
 
@@ -589,10 +1026,32 @@ onMounted(() => {
   display: none !important;
 }
 
+.supplier-contact-section {
+  padding-top: 16px;
+  margin-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.supplier-contact-title {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.supplier-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 16px;
+}
+
 @media (max-width: 768px) {
   .product-form-grid {
     grid-template-columns: 1fr;
     max-height: 70vh;
+  }
+
+  .supplier-contact-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

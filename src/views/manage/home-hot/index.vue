@@ -92,7 +92,7 @@ const productLoading = ref(false);
 const productMap = ref<Record<number, ProductMeta>>({});
 const productOptions = ref<ProductOption[]>([]);
 
-const localUploadOrigin = 'http://localhost:3000';
+const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const statusOptions = [
   { label: '全部', value: '' },
@@ -175,27 +175,26 @@ function normalizeProductOptions(data: any): ProductOption[] {
 }
 
 function normalizeCategoryMap(data: any) {
-  return normalizeList(data).reduce(
-    (map: Record<number, string>, item: any) => {
-      const id = Number(item.id);
-      if (Number.isFinite(id)) {
-        map[id] = item.name ?? item.title ?? '';
-      }
-      return map;
-    },
-    {},
-  );
+  const map: Record<number, string> = {};
+  for (const item of normalizeList(data)) {
+    const id = Number(item.id);
+    if (Number.isFinite(id)) {
+      map[id] = item.name ?? item.title ?? '';
+    }
+  }
+  return map;
 }
 
 function buildProductMap(products: ProductOption[]) {
-  return products.reduce((map: Record<number, ProductMeta>, item) => {
+  const map: Record<number, ProductMeta> = {};
+  for (const item of products) {
     map[item.value] = {
       categoryId: item.categoryId,
       cover: item.cover,
       title: item.title,
     };
-    return map;
-  }, {});
+  }
+  return map;
 }
 
 function normalizeTotal(data: any, listLength: number) {
@@ -212,7 +211,7 @@ function resolveImageUrl(url?: string) {
   }
 
   if (url.startsWith('/uploads')) {
-    return `${localUploadOrigin}${url}`;
+    return `${uploadOrigin}${url}`;
   }
 
   return url.startsWith('/') ? url : `/${url}`;

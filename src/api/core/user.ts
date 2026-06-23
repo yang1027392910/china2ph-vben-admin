@@ -4,11 +4,20 @@ import { preferences } from '@vben/preferences';
 
 import { requestClient } from '#/api/request';
 
-type UserInfoResponse =
-  | Partial<UserInfo>
-  | {
-      data?: Partial<UserInfo>;
-    };
+export namespace AdminUserApi {
+  export interface UserListQuery {
+    page: number;
+    pageSize: number;
+  }
+
+  export interface UserPayload {
+    email: string;
+    name: string;
+    role: string;
+  }
+
+  export type UserResponse = Record<string, any>;
+}
 
 function normalizeUserInfo(data?: Partial<UserInfo>): UserInfo {
   return {
@@ -24,14 +33,18 @@ function normalizeUserInfo(data?: Partial<UserInfo>): UserInfo {
 }
 
 export async function getUserInfoApi() {
-  try {
-    const response =
-      await requestClient.get<UserInfoResponse>('/auth/admin/info');
-    const responseData = response as any;
-    const userInfo = responseData?.data ?? responseData;
+  return normalizeUserInfo();
+}
 
-    return normalizeUserInfo(userInfo);
-  } catch {
-    return normalizeUserInfo();
-  }
+export function getAdminUserListApi(params?: AdminUserApi.UserListQuery) {
+  return requestClient.get<AdminUserApi.UserResponse>('/admin/user/list', {
+    params,
+  });
+}
+
+export function createAdminUserApi(data: AdminUserApi.UserPayload) {
+  return requestClient.post<AdminUserApi.UserResponse>(
+    '/admin/user/list/created',
+    data,
+  );
 }

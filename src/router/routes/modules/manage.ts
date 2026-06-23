@@ -20,6 +20,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'UserVerificationManagement',
+        path: '/management/user-verifications',
+        component: () => import('#/views/manage/user-verification/index.vue'),
+        meta: {
+          title: '用户认证管理',
+          icon: 'lucide:user-check',
+        },
+      },
+      {
         name: 'EmailCodeRecord',
         path: '/management/email-codes',
         component: () => import('#/views/manage/email-code/index.vue'),
@@ -35,6 +44,33 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: '登录日志',
           icon: 'lucide:clipboard-list',
+        },
+      },
+      {
+        name: 'BannerManagement',
+        path: '/management/banners',
+        component: () => import('#/views/manage/banner/index.vue'),
+        meta: {
+          title: 'Banner管理',
+          icon: 'lucide:image',
+        },
+      },
+      {
+        name: 'HomeNavigationManagement',
+        path: '/management/home-navigation',
+        component: () => import('#/views/manage/home-navigation/index.vue'),
+        meta: {
+          title: '首页导航',
+          icon: 'lucide:layout-grid',
+        },
+      },
+      {
+        name: 'ProcurementContact',
+        path: '/management/procurement-contacts',
+        component: () => import('#/views/manage/procurement-contact/index.vue'),
+        meta: {
+          title: '客服管理',
+          icon: 'lucide:headphones',
         },
       },
     ],
@@ -74,6 +110,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: '首页热门',
           icon: 'lucide:fire',
+        },
+      },
+      {
+        name: 'LogisticsSupplier',
+        path: '/management/products/logistics-suppliers',
+        component: () => import('#/views/manage/logistics-supplier/index.vue'),
+        meta: {
+          title: '物流供应商',
+          icon: 'lucide:ship',
         },
       },
     ],

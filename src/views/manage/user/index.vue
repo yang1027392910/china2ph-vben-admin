@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import type { TableColumnsType } from 'ant-design-vue';
+
+import { onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -14,14 +16,30 @@ import {
   Table,
 } from 'ant-design-vue';
 
-type User = { email: string; id: number; name: string; role: string };
+import { createAdminUserApi, getAdminUserListApi } from '#/api';
 
-const users = ref<User[]>([
-  { id: 1, name: '张三', email: 'zhangsan@example.com', role: '管理员' },
-  { id: 2, name: '李四', email: 'lisi@example.com', role: '编辑' },
-]);
+type User = {
+  email: string;
+  id: number | string;
+  name: string;
+  role: string;
+};
 
-const columns = [
+type UserForm = Omit<User, 'id'>;
+
+const defaultForm: UserForm = {
+  email: '',
+  name: '',
+  role: '',
+};
+
+const users = ref<User[]>([]);
+const queryLoading = ref(false);
+const createVisible = ref(false);
+const createLoading = ref(false);
+const createForm = ref<UserForm>({ ...defaultForm });
+
+const columns: TableColumnsType<User> = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: '姓名', dataIndex: 'name', key: 'name' },
   { title: '邮箱', dataIndex: 'email', key: 'email' },
@@ -29,74 +47,122 @@ const columns = [
   { title: '操作', key: 'actions' },
 ];
 
-const modalVisible = ref(false);
-const editForm = ref({ id: 0, name: '', email: '', role: '' });
-const formRef = ref();
+function normalizeUsers(data: any): User[] {
+  const list = Array.isArray(data)
+    ? data
+    : data?.list || data?.records || data?.rows || data?.data || [];
 
-function add() {
-  editForm.value = { id: 0, name: '', email: '', role: '' };
-  modalVisible.value = true;
+  return list.map((item: any) => ({
+    email: String(item.email ?? ''),
+    id: item.id ?? item.userId ?? '',
+    name: String(item.name ?? item.realName ?? item.username ?? ''),
+    role: String(item.role ?? item.roleName ?? item.roles?.[0] ?? ''),
+  }));
 }
 
-function edit(row: User) {
-  editForm.value = { ...row };
-  modalVisible.value = true;
+async function queryUsers() {
+  try {
+    queryLoading.value = true;
+    const responseData = await getAdminUserListApi();
+    users.value = normalizeUsers(responseData);
+  } catch (error: any) {
+    message.error(error?.message || '查询失败');
+  } finally {
+    queryLoading.value = false;
+  }
 }
 
-function save() {
-  const f = editForm.value;
-  if (!f.name) {
+function openCreate() {
+  createForm.value = { ...defaultForm };
+  createVisible.value = true;
+}
+
+async function createUser() {
+  const payload = {
+    email: createForm.value.email.trim(),
+    name: createForm.value.name.trim(),
+    role: createForm.value.role.trim(),
+  };
+
+  if (!payload.name) {
     message.error('请输入姓名');
     return;
   }
-  if (f.id === 0) {
-    f.id = Date.now();
-    users.value.push({ ...f });
-    message.success('新增成功');
-  } else {
-    const idx = users.value.findIndex((i) => i.id === f.id);
-    if (idx !== -1) users.value[idx] = { ...f };
-    message.success('更新成功');
+
+  if (!payload.email) {
+    message.error('请输入邮箱');
+    return;
   }
-  modalVisible.value = false;
+
+  try {
+    createLoading.value = true;
+    await createAdminUserApi(payload);
+    createVisible.value = false;
+    message.success('新增成功');
+    await queryUsers();
+  } catch (error: any) {
+    message.error(error?.message || '新增失败');
+  } finally {
+    createLoading.value = false;
+  }
 }
 
-function remove(id: number) {
-  users.value = users.value.filter((i) => i.id !== id);
+function remove(id: number | string) {
+  users.value = users.value.filter((item) => item.id !== id);
   message.success('已删除');
 }
+
+function getCellValue(record: Record<string, any>, dataIndex: unknown) {
+  return typeof dataIndex === 'string' ? record[dataIndex] : '';
+}
+
+onMounted(() => {
+  queryUsers();
+});
 </script>
 
 <template>
-  <Page title="用户管理" description="增删改查示例页面">
-    <div class="mb-4">
-      <Button type="primary" @click="add">新建用户</Button>
+  <Page title="用户管理" description="用户列表">
+    <div class="mb-4 flex gap-2">
+      <Button :loading="queryLoading" @click="queryUsers">查询</Button>
+      <Button type="primary" @click="openCreate">新建用户</Button>
     </div>
-    <Table :columns="columns" :data-source="users" row-key="id">
+
+    <Table
+      :columns="columns"
+      :data-source="users"
+      :loading="queryLoading"
+      row-key="id"
+    >
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <a @click="edit(record)">编辑</a>
             <Popconfirm title="确定删除?" @confirm="() => remove(record.id)">
               <a>删除</a>
             </Popconfirm>
           </Space>
         </template>
         <template v-else>
-          {{ record[column.dataIndex] }}
+          {{ getCellValue(record, column.dataIndex) }}
         </template>
       </template>
     </Table>
-    <Modal v-model:visible="modalVisible" title="用户" @ok="save">
-      <Form ref="formRef" layout="vertical">
-        <Form.Item label="姓名">
-          <Input v-model:value="editForm.name" />
+
+    <Modal
+      v-model:open="createVisible"
+      :confirm-loading="createLoading"
+      title="新建用户"
+      @ok="createUser"
+    >
+      <Form layout="vertical">
+        <Form.Item label="姓名" required>
+          <Input v-model:value="createForm.name" />
         </Form.Item>
-        <Form.Item label="邮箱">
-          <Input v-model:value="editForm.email" />
+        <Form.Item label="邮箱" required>
+          <Input v-model:value="createForm.email" />
         </Form.Item>
         <Form.Item label="角色">
-          <Input v-model:value="editForm.role" />
+          <Input v-model:value="createForm.role" />
         </Form.Item>
       </Form>
     </Modal>
