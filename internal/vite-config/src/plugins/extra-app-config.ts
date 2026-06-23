@@ -25,6 +25,7 @@ async function viteExtraAppConfigPlugin({
   isBuild,
   root,
 }: PluginOptions): Promise<PluginOption | undefined> {
+  let appConfigFileName: string;
   let publicPath: string;
   let source: string;
   let hash: string;
@@ -40,11 +41,12 @@ async function viteExtraAppConfigPlugin({
       publicPath = ensureTrailingSlash(config.base);
       source = await getConfigSource();
       hash = generatorContentHash(source, 8);
+      appConfigFileName = `${config.build.assetsDir}/${GLOBAL_CONFIG_FILE_NAME}-${version}-${hash}.js`;
     },
     async generateBundle() {
       try {
         this.emitFile({
-          fileName: `${GLOBAL_CONFIG_FILE_NAME}-${version}-${hash}.js`,
+          fileName: appConfigFileName,
           source,
           type: 'asset',
         });
@@ -60,7 +62,7 @@ async function viteExtraAppConfigPlugin({
     },
     name: 'vite:extra-app-config',
     async transformIndexHtml(html) {
-      const appConfigSrc = `${publicPath}${GLOBAL_CONFIG_FILE_NAME}-${version}-${hash}.js`;
+      const appConfigSrc = `${publicPath}${appConfigFileName}`;
 
       return {
         html,

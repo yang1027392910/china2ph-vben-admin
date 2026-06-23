@@ -58,20 +58,6 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
     const applicationConfig: UserConfig = {
       base,
       build: {
-        rolldownOptions: {
-          output: {
-            assetFileNames: '[ext]/[name]-[hash].[ext]',
-            chunkFileNames: 'js/[name]-[hash].js',
-            entryFileNames: 'jse/index-[name]-[hash].js',
-            minify: isBuild
-              ? {
-                  compress: {
-                    dropDebugger: true,
-                  },
-                }
-              : false,
-          },
-        },
         target: 'es2015',
       },
       css: createCssOptions(injectGlobalScss),
