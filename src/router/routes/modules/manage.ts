@@ -113,6 +113,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'ProductSupplier',
+        path: '/management/products/suppliers',
+        component: () => import('#/views/manage/supplier/index.vue'),
+        meta: {
+          title: '商品供应商',
+          icon: 'lucide:store',
+        },
+      },
+      {
         name: 'LogisticsSupplier',
         path: '/management/products/logistics-suppliers',
         component: () => import('#/views/manage/logistics-supplier/index.vue'),

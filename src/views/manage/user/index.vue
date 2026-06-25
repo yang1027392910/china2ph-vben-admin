@@ -14,22 +14,31 @@ import {
   Popconfirm,
   Space,
   Table,
+  Tag,
 } from 'ant-design-vue';
 
 import { createAdminUserApi, getAdminUserListApi } from '#/api';
 
 type User = {
+  canLottery: boolean;
   email: string;
   id: number | string;
+  inviteCode: string;
+  inviteCount: number;
   name: string;
+  nickname: string;
   role: string;
 };
 
 type UserForm = Omit<User, 'id'>;
 
 const defaultForm: UserForm = {
+  canLottery: false,
   email: '',
+  inviteCode: '',
+  inviteCount: 0,
   name: '',
+  nickname: '',
   role: '',
 };
 
@@ -41,8 +50,12 @@ const createForm = ref<UserForm>({ ...defaultForm });
 
 const columns: TableColumnsType<User> = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
+  { title: '昵称', dataIndex: 'nickname', key: 'nickname' },
   { title: '姓名', dataIndex: 'name', key: 'name' },
   { title: '邮箱', dataIndex: 'email', key: 'email' },
+  { title: '邀请码', dataIndex: 'inviteCode', key: 'inviteCode' },
+  { title: '邀请人数', dataIndex: 'inviteCount', key: 'inviteCount' },
+  { title: '可抽奖', dataIndex: 'canLottery', key: 'canLottery' },
   { title: '角色', dataIndex: 'role', key: 'role' },
   { title: '操作', key: 'actions' },
 ];
@@ -53,11 +66,19 @@ function normalizeUsers(data: any): User[] {
     : data?.list || data?.records || data?.rows || data?.data || [];
 
   return list.map((item: any) => ({
+    canLottery: normalizeBoolean(item.canLottery ?? item.can_lottery),
     email: String(item.email ?? ''),
     id: item.id ?? item.userId ?? '',
+    inviteCode: String(item.inviteCode ?? item.invite_code ?? ''),
+    inviteCount: Number(item.inviteCount ?? item.invite_count ?? 0),
     name: String(item.name ?? item.realName ?? item.username ?? ''),
+    nickname: String(item.nickname ?? item.nickName ?? item.nick_name ?? ''),
     role: String(item.role ?? item.roleName ?? item.roles?.[0] ?? ''),
   }));
+}
+
+function normalizeBoolean(value: unknown) {
+  return value === true || value === 1 || value === '1';
 }
 
 async function queryUsers() {
@@ -116,6 +137,10 @@ function getCellValue(record: Record<string, any>, dataIndex: unknown) {
   return typeof dataIndex === 'string' ? record[dataIndex] : '';
 }
 
+function formatCellValue(value: unknown) {
+  return value === undefined || value === null || value === '' ? '-' : value;
+}
+
 onMounted(() => {
   queryUsers();
 });
@@ -132,6 +157,7 @@ onMounted(() => {
       :columns="columns"
       :data-source="users"
       :loading="queryLoading"
+      :scroll="{ x: 1100 }"
       row-key="id"
     >
       <template #bodyCell="{ record, column }">
@@ -142,8 +168,13 @@ onMounted(() => {
             </Popconfirm>
           </Space>
         </template>
+        <template v-else-if="column.key === 'canLottery'">
+          <Tag :color="record.canLottery ? 'green' : 'default'">
+            {{ record.canLottery ? '是' : '否' }}
+          </Tag>
+        </template>
         <template v-else>
-          {{ getCellValue(record, column.dataIndex) }}
+          {{ formatCellValue(getCellValue(record, column.dataIndex)) }}
         </template>
       </template>
     </Table>

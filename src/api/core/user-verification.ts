@@ -19,7 +19,7 @@ export namespace UserVerificationApi {
     storeDescription: string;
     storePhotos: string[];
     updatedAt: string;
-    userId: number | string;
+    userName: string;
   }
 
   export interface VerificationListQuery {

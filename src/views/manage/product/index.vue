@@ -3,7 +3,7 @@ import type { UploadProps } from 'ant-design-vue';
 
 import type { ProductApi } from '#/api';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -21,6 +21,7 @@ import {
   Space,
   Switch,
   Table,
+  Tag,
   Upload,
 } from 'ant-design-vue';
 
@@ -71,6 +72,13 @@ type UserOption = {
   value: number;
 };
 
+type AuthorizedUserPreviewRow = {
+  email: string;
+  key: number;
+  status: 'added' | 'removed' | 'unchanged';
+  userId: number;
+};
+
 const defaultForm: ProductForm = {
   categoryId: 1,
   chinaPrice: 100,
@@ -96,6 +104,7 @@ const defaultForm: ProductForm = {
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const products = ref<Product[]>([]);
+const queryHotType = ref('');
 const queryTitle = ref('');
 const queryLoading = ref(false);
 const createVisible = ref(false);
@@ -116,6 +125,14 @@ const selectedAuthorizedUserIds = ref<number[]>([]);
 const userOptions = ref<UserOption[]>([]);
 let contactPermissionLoadVersion = 0;
 
+const hotTypeOptions = [
+  { label: '全部', value: '' },
+  { label: 'today', value: 'today' },
+  { label: 'week', value: 'week' },
+  { label: 'month', value: 'month' },
+  { label: 'new_alert', value: 'new_alert' },
+];
+
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: '标题', dataIndex: 'title', key: 'title' },
@@ -134,6 +151,43 @@ const columns = [
   { title: '状态', dataIndex: 'status', key: 'status' },
   { title: '操作', key: 'actions' },
 ];
+
+const authorizedUserPreviewColumns = [
+  { title: '用户', dataIndex: 'email', key: 'email' },
+  { title: '用户ID', dataIndex: 'userId', key: 'userId', width: 100 },
+  { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
+];
+
+const authorizedUserPreviewRows = computed<AuthorizedUserPreviewRow[]>(() => {
+  const originalUserIdSet = new Set(originalAuthorizedUserIds.value);
+  const selectedUserIdSet = new Set(selectedAuthorizedUserIds.value);
+  const userIds = [
+    ...selectedAuthorizedUserIds.value,
+    ...originalAuthorizedUserIds.value.filter(
+      (userId) => !selectedUserIdSet.has(userId),
+    ),
+  ];
+
+  return userIds.map((userId) => ({
+    email: getUserOptionLabel(userId),
+    key: userId,
+    status: !originalUserIdSet.has(userId)
+      ? 'added'
+      : selectedUserIdSet.has(userId)
+        ? 'unchanged'
+        : 'removed',
+    userId,
+  }));
+});
+
+const authorizedUserStatusMap: Record<
+  AuthorizedUserPreviewRow['status'],
+  { color: string; text: string }
+> = {
+  added: { color: 'green', text: '新增' },
+  removed: { color: 'red', text: '待移除' },
+  unchanged: { color: 'blue', text: '已授权' },
+};
 
 function normalizeProducts(data: any): Product[] {
   const list = Array.isArray(data)
@@ -233,6 +287,50 @@ function normalizeUserOptions(data: any): UserOption[] {
     .filter((item: UserOption) => item.label && Number.isFinite(item.value));
 }
 
+function getUserOptionLabel(userId: number) {
+  return (
+    userOptions.value.find((item) => item.value === userId)?.label ||
+    `用户 ${userId}`
+  );
+}
+
+function updateSelectedAuthorizedUsers(nextValue: unknown) {
+  const nextUserIds = (Array.isArray(nextValue) ? nextValue : [])
+    .map((item) => Number(item))
+    .filter((item) => Number.isFinite(item));
+  const nextUserIdSet = new Set(nextUserIds);
+  const removedUserIds = selectedAuthorizedUserIds.value.filter(
+    (userId) => !nextUserIdSet.has(userId),
+  );
+
+  if (removedUserIds.length === 0) {
+    selectedAuthorizedUserIds.value = nextUserIds;
+    return;
+  }
+
+  Modal.confirm({
+    cancelText: '取消',
+    content: `将移除 ${removedUserIds
+      .map((userId) => getUserOptionLabel(userId))
+      .join('、')} 的供应商联系方式查看权限，保存后生效。`,
+    okText: '确认移除',
+    okType: 'danger',
+    onOk: () => {
+      selectedAuthorizedUserIds.value = nextUserIds;
+    },
+    title: '确认移除授权用户？',
+  });
+}
+
+async function copyAuthorizedUser(value: string) {
+  try {
+    await navigator.clipboard.writeText(value);
+    message.success('复制成功');
+  } catch {
+    message.error('复制失败');
+  }
+}
+
 function getUploadedImageUrl(data: any) {
   if (typeof data === 'string') {
     return data;
@@ -290,6 +388,7 @@ async function queryProducts() {
   try {
     queryLoading.value = true;
     const responseData = await getProductListApi({
+      hotType: queryHotType.value || undefined,
       title: queryTitle.value.trim() || undefined,
     });
     products.value = normalizeProducts(responseData);
@@ -669,6 +768,12 @@ onMounted(() => {
 <template>
   <Page title="商品管理">
     <div class="mb-4 flex gap-2">
+      <Select
+        v-model:value="queryHotType"
+        :options="hotTypeOptions"
+        placeholder="热门类型"
+        style="width: 140px"
+      />
       <Input
         v-model:value="queryTitle"
         allow-clear
@@ -953,15 +1058,16 @@ onMounted(() => {
               </Form.Item>
               <Form.Item class="product-form-full" label="授权用户">
                 <Select
-                  v-model:value="selectedAuthorizedUserIds"
                   :filter-option="true"
                   :loading="contactPermissionLoading"
                   :options="userOptions"
+                  :value="selectedAuthorizedUserIds"
                   allow-clear
                   mode="multiple"
                   option-filter-prop="label"
                   placeholder="请选择可查看供应商联系方式的用户"
                   show-search
+                  @change="updateSelectedAuthorizedUsers"
                 >
                   <template #notFoundContent>
                     <Empty
@@ -970,6 +1076,52 @@ onMounted(() => {
                     />
                   </template>
                 </Select>
+                <Table
+                  v-if="authorizedUserPreviewRows.length > 0"
+                  :columns="authorizedUserPreviewColumns"
+                  :data-source="authorizedUserPreviewRows"
+                  :pagination="false"
+                  class="authorized-user-preview-table"
+                  row-key="key"
+                  size="small"
+                >
+                  <template #bodyCell="{ record, column }">
+                    <template v-if="column.key === 'status'">
+                      <Tag
+                        :color="
+                          authorizedUserStatusMap[
+                            record.status as AuthorizedUserPreviewRow['status']
+                          ].color
+                        "
+                      >
+                        {{
+                          authorizedUserStatusMap[
+                            record.status as AuthorizedUserPreviewRow['status']
+                          ].text
+                        }}
+                      </Tag>
+                    </template>
+                    <template v-else-if="column.key === 'email'">
+                      <Space>
+                        <span>{{ record.email }}</span>
+                        <Button
+                          size="small"
+                          type="link"
+                          @click="copyAuthorizedUser(record.email)"
+                        >
+                          复制
+                        </Button>
+                      </Space>
+                    </template>
+                    <template v-else>
+                      {{
+                        record[
+                          column.dataIndex as keyof AuthorizedUserPreviewRow
+                        ]
+                      }}
+                    </template>
+                  </template>
+                </Table>
               </Form.Item>
             </div>
           </div>
@@ -1042,6 +1194,10 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 16px;
+}
+
+.authorized-user-preview-table {
+  margin-top: 12px;
 }
 
 @media (max-width: 768px) {

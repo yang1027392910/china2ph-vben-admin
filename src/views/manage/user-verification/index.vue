@@ -64,7 +64,7 @@ const statusMap: Record<VerificationStatus, { color: string; text: string }> = {
 
 const columns: TableColumnsType<VerificationRecord> = [
   { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
-  { title: '用户ID', dataIndex: 'userId', key: 'userId', width: 100 },
+  { title: '用户名', dataIndex: 'userName', key: 'userName', width: 120 },
   { title: '姓名', dataIndex: 'fullName', key: 'fullName', width: 120 },
   { title: '联系电话', dataIndex: 'phone', key: 'phone', width: 150 },
   { title: '邮箱', dataIndex: 'email', key: 'email', width: 210 },
@@ -146,7 +146,7 @@ function normalizeRecord(item: any): VerificationRecord {
       item.storePhotos ?? item.store_photos ?? [],
     ),
     updatedAt: String(item.updatedAt ?? item.updated_at ?? ''),
-    userId: item.userId ?? item.user_id ?? '',
+    userName: String(item.userName ?? item.user_name ?? ''),
   };
 }
 
@@ -364,8 +364,8 @@ onMounted(() => {
         <Descriptions.Item label="申请ID">
           {{ detailRecord.id }}
         </Descriptions.Item>
-        <Descriptions.Item label="用户ID">
-          {{ detailRecord.userId }}
+        <Descriptions.Item label="用户名">
+          {{ detailRecord.userName || '-' }}
         </Descriptions.Item>
         <Descriptions.Item label="姓名">
           {{ detailRecord.fullName || '-' }}

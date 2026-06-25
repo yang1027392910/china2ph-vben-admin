@@ -9,6 +9,7 @@ export * from './logistics-supplier';
 export * from './menu';
 export * from './procurement-contact';
 export * from './product';
+export * from './supplier';
 export * from './upload';
 export * from './user';
 export * from './user-verification';
