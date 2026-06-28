@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { TableProps } from 'ant-design-vue';
+
 import { onMounted, reactive, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
@@ -23,10 +25,13 @@ type LoginLog = {
 const filters = reactive({
   account: '',
   ip: '',
+  page: 1,
+  pageSize: 10,
   status: undefined as string | undefined,
 });
 
 const logs = ref<LoginLog[]>([]);
+const total = ref(0);
 const queryLoading = ref(false);
 
 const columns = [
@@ -76,24 +81,47 @@ function normalizeLogs(data: any): LoginLog[] {
   }));
 }
 
+function normalizeTotal(data: any, listLength: number) {
+  return Number(data?.total ?? data?.pagination?.total ?? listLength);
+}
+
 async function queryLogs() {
   try {
     queryLoading.value = true;
     const responseData = await getLoginLogListApi({
       account: filters.account.trim() || undefined,
       ip: filters.ip.trim() || undefined,
+      page: filters.page,
+      pageSize: filters.pageSize,
       status: filters.status,
     });
     logs.value = normalizeLogs(responseData);
+    total.value = normalizeTotal(responseData, logs.value.length);
   } finally {
     queryLoading.value = false;
   }
 }
 
+function handleSearch() {
+  filters.page = 1;
+  queryLogs();
+}
+
 function resetFilters() {
   filters.account = '';
   filters.ip = '';
+  filters.page = 1;
   filters.status = undefined;
+  queryLogs();
+}
+
+function handleTableChange(pagination: TableProps['pagination']) {
+  if (!pagination || typeof pagination === 'boolean') {
+    return;
+  }
+
+  filters.page = pagination.current ?? 1;
+  filters.pageSize = pagination.pageSize ?? 10;
   queryLogs();
 }
 
@@ -132,7 +160,7 @@ onMounted(() => {
       </Form.Item>
       <Form.Item>
         <Space>
-          <Button :loading="queryLoading" type="primary" @click="queryLogs">
+          <Button :loading="queryLoading" type="primary" @click="handleSearch">
             查询
           </Button>
           <Button @click="resetFilters">重置</Button>
@@ -144,8 +172,15 @@ onMounted(() => {
       :columns="columns"
       :data-source="logs"
       :loading="queryLoading"
+      :pagination="{
+        current: filters.page,
+        pageSize: filters.pageSize,
+        showSizeChanger: true,
+        total,
+      }"
       :scroll="{ x: 1360 }"
       row-key="id"
+      @change="handleTableChange"
     >
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'status'">

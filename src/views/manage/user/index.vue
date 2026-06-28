@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { TableColumnsType } from 'ant-design-vue';
+import type { TableColumnsType, TableProps } from 'ant-design-vue';
 
 import { onMounted, ref } from 'vue';
 
@@ -42,7 +42,14 @@ const defaultForm: UserForm = {
   role: '',
 };
 
+const defaultQuery = {
+  page: 1,
+  pageSize: 10,
+};
+
 const users = ref<User[]>([]);
+const queryForm = ref({ ...defaultQuery });
+const total = ref(0);
 const queryLoading = ref(false);
 const createVisible = ref(false);
 const createLoading = ref(false);
@@ -81,16 +88,35 @@ function normalizeBoolean(value: unknown) {
   return value === true || value === 1 || value === '1';
 }
 
-async function queryUsers() {
+function normalizeTotal(data: any, listLength: number) {
+  return Number(data?.total ?? data?.pagination?.total ?? listLength);
+}
+
+async function queryUsers(page = queryForm.value.page) {
   try {
     queryLoading.value = true;
-    const responseData = await getAdminUserListApi();
+    queryForm.value.page = page;
+    const responseData = await getAdminUserListApi({
+      page: queryForm.value.page,
+      pageSize: queryForm.value.pageSize,
+    });
     users.value = normalizeUsers(responseData);
+    total.value = normalizeTotal(responseData, users.value.length);
   } catch (error: any) {
     message.error(error?.message || '查询失败');
   } finally {
     queryLoading.value = false;
   }
+}
+
+function handleTableChange(pagination: TableProps['pagination']) {
+  if (!pagination || typeof pagination === 'boolean') {
+    return;
+  }
+
+  queryForm.value.page = pagination.current ?? 1;
+  queryForm.value.pageSize = pagination.pageSize ?? 10;
+  queryUsers(queryForm.value.page);
 }
 
 function openCreate() {
@@ -130,6 +156,7 @@ async function createUser() {
 
 function remove(id: number | string) {
   users.value = users.value.filter((item) => item.id !== id);
+  total.value = Math.max(total.value - 1, 0);
   message.success('已删除');
 }
 
@@ -157,8 +184,15 @@ onMounted(() => {
       :columns="columns"
       :data-source="users"
       :loading="queryLoading"
+      :pagination="{
+        current: queryForm.page,
+        pageSize: queryForm.pageSize,
+        showSizeChanger: true,
+        total,
+      }"
       :scroll="{ x: 1100 }"
       row-key="id"
+      @change="handleTableChange"
     >
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">

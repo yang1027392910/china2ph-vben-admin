@@ -4,6 +4,8 @@ export namespace LoginLogApi {
   export interface LoginLogListParams {
     account?: string;
     ip?: string;
+    page?: number;
+    pageSize?: number;
     status?: string;
   }
 
