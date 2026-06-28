@@ -82,12 +82,11 @@ const queryShippingMethodOptions = [
   { label: '空运', value: '空运' },
 ];
 
-const pricingMethodOptions = [
-  { label: '按kg', value: '按kg' },
-  { label: '按件', value: '按件' },
-  { label: '按体积', value: '按体积' },
-];
-
+[
+  { label: 'Per kg', value: 'Per kg' },
+  { label: 'Per Item', value: 'Per Item' },
+  { label: 'By Volume', value: 'By Volume' },
+]
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
   { title: 'Logo', dataIndex: 'logo', key: 'logo', width: 90 },
