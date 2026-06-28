@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UploadProps } from 'ant-design-vue';
+import type { TableProps, UploadProps } from 'ant-design-vue';
 
 import type { ProductApi } from '#/api';
 
@@ -79,6 +79,13 @@ type AuthorizedUserPreviewRow = {
   userId: number;
 };
 
+const defaultQuery = {
+  hotType: '',
+  page: 1,
+  pageSize: 10,
+  title: '',
+};
+
 const defaultForm: ProductForm = {
   categoryId: 1,
   chinaPrice: 100,
@@ -104,8 +111,8 @@ const defaultForm: ProductForm = {
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const products = ref<Product[]>([]);
-const queryHotType = ref('');
-const queryTitle = ref('');
+const queryForm = ref({ ...defaultQuery });
+const total = ref(0);
 const queryLoading = ref(false);
 const createVisible = ref(false);
 const createLoading = ref(false);
@@ -216,6 +223,10 @@ function normalizeProducts(data: any): Product[] {
     supplierWhatsapp: item.supplierWhatsapp ?? '',
     title: item.title ?? '',
   }));
+}
+
+function normalizeTotal(data: any, listLength: number) {
+  return Number(data?.total ?? data?.pagination?.total ?? listLength);
 }
 
 function normalizeProductImages(images: any): string[] {
@@ -384,19 +395,33 @@ function buildExistingUploadFile(url: string, uid: string) {
   };
 }
 
-async function queryProducts() {
+async function queryProducts(page = queryForm.value.page) {
   try {
     queryLoading.value = true;
+    queryForm.value.page = page;
     const responseData = await getProductListApi({
-      hotType: queryHotType.value || undefined,
-      title: queryTitle.value.trim() || undefined,
+      hotType: queryForm.value.hotType || undefined,
+      page: queryForm.value.page,
+      pageSize: queryForm.value.pageSize,
+      title: queryForm.value.title.trim() || undefined,
     });
     products.value = normalizeProducts(responseData);
+    total.value = normalizeTotal(responseData, products.value.length);
   } catch (error: any) {
     message.error(error?.message || '查询失败');
   } finally {
     queryLoading.value = false;
   }
+}
+
+function handleTableChange(pagination: TableProps['pagination']) {
+  if (!pagination || typeof pagination === 'boolean') {
+    return;
+  }
+
+  queryForm.value.page = pagination.current ?? 1;
+  queryForm.value.pageSize = pagination.pageSize ?? 10;
+  queryProducts(queryForm.value.page);
 }
 
 async function queryCategoryOptions() {
@@ -699,6 +724,7 @@ async function createProduct() {
       ...payload,
       id: createdProduct?.id || Date.now(),
     });
+    total.value += 1;
     createVisible.value = false;
     message.success('新增成功');
   } catch (error: any) {
@@ -756,6 +782,7 @@ async function updateProduct() {
 
 function remove(id: number | string) {
   products.value = products.value.filter((i) => i.id !== id);
+  total.value = Math.max(total.value - 1, 0);
   message.success('已删除');
 }
 
@@ -769,23 +796,34 @@ onMounted(() => {
   <Page title="商品管理">
     <div class="mb-4 flex gap-2">
       <Select
-        v-model:value="queryHotType"
+        v-model:value="queryForm.hotType"
         :options="hotTypeOptions"
         placeholder="热门类型"
         style="width: 140px"
       />
       <Input
-        v-model:value="queryTitle"
+        v-model:value="queryForm.title"
         allow-clear
         placeholder="请输入商品标题"
         style="width: 240px"
-        @press-enter="queryProducts"
+        @press-enter="queryProducts(1)"
       />
-      <Button :loading="queryLoading" @click="queryProducts">查询</Button>
+      <Button :loading="queryLoading" @click="queryProducts(1)">查询</Button>
       <Button type="primary" @click="openCreate">新增商品</Button>
     </div>
 
-    <Table :columns="columns" :data-source="products" row-key="id">
+    <Table
+      :columns="columns"
+      :data-source="products"
+      :pagination="{
+        current: queryForm.page,
+        pageSize: queryForm.pageSize,
+        showSizeChanger: true,
+        total,
+      }"
+      row-key="id"
+      @change="handleTableChange"
+    >
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
