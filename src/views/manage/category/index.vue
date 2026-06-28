@@ -23,6 +23,7 @@ import {
   createCategoryApi,
   deleteCategoryApi,
   getCategoryListApi,
+  updateCategoryApi,
   uploadAdminFileApi,
 } from '#/api';
 
@@ -70,6 +71,7 @@ const createForm = ref<CategoryForm>({
 const iconFileList = ref<UploadProps['fileList']>([]);
 
 const editVisible = ref(false);
+const editLoading = ref(false);
 const editForm = ref<Category>({
   icon: '',
   id: '',
@@ -77,6 +79,7 @@ const editForm = ref<Category>({
   parent: '',
   status: '1',
 });
+const editIconFileList = ref<UploadProps['fileList']>([]);
 
 function normalizeCategories(data: any): Category[] {
   const list = Array.isArray(data)
@@ -144,8 +147,22 @@ function openCreate() {
   createVisible.value = true;
 }
 
+function buildIconFileList(icon?: string, uidPrefix: number | string = 'icon') {
+  return icon
+    ? [
+        {
+          name: icon.split('/').pop() || 'icon',
+          status: 'done' as const,
+          uid: `${uidPrefix}-icon`,
+          url: resolveImageUrl(icon),
+        },
+      ]
+    : [];
+}
+
 function edit(row: Category) {
   editForm.value = { ...row };
+  editIconFileList.value = buildIconFileList(row.icon, row.id);
   editVisible.value = true;
 }
 
@@ -222,24 +239,74 @@ const uploadIcon: UploadProps['customRequest'] = async (options) => {
   }
 };
 
+const uploadEditIcon: UploadProps['customRequest'] = async (options) => {
+  const file = options.file as File;
+
+  try {
+    const responseData = await uploadAdminFileApi(file);
+    const iconUrl = getUploadedIconUrl(responseData);
+
+    if (!iconUrl) {
+      throw new Error('上传接口未返回图片地址');
+    }
+
+    editForm.value.icon = iconUrl;
+    editIconFileList.value = [
+      {
+        name: file.name,
+        status: 'done',
+        uid: `${Date.now()}`,
+        url: resolveImageUrl(iconUrl),
+      },
+    ];
+    options.onSuccess?.(responseData);
+    message.success('上传成功');
+  } catch (error: any) {
+    editForm.value.icon = '';
+    editIconFileList.value = [];
+    options.onError?.(error);
+    message.error(error?.message || '上传失败');
+  }
+};
+
 function removeIcon() {
   createForm.value.icon = '';
   iconFileList.value = [];
 }
 
-function saveEdit() {
-  const f = editForm.value;
-  if (!f.name) {
-    message.error('请输入分类名称');
-    return;
-  }
+function removeEditIcon() {
+  editForm.value.icon = '';
+  editIconFileList.value = [];
+}
 
-  const idx = categories.value.findIndex((i) => i.id === f.id);
-  if (idx !== -1) {
-    categories.value[idx] = { ...f };
+async function saveEdit() {
+  const f = editForm.value;
+
+  const payload = {
+    icon: f.icon || '',
+    id: f.id,
+  };
+
+  try {
+    editLoading.value = true;
+    const updatedCategory = (await updateCategoryApi(payload)) as
+      | Category
+      | undefined;
+    const nextCategory = {
+      ...f,
+      icon: updatedCategory?.icon ?? payload.icon,
+    };
+    const idx = categories.value.findIndex((i) => i.id === f.id);
+    if (idx !== -1) {
+      categories.value[idx] = nextCategory;
+    }
+    editVisible.value = false;
+    message.success('更新成功');
+  } catch (error: any) {
+    message.error(error?.message || '更新失败');
+  } finally {
+    editLoading.value = false;
   }
-  editVisible.value = false;
-  message.success('更新成功');
 }
 
 async function remove(id: number | string) {
@@ -346,17 +413,31 @@ onMounted(() => {
           <Input v-model:value="editForm.id" disabled />
         </Form.Item>
         <Form.Item label="分类名称" required>
-          <Input v-model:value="editForm.name" />
+          <Input v-model:value="editForm.name" disabled />
         </Form.Item>
         <Form.Item label="父级">
-          <Input v-model:value="editForm.parent" />
+          <Input v-model:value="editForm.parent" disabled />
         </Form.Item>
         <Form.Item label="启用">
           <Switch
             v-model:checked="editForm.status"
             checked-value="1"
+            disabled
             un-checked-value="0"
           />
+        </Form.Item>
+        <Form.Item label="Icon">
+          <Upload
+            v-model:file-list="editIconFileList"
+            :before-upload="beforeIconUpload"
+            :custom-request="uploadEditIcon"
+            :max-count="1"
+            @remove="removeEditIcon"
+            accept="image/*"
+            list-type="picture-card"
+          >
+            <div>上传</div>
+          </Upload>
         </Form.Item>
       </Form>
     </Modal>

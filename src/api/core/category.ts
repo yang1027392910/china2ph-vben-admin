@@ -14,6 +14,10 @@ export namespace CategoryApi {
     status: string;
   }
 
+  export interface CategoryUpdatePayload extends Partial<CategoryPayload> {
+    id: CategoryId;
+  }
+
   export type CategoryResponse = Record<string, any>;
   export type UploadResponse = Record<string, any> | string;
 }
@@ -28,6 +32,13 @@ export function getCategoryListApi(params?: CategoryApi.CategoryListParams) {
 export function createCategoryApi(data: CategoryApi.CategoryPayload) {
   return requestClient.post<CategoryApi.CategoryResponse>(
     '/admin/category/list/created',
+    data,
+  );
+}
+
+export function updateCategoryApi(data: CategoryApi.CategoryUpdatePayload) {
+  return requestClient.post<CategoryApi.CategoryResponse>(
+    '/admin/category/list/update',
     data,
   );
 }
