@@ -10,6 +10,7 @@ import {
   Button,
   Form,
   Input,
+  InputNumber,
   message,
   Modal,
   Popconfirm,
@@ -32,6 +33,7 @@ type Category = {
   id: number | string;
   name: string;
   parent: string;
+  sort: number;
   status: string;
 };
 
@@ -39,14 +41,15 @@ type CategoryForm = {
   icon: string;
   name: string;
   parent: string;
+  sort: number;
   status: string;
 };
 
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const categories = ref<Category[]>([
-  { id: 1, name: '电子产品', parent: '根', status: '1' },
-  { id: 2, name: '手机', parent: '电子产品', status: '1' },
+  { id: 1, name: '电子产品', parent: '根', sort: 1, status: '1' },
+  { id: 2, name: '手机', parent: '电子产品', sort: 2, status: '1' },
 ]);
 
 const columns = [
@@ -54,6 +57,7 @@ const columns = [
   { title: 'Icon', dataIndex: 'icon', key: 'icon' },
   { title: '分类名称', dataIndex: 'name', key: 'name' },
   { title: '父级', dataIndex: 'parent', key: 'parent' },
+  { title: '排序', dataIndex: 'sort', key: 'sort' },
   { title: '状态', dataIndex: 'status', key: 'status' },
   { title: '操作', key: 'actions' },
 ];
@@ -66,6 +70,7 @@ const createForm = ref<CategoryForm>({
   icon: '',
   name: '',
   parent: '',
+  sort: 1,
   status: '1',
 });
 const iconFileList = ref<UploadProps['fileList']>([]);
@@ -77,6 +82,7 @@ const editForm = ref<Category>({
   id: '',
   name: '',
   parent: '',
+  sort: 1,
   status: '1',
 });
 const editIconFileList = ref<UploadProps['fileList']>([]);
@@ -91,6 +97,7 @@ function normalizeCategories(data: any): Category[] {
     id: item.id,
     name: item.name,
     parent: item.parent ?? item.parentId ?? '',
+    sort: Number(item.sort ?? 0),
     status: item.status ?? '1',
   }));
 }
@@ -142,7 +149,7 @@ async function queryCategories() {
 }
 
 function openCreate() {
-  createForm.value = { icon: '', name: '', parent: '', status: '1' };
+  createForm.value = { icon: '', name: '', parent: '', sort: 1, status: '1' };
   iconFileList.value = [];
   createVisible.value = true;
 }
@@ -171,11 +178,17 @@ async function createCategory() {
     icon: createForm.value.icon,
     name: createForm.value.name.trim(),
     parent: createForm.value.parent.trim(),
+    sort: Number(createForm.value.sort),
     status: createForm.value.status,
   };
 
   if (!payload.name) {
     message.error('请输入分类名称');
+    return;
+  }
+
+  if (!Number.isFinite(payload.sort)) {
+    message.error('请输入正确的排序');
     return;
   }
 
@@ -190,6 +203,7 @@ async function createCategory() {
       id: createdCategory?.id || Date.now(),
       name: createdCategory?.name || payload.name,
       parent: createdCategory?.parent || payload.parent,
+      sort: Number(createdCategory?.sort ?? payload.sort),
       status: createdCategory?.status || payload.status,
     });
     createVisible.value = false;
@@ -285,7 +299,13 @@ async function saveEdit() {
   const payload = {
     icon: f.icon || '',
     id: f.id,
+    sort: Number(f.sort),
   };
+
+  if (!Number.isFinite(payload.sort)) {
+    message.error('请输入正确的排序');
+    return;
+  }
 
   try {
     editLoading.value = true;
@@ -295,6 +315,7 @@ async function saveEdit() {
     const nextCategory = {
       ...f,
       icon: updatedCategory?.icon ?? payload.icon,
+      sort: Number(updatedCategory?.sort ?? payload.sort),
     };
     const idx = categories.value.findIndex((i) => i.id === f.id);
     if (idx !== -1) {
@@ -384,6 +405,13 @@ onMounted(() => {
         <Form.Item label="父级">
           <Input v-model:value="createForm.parent" />
         </Form.Item>
+        <Form.Item label="排序">
+          <InputNumber
+            v-model:value="createForm.sort"
+            :min="0"
+            class="w-full"
+          />
+        </Form.Item>
         <Form.Item label="启用">
           <Switch
             v-model:checked="createForm.status"
@@ -417,6 +445,13 @@ onMounted(() => {
         </Form.Item>
         <Form.Item label="父级">
           <Input v-model:value="editForm.parent" disabled />
+        </Form.Item>
+        <Form.Item label="排序">
+          <InputNumber
+            v-model:value="editForm.sort"
+            :min="0"
+            class="w-full"
+          />
         </Form.Item>
         <Form.Item label="启用">
           <Switch

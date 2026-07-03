@@ -11,6 +11,7 @@ export namespace CategoryApi {
     icon?: string;
     name: string;
     parent?: string;
+    sort: number;
     status: string;
   }
 

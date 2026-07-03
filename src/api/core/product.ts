@@ -31,6 +31,7 @@ export namespace ProductApi {
   }
 
   export interface ProductListParams {
+    category?: number | string;
     hotType?: string;
     page?: number;
     pageSize?: number;

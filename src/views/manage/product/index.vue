@@ -80,6 +80,7 @@ type AuthorizedUserPreviewRow = {
 };
 
 const defaultQuery = {
+  category: '',
   hotType: '',
   page: 1,
   pageSize: 10,
@@ -400,6 +401,7 @@ async function queryProducts(page = queryForm.value.page) {
     queryLoading.value = true;
     queryForm.value.page = page;
     const responseData = await getProductListApi({
+      category: queryForm.value.category || undefined,
       hotType: queryForm.value.hotType || undefined,
       page: queryForm.value.page,
       pageSize: queryForm.value.pageSize,
@@ -800,6 +802,14 @@ onMounted(() => {
         :options="hotTypeOptions"
         placeholder="热门类型"
         style="width: 140px"
+      />
+      <Select
+        v-model:value="queryForm.category"
+        :loading="categoryLoading"
+        :options="[{ label: '全部分类', value: '' }, ...categoryOptions]"
+        allow-clear
+        placeholder="请选择分类"
+        style="width: 180px"
       />
       <Input
         v-model:value="queryForm.title"
