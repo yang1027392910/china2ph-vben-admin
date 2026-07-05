@@ -25,12 +25,13 @@ type User = {
   id: number | string;
   inviteCode: string;
   inviteCount: number;
+  ipLocation: string;
   name: string;
   nickname: string;
   role: string;
 };
 
-type UserForm = Omit<User, 'id'>;
+type UserForm = Omit<User, 'id' | 'ipLocation'>;
 
 const defaultForm: UserForm = {
   canLottery: false,
@@ -45,6 +46,7 @@ const defaultForm: UserForm = {
 const defaultQuery = {
   page: 1,
   pageSize: 10,
+  username: '',
 };
 
 const users = ref<User[]>([]);
@@ -58,8 +60,8 @@ const createForm = ref<UserForm>({ ...defaultForm });
 const columns: TableColumnsType<User> = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: '昵称', dataIndex: 'nickname', key: 'nickname' },
-  { title: '姓名', dataIndex: 'name', key: 'name' },
   { title: '邮箱', dataIndex: 'email', key: 'email' },
+  { title: 'IP 归属地', dataIndex: 'ipLocation', key: 'ipLocation' },
   { title: '邀请码', dataIndex: 'inviteCode', key: 'inviteCode' },
   { title: '邀请人数', dataIndex: 'inviteCount', key: 'inviteCount' },
   { title: '可抽奖', dataIndex: 'canLottery', key: 'canLottery' },
@@ -78,6 +80,7 @@ function normalizeUsers(data: any): User[] {
     id: item.id ?? item.userId ?? '',
     inviteCode: String(item.inviteCode ?? item.invite_code ?? ''),
     inviteCount: Number(item.inviteCount ?? item.invite_count ?? 0),
+    ipLocation: String(item.ipLocation ?? item.ip_location ?? ''),
     name: String(item.name ?? item.realName ?? item.username ?? ''),
     nickname: String(item.nickname ?? item.nickName ?? item.nick_name ?? ''),
     role: String(item.role ?? item.roleName ?? item.roles?.[0] ?? ''),
@@ -92,14 +95,21 @@ function normalizeTotal(data: any, listLength: number) {
   return Number(data?.total ?? data?.pagination?.total ?? listLength);
 }
 
+function buildUserListParams() {
+  const username = queryForm.value.username.trim();
+
+  return {
+    page: queryForm.value.page,
+    pageSize: queryForm.value.pageSize,
+    ...(username ? { username } : {}),
+  };
+}
+
 async function queryUsers(page = queryForm.value.page) {
   try {
     queryLoading.value = true;
     queryForm.value.page = page;
-    const responseData = await getAdminUserListApi({
-      page: queryForm.value.page,
-      pageSize: queryForm.value.pageSize,
-    });
+    const responseData = await getAdminUserListApi(buildUserListParams());
     users.value = normalizeUsers(responseData);
     total.value = normalizeTotal(responseData, users.value.length);
   } catch (error: any) {
@@ -117,6 +127,10 @@ function handleTableChange(pagination: TableProps['pagination']) {
   queryForm.value.page = pagination.current ?? 1;
   queryForm.value.pageSize = pagination.pageSize ?? 10;
   queryUsers(queryForm.value.page);
+}
+
+function handleQuery() {
+  queryUsers(1);
 }
 
 function openCreate() {
@@ -175,8 +189,15 @@ onMounted(() => {
 
 <template>
   <Page title="用户管理" description="用户列表">
-    <div class="mb-4 flex gap-2">
-      <Button :loading="queryLoading" @click="queryUsers">查询</Button>
+    <div class="mb-4 flex flex-wrap gap-2">
+      <Input
+        v-model:value="queryForm.username"
+        allow-clear
+        class="w-60"
+        placeholder="请输入用户名"
+        @press-enter="handleQuery"
+      />
+      <Button :loading="queryLoading" @click="handleQuery">查询</Button>
       <Button type="primary" @click="openCreate">新建用户</Button>
     </div>
 
@@ -190,7 +211,7 @@ onMounted(() => {
         showSizeChanger: true,
         total,
       }"
-      :scroll="{ x: 1100 }"
+      :scroll="{ x: 1260 }"
       row-key="id"
       @change="handleTableChange"
     >

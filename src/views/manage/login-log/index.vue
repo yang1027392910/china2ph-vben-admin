@@ -38,11 +38,8 @@ const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
   { title: '登录账号', dataIndex: 'account', key: 'account', width: 160 },
   { title: '登录状态', dataIndex: 'status', key: 'status', width: 110 },
-  { title: '提示信息', dataIndex: 'message', key: 'message', width: 160 },
-  { title: 'IP 地址', dataIndex: 'ip', key: 'ip', width: 150 },
   { title: '登录地点', dataIndex: 'city', key: 'city', width: 120 },
   { title: '设备', dataIndex: 'device', key: 'device', width: 120 },
-  { title: '浏览器', dataIndex: 'browser', key: 'browser', width: 140 },
   { title: '操作系统', dataIndex: 'os', key: 'os', width: 140 },
   { title: '登录时间', dataIndex: 'loginAt', key: 'loginAt', width: 180 },
 ];

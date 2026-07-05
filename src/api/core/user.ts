@@ -8,6 +8,7 @@ export namespace AdminUserApi {
   export interface UserListQuery {
     page: number;
     pageSize: number;
+    username?: string;
   }
 
   export interface UserPayload {
