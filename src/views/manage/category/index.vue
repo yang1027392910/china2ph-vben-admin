@@ -29,18 +29,18 @@ import {
 } from '#/api';
 
 type Category = {
+  alice?: string;
   icon?: string;
   id: number | string;
   name: string;
-  parent: string;
   sort: number;
   status: string;
 };
 
 type CategoryForm = {
+  alice: string;
   icon: string;
   name: string;
-  parent: string;
   sort: number;
   status: string;
 };
@@ -48,15 +48,15 @@ type CategoryForm = {
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const categories = ref<Category[]>([
-  { id: 1, name: '电子产品', parent: '根', sort: 1, status: '1' },
-  { id: 2, name: '手机', parent: '电子产品', sort: 2, status: '1' },
+  { id: 1, name: '电子产品', sort: 1, status: '1' },
+  { id: 2, name: '手机', sort: 2, status: '1' },
 ]);
 
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: 'Icon', dataIndex: 'icon', key: 'icon' },
   { title: '分类名称', dataIndex: 'name', key: 'name' },
-  { title: '父级', dataIndex: 'parent', key: 'parent' },
+  { title: '别名', dataIndex: 'alice', key: 'alice' },
   { title: '排序', dataIndex: 'sort', key: 'sort' },
   { title: '状态', dataIndex: 'status', key: 'status' },
   { title: '操作', key: 'actions' },
@@ -67,9 +67,9 @@ const deleteLoadingId = ref<number | string>('');
 const createVisible = ref(false);
 const createLoading = ref(false);
 const createForm = ref<CategoryForm>({
+  alice: '',
   icon: '',
   name: '',
-  parent: '',
   sort: 1,
   status: '1',
 });
@@ -78,10 +78,10 @@ const iconFileList = ref<UploadProps['fileList']>([]);
 const editVisible = ref(false);
 const editLoading = ref(false);
 const editForm = ref<Category>({
+  alice: '',
   icon: '',
   id: '',
   name: '',
-  parent: '',
   sort: 1,
   status: '1',
 });
@@ -93,10 +93,10 @@ function normalizeCategories(data: any): Category[] {
     : data?.list || data?.records || data?.rows || data?.data || [];
 
   return list.map((item: any) => ({
+    alice: item.alice ?? '',
     icon: item.icon ?? '',
     id: item.id,
     name: item.name,
-    parent: item.parent ?? item.parentId ?? '',
     sort: Number(item.sort ?? 0),
     status: item.status ?? '1',
   }));
@@ -149,7 +149,13 @@ async function queryCategories() {
 }
 
 function openCreate() {
-  createForm.value = { icon: '', name: '', parent: '', sort: 1, status: '1' };
+  createForm.value = {
+    alice: '',
+    icon: '',
+    name: '',
+    sort: 1,
+    status: '1',
+  };
   iconFileList.value = [];
   createVisible.value = true;
 }
@@ -175,9 +181,9 @@ function edit(row: Category) {
 
 async function createCategory() {
   const payload = {
+    alice: createForm.value.alice.trim(),
     icon: createForm.value.icon,
     name: createForm.value.name.trim(),
-    parent: createForm.value.parent.trim(),
     sort: Number(createForm.value.sort),
     status: createForm.value.status,
   };
@@ -199,10 +205,10 @@ async function createCategory() {
       | undefined;
 
     categories.value.unshift({
+      alice: createdCategory?.alice ?? payload.alice,
       icon: createdCategory?.icon || payload.icon,
       id: createdCategory?.id || Date.now(),
       name: createdCategory?.name || payload.name,
-      parent: createdCategory?.parent || payload.parent,
       sort: Number(createdCategory?.sort ?? payload.sort),
       status: createdCategory?.status || payload.status,
     });
@@ -297,10 +303,17 @@ async function saveEdit() {
   const f = editForm.value;
 
   const payload = {
+    alice: f.alice?.trim() || '',
     icon: f.icon || '',
     id: f.id,
+    name: f.name.trim(),
     sort: Number(f.sort),
   };
+
+  if (!payload.name) {
+    message.error('请输入分类名称');
+    return;
+  }
 
   if (!Number.isFinite(payload.sort)) {
     message.error('请输入正确的排序');
@@ -314,7 +327,9 @@ async function saveEdit() {
       | undefined;
     const nextCategory = {
       ...f,
+      alice: updatedCategory?.alice ?? payload.alice,
       icon: updatedCategory?.icon ?? payload.icon,
+      name: updatedCategory?.name ?? payload.name,
       sort: Number(updatedCategory?.sort ?? payload.sort),
     };
     const idx = categories.value.findIndex((i) => i.id === f.id);
@@ -402,8 +417,8 @@ onMounted(() => {
         <Form.Item label="分类名称" required>
           <Input v-model:value="createForm.name" />
         </Form.Item>
-        <Form.Item label="父级">
-          <Input v-model:value="createForm.parent" />
+        <Form.Item label="别名">
+          <Input v-model:value="createForm.alice" />
         </Form.Item>
         <Form.Item label="排序">
           <InputNumber
@@ -441,10 +456,10 @@ onMounted(() => {
           <Input v-model:value="editForm.id" disabled />
         </Form.Item>
         <Form.Item label="分类名称" required>
-          <Input v-model:value="editForm.name" disabled />
+          <Input v-model:value="editForm.name" />
         </Form.Item>
-        <Form.Item label="父级">
-          <Input v-model:value="editForm.parent" disabled />
+        <Form.Item label="别名">
+          <Input v-model:value="editForm.alice" />
         </Form.Item>
         <Form.Item label="排序">
           <InputNumber

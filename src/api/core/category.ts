@@ -8,9 +8,9 @@ export namespace CategoryApi {
   }
 
   export interface CategoryPayload {
+    alice?: string;
     icon?: string;
     name: string;
-    parent?: string;
     sort: number;
     status: string;
   }
