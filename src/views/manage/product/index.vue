@@ -27,6 +27,7 @@ import {
 
 import {
   addProductContactPermissionApi,
+  aiGenerateProductApi,
   createProductApi,
   deleteProductContactPermissionApi,
   getAdminUserListApi,
@@ -36,6 +37,7 @@ import {
   updateProductApi,
   uploadProductImageApi,
 } from '#/api';
+import { RichTextEditor, sanitizeRichTextHtml } from '#/components/rich-text-editor';
 
 type Product = {
   categoryId: number;
@@ -120,6 +122,7 @@ const createLoading = ref(false);
 const createForm = ref<ProductForm>({ ...defaultForm, images: [] });
 const editVisible = ref(false);
 const editLoading = ref(false);
+const aiGenerateLoading = ref(false);
 const editForm = ref<Product>({ ...defaultForm, id: '', images: [] });
 const coverFileList = ref<UploadProps['fileList']>([]);
 const imageFileList = ref<UploadProps['fileList']>([]);
@@ -176,16 +179,20 @@ const authorizedUserPreviewRows = computed<AuthorizedUserPreviewRow[]>(() => {
     ),
   ];
 
-  return userIds.map((userId) => ({
-    email: getUserOptionLabel(userId),
-    key: userId,
-    status: !originalUserIdSet.has(userId)
-      ? 'added'
-      : selectedUserIdSet.has(userId)
-        ? 'unchanged'
-        : 'removed',
-    userId,
-  }));
+  return userIds.map((userId) => {
+    let status: AuthorizedUserPreviewRow['status'] = 'added';
+
+    if (originalUserIdSet.has(userId)) {
+      status = selectedUserIdSet.has(userId) ? 'unchanged' : 'removed';
+    }
+
+    return {
+      email: getUserOptionLabel(userId),
+      key: userId,
+      status,
+      userId,
+    };
+  });
 });
 
 const authorizedUserStatusMap: Record<
@@ -259,6 +266,32 @@ function normalizeProductImages(images: any): string[] {
     .filter(Boolean);
 }
 
+function getCategoryName(categoryId: number) {
+  return (
+    categoryOptions.value.find((item) => item.value === categoryId)?.label ||
+    String(categoryId)
+  );
+}
+
+function getAiGeneratedDescription(data: ProductApi.ProductAiGenerateResponse) {
+  if (typeof data === 'string') {
+    return data;
+  }
+
+  return (
+    data?.descriptionHtml ||
+    data?.description ||
+    data?.content ||
+    data?.text ||
+    data?.result ||
+    data?.data?.descriptionHtml ||
+    data?.data?.description ||
+    data?.data?.content ||
+    data?.data?.text ||
+    ''
+  );
+}
+
 function normalizeCategoryOptions(data: any): CategoryOption[] {
   const list = Array.isArray(data)
     ? data
@@ -308,7 +341,7 @@ function getUserOptionLabel(userId: number) {
 
 function updateSelectedAuthorizedUsers(nextValue: unknown) {
   const nextUserIds = (Array.isArray(nextValue) ? nextValue : [])
-    .map((item) => Number(item))
+    .map(Number)
     .filter((item) => Number.isFinite(item));
   const nextUserIdSet = new Set(nextUserIds);
   const removedUserIds = selectedAuthorizedUserIds.value.filter(
@@ -657,7 +690,7 @@ function buildProductPayload(form: ProductForm) {
     categoryId: Number(form.categoryId),
     chinaPrice: Number(form.chinaPrice),
     cover: form.cover.trim(),
-    description: form.description.trim(),
+    description: sanitizeRichTextHtml(form.description),
     images: form.images,
     minimumOrderQuantity: Number(form.minimumOrderQuantity),
     phPrice: Number(form.phPrice),
@@ -687,13 +720,54 @@ function validateProductPayload(
   return true;
 }
 
+async function handleAiGenerateDescription() {
+  const product = editForm.value;
+
+  if (!product.id) {
+    message.error('请先选择商品');
+    return;
+  }
+
+  try {
+    aiGenerateLoading.value = true;
+    const responseData = await aiGenerateProductApi({
+      categoryName: getCategoryName(Number(product.categoryId)),
+      chinaPrice: Number(product.chinaPrice),
+      language: 'English',
+      minimumOrderQuantity: Number(product.minimumOrderQuantity),
+      phPrice: Number(product.phPrice),
+      productId: product.id,
+      profit: Number(product.profit),
+      sales: Number(product.sales),
+      shippingFee: Number(product.shippingFee),
+      stock: Number(product.stock),
+      subtitle: product.subtitle.trim(),
+      targetMarket: 'Philippines',
+      title: product.title.trim(),
+    });
+    const description = getAiGeneratedDescription(responseData);
+
+    if (!description) {
+      message.error('AI生成接口未返回商品描述');
+      return;
+    }
+
+    product.description = description;
+    message.success('AI生成成功');
+  } catch (error: any) {
+    message.error(error?.message || 'AI生成失败');
+  } finally {
+    aiGenerateLoading.value = false;
+  }
+}
+
 async function createProduct() {
   const form = createForm.value;
   const payload = {
     categoryId: Number(form.categoryId),
     chinaPrice: Number(form.chinaPrice),
     cover: form.cover.trim(),
-    description: form.description.trim(),
+    description: sanitizeRichTextHtml(form.description),
     images: form.images,
     minimumOrderQuantity: Number(form.minimumOrderQuantity),
     phPrice: Number(form.phPrice),
@@ -907,9 +981,6 @@ onMounted(() => {
           <Form.Item class="product-form-full" label="商品标题" required>
             <Input v-model:value="createForm.title" />
           </Form.Item>
-          <Form.Item class="product-form-full" label="副标题">
-            <Input v-model:value="createForm.subtitle" />
-          </Form.Item>
           <Form.Item label="产品类型" required>
             <Select
               v-model:value="createForm.categoryId"
@@ -944,12 +1015,6 @@ onMounted(() => {
             >
               <div>上传</div>
             </Upload>
-          </Form.Item>
-          <Form.Item class="product-form-full" label="商品描述">
-            <Input.TextArea
-              v-model:value="createForm.description"
-              :auto-size="{ minRows: 3, maxRows: 6 }"
-            />
           </Form.Item>
           <Form.Item label="中国价格">
             <InputNumber v-model:value="createForm.chinaPrice" class="w-full" />
@@ -1002,9 +1067,6 @@ onMounted(() => {
           <Form.Item class="product-form-full" label="商品标题" required>
             <Input v-model:value="editForm.title" />
           </Form.Item>
-          <Form.Item class="product-form-full" label="副标题">
-            <Input v-model:value="editForm.subtitle" />
-          </Form.Item>
           <Form.Item label="产品类型" required>
             <Select
               v-model:value="editForm.categoryId"
@@ -1041,9 +1103,10 @@ onMounted(() => {
             </Upload>
           </Form.Item>
           <Form.Item class="product-form-full" label="商品描述">
-            <Input.TextArea
-              v-model:value="editForm.description"
-              :auto-size="{ minRows: 3, maxRows: 6 }"
+            <RichTextEditor
+              v-model="editForm.description"
+              :ai-loading="aiGenerateLoading"
+              @ai-generate="handleAiGenerateDescription"
             />
           </Form.Item>
           <Form.Item label="中国价格">

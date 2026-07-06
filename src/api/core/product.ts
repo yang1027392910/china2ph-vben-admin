@@ -30,6 +30,22 @@ export namespace ProductApi {
     id: number | string;
   }
 
+  export interface ProductAiGeneratePayload {
+    categoryName: string;
+    chinaPrice: number;
+    language: string;
+    minimumOrderQuantity: number;
+    phPrice: number;
+    productId: number | string;
+    profit: number;
+    sales: number;
+    shippingFee: number;
+    stock: number;
+    subtitle: string;
+    targetMarket: string;
+    title: string;
+  }
+
   export interface ProductListParams {
     category?: number | string;
     hotType?: string;
@@ -49,6 +65,7 @@ export namespace ProductApi {
   }
 
   export type ContactPermissionResponse = ContactPermission[];
+  export type ProductAiGenerateResponse = Record<string, any> | string;
   export type ProductResponse = Record<string, any>;
   export type UploadResponse = Record<string, any> | string;
 
@@ -90,6 +107,16 @@ export function updateProductApi(data: ProductApi.ProductUpdatePayload) {
   return requestClient.post<ProductApi.ProductResponse>(
     '/admin/product/list/update',
     data,
+  );
+}
+
+export function aiGenerateProductApi(data: ProductApi.ProductAiGeneratePayload) {
+  return requestClient.post<ProductApi.ProductAiGenerateResponse>(
+    '/admin/product/ai-generate',
+    data,
+    {
+      timeout: 60_000,
+    },
   );
 }
 
