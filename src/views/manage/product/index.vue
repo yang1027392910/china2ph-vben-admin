@@ -557,7 +557,7 @@ async function handleTranslateUploadImage(
   const rawImageUrl = getUploadFileRawUrl(file);
 
   if (!rawImageUrl) {
-    message.warning('鏆傛棤鍙炕璇戠殑鍥剧墖');
+    message.warning('暂无可翻译的图片');
     return;
   }
 
@@ -577,7 +577,7 @@ async function handleTranslateUploadImage(
     const translatedImageUrl = getUploadedImageUrl(responseData);
 
     if (!translatedImageUrl) {
-      throw new Error('缈昏瘧鎺ュ彛鏈繑鍥炲浘鐗囧湴鍧€');
+      throw new Error('翻译接口未返回图片地址');
     }
 
     setTranslateProgress(uid, 100);
@@ -622,10 +622,10 @@ async function handleTranslateUploadImage(
     }
 
     window.setTimeout(() => clearTranslateProgress(uid), 500);
-    message.success('鍥剧墖缈昏瘧鎴愬姛');
+    message.success('图片翻译成功');
   } catch (error: any) {
     clearTranslateProgress(uid);
-    message.error(error?.message || '鍥剧墖缈昏瘧澶辫触');
+    message.error(error?.message || '图片翻译失败');
   } finally {
     if (progressTimer) {
       window.clearInterval(progressTimer);
@@ -1647,14 +1647,15 @@ onMounted(() => {
         </div>
       </Form>
     </Modal>
-    <AntImage
-      :preview="{
-        visible: imagePreviewVisible,
-        onVisibleChange: handleImagePreviewVisibleChange,
-      }"
-      :src="imagePreviewUrl"
-      class="product-preview-image"
-    />
+    <div v-if="imagePreviewUrl" class="product-preview-image">
+      <AntImage
+        :preview="{
+          visible: imagePreviewVisible,
+          onVisibleChange: handleImagePreviewVisibleChange,
+        }"
+        :src="imagePreviewUrl"
+      />
+    </div>
   </Page>
 </template>
 
