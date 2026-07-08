@@ -1,4 +1,7 @@
-import { requestClient } from '#/api/request';
+import { preferences } from '@vben/preferences';
+import { useAccessStore } from '@vben/stores';
+
+import { baseRequestClient, requestClient } from '#/api/request';
 
 export namespace ProductApi {
   export interface SupplierContactFields {
@@ -67,6 +70,7 @@ export namespace ProductApi {
   export type ContactPermissionResponse = ContactPermission[];
   export type ProductAiGenerateResponse = Record<string, any> | string;
   export type ProductResponse = Record<string, any>;
+  export type TranslateImageResponse = Record<string, any> | string;
   export type UploadResponse = Record<string, any> | string;
 
   export interface HotProductQuery {
@@ -118,6 +122,25 @@ export function aiGenerateProductApi(data: ProductApi.ProductAiGeneratePayload) 
       timeout: 60_000,
     },
   );
+}
+
+export async function translateProductImageApi(image: string) {
+  const accessStore = useAccessStore();
+  const response = await baseRequestClient.post<ProductApi.TranslateImageResponse>(
+    '/ai/translate-image',
+    { image },
+    {
+      headers: {
+        'Accept-Language': preferences.app.locale,
+        ...(accessStore.accessToken
+          ? { Authorization: `Bearer ${accessStore.accessToken}` }
+          : {}),
+      },
+      timeout: 120_000,
+    },
+  );
+
+  return (response as any)?.data ?? response;
 }
 
 export function getProductContactPermissionsApi(productId: number | string) {

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import type { TableProps, UploadProps } from 'ant-design-vue';
+import type { TableProps, UploadFile, UploadProps } from 'ant-design-vue';
 
 import type { ProductApi } from '#/api';
 
 import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
+import { IconifyIcon } from '@vben/icons';
 
 import {
   Image as AntImage,
@@ -17,6 +18,7 @@ import {
   message,
   Modal,
   Popconfirm,
+  Progress,
   Select,
   Space,
   Switch,
@@ -34,6 +36,7 @@ import {
   getCategoryListApi,
   getProductContactPermissionsApi,
   getProductListApi,
+  translateProductImageApi,
   updateProductApi,
   uploadProductImageApi,
 } from '#/api';
@@ -128,6 +131,9 @@ const coverFileList = ref<UploadProps['fileList']>([]);
 const imageFileList = ref<UploadProps['fileList']>([]);
 const editCoverFileList = ref<UploadProps['fileList']>([]);
 const editImageFileList = ref<UploadProps['fileList']>([]);
+const imagePreviewVisible = ref(false);
+const imagePreviewUrl = ref('');
+const translateImageProgress = ref<Record<string, number>>({});
 const categoryLoading = ref(false);
 const categoryOptions = ref<CategoryOption[]>([]);
 const contactPermissionLoading = ref(false);
@@ -135,6 +141,11 @@ const originalAuthorizedUserIds = ref<number[]>([]);
 const selectedAuthorizedUserIds = ref<number[]>([]);
 const userOptions = ref<UserOption[]>([]);
 let contactPermissionLoadVersion = 0;
+type TranslateImageScene =
+  | 'createCover'
+  | 'createImage'
+  | 'editCover'
+  | 'editImage';
 
 const hotTypeOptions = [
   { label: '全部', value: '' },
@@ -383,11 +394,13 @@ function getUploadedImageUrl(data: any) {
 
   return (
     data?.url ||
+    data?.image ||
     data?.path ||
     data?.fileUrl ||
     data?.filePath ||
     data?.src ||
     data?.data?.url ||
+    data?.data?.image ||
     data?.data?.path ||
     ''
   );
@@ -427,6 +440,197 @@ function buildExistingUploadFile(url: string, uid: string) {
     uid,
     url: resolveImageUrl(url),
   };
+}
+
+const previewUploadImage: UploadProps['onPreview'] = async (file) => {
+  const responseUrl =
+    typeof file.response === 'string'
+      ? file.response
+      : getUploadedImageUrl(file.response);
+  const previewUrl = resolveImageUrl(file.url || file.thumbUrl || responseUrl);
+
+  if (!previewUrl) {
+    message.warning('暂无可预览图片');
+    return;
+  }
+
+  imagePreviewUrl.value = previewUrl;
+  imagePreviewVisible.value = true;
+};
+
+function handleImagePreviewVisibleChange(visible: boolean) {
+  imagePreviewVisible.value = visible;
+}
+
+
+function getUploadFileRawUrl(file: UploadFile) {
+  if (typeof file.response === 'string') {
+    return file.response;
+  }
+
+  return getUploadedImageUrl(file.response) || file.url || file.thumbUrl || '';
+}
+
+function getTranslateProgress(uid: string) {
+  return translateImageProgress.value[uid] ?? 0;
+}
+
+function setTranslateProgress(uid: string, percent: number) {
+  translateImageProgress.value = {
+    ...translateImageProgress.value,
+    [uid]: percent,
+  };
+}
+
+function clearTranslateProgress(uid: string) {
+  const nextProgress = { ...translateImageProgress.value };
+  delete nextProgress[uid];
+  translateImageProgress.value = nextProgress;
+}
+
+function updateTranslatedFile(
+  fileList: typeof imageFileList,
+  file: UploadFile,
+  imageUrl: string,
+) {
+  const oldImageUrl = getUploadFileRawUrl(file);
+  const resolvedOldImageUrl = resolveImageUrl(oldImageUrl);
+  const resolvedImageUrl = resolveImageUrl(imageUrl);
+
+  fileList.value = (fileList.value || []).map((item) =>
+    item.uid === file.uid ||
+    item.response === oldImageUrl ||
+    item.url === resolvedOldImageUrl
+      ? {
+          ...item,
+          name: imageUrl.split('/').pop() || item.name,
+          response: imageUrl,
+          status: 'done',
+          thumbUrl: resolvedImageUrl,
+          url: resolvedImageUrl,
+        }
+      : item,
+  );
+}
+
+function replaceImageValue(
+  images: string[],
+  index: number,
+  oldImageUrl: string,
+  imageUrl: string,
+) {
+  const resolvedOldImageUrl = resolveImageUrl(oldImageUrl);
+
+  if (index >= 0) {
+    return images.map((image, imageIndex) =>
+      imageIndex === index ? imageUrl : image,
+    );
+  }
+
+  return images.map((image) =>
+    image === oldImageUrl || resolveImageUrl(image) === resolvedOldImageUrl
+      ? imageUrl
+      : image,
+  );
+}
+
+function getFileListImageUrls(fileList: UploadProps['fileList']) {
+  return (fileList || [])
+    .map((file) => getUploadFileRawUrl(file))
+    .filter(Boolean);
+}
+
+function syncCreateUploadImagesToForm() {
+  createForm.value.cover = getFileListImageUrls(coverFileList.value)[0] || '';
+  createForm.value.images = getFileListImageUrls(imageFileList.value);
+}
+
+function syncEditUploadImagesToForm() {
+  editForm.value.cover = getFileListImageUrls(editCoverFileList.value)[0] || '';
+  editForm.value.images = getFileListImageUrls(editImageFileList.value);
+}
+
+async function handleTranslateUploadImage(
+  scene: TranslateImageScene,
+  file: UploadFile,
+) {
+  const rawImageUrl = getUploadFileRawUrl(file);
+
+  if (!rawImageUrl) {
+    message.warning('鏆傛棤鍙炕璇戠殑鍥剧墖');
+    return;
+  }
+
+  const uid = file.uid;
+  let progressTimer: ReturnType<typeof window.setInterval> | undefined;
+
+  try {
+    setTranslateProgress(uid, 8);
+    progressTimer = window.setInterval(() => {
+      const currentProgress = getTranslateProgress(uid);
+      if (currentProgress < 90) {
+        setTranslateProgress(uid, currentProgress + 8);
+      }
+    }, 400);
+
+    const responseData = await translateProductImageApi(rawImageUrl);
+    const translatedImageUrl = getUploadedImageUrl(responseData);
+
+    if (!translatedImageUrl) {
+      throw new Error('缈昏瘧鎺ュ彛鏈繑鍥炲浘鐗囧湴鍧€');
+    }
+
+    setTranslateProgress(uid, 100);
+
+    switch (scene) {
+      case 'createCover': {
+        createForm.value.cover = translatedImageUrl;
+        updateTranslatedFile(coverFileList, file, translatedImageUrl);
+        break;
+      }
+      case 'createImage': {
+        const imageIndex = (imageFileList.value || []).findIndex(
+          (item) => item.uid === uid,
+        );
+        createForm.value.images = replaceImageValue(
+          createForm.value.images,
+          imageIndex,
+          rawImageUrl,
+          translatedImageUrl,
+        );
+        updateTranslatedFile(imageFileList, file, translatedImageUrl);
+        break;
+      }
+      case 'editCover': {
+        editForm.value.cover = translatedImageUrl;
+        updateTranslatedFile(editCoverFileList, file, translatedImageUrl);
+        break;
+      }
+      case 'editImage': {
+        const imageIndex = (editImageFileList.value || []).findIndex(
+          (item) => item.uid === uid,
+        );
+        editForm.value.images = replaceImageValue(
+          editForm.value.images,
+          imageIndex,
+          rawImageUrl,
+          translatedImageUrl,
+        );
+        updateTranslatedFile(editImageFileList, file, translatedImageUrl);
+        break;
+      }
+    }
+
+    window.setTimeout(() => clearTranslateProgress(uid), 500);
+    message.success('鍥剧墖缈昏瘧鎴愬姛');
+  } catch (error: any) {
+    clearTranslateProgress(uid);
+    message.error(error?.message || '鍥剧墖缈昏瘧澶辫触');
+  } finally {
+    if (progressTimer) {
+      window.clearInterval(progressTimer);
+    }
+  }
 }
 
 async function queryProducts(page = queryForm.value.page) {
@@ -762,6 +966,8 @@ async function handleAiGenerateDescription() {
 }
 
 async function createProduct() {
+  syncCreateUploadImagesToForm();
+
   const form = createForm.value;
   const payload = {
     categoryId: Number(form.categoryId),
@@ -814,6 +1020,8 @@ async function updateProduct() {
   if (contactPermissionLoading.value) {
     return;
   }
+
+  syncEditUploadImagesToForm();
 
   const payload = buildProductPayload(editForm.value);
 
@@ -996,11 +1204,61 @@ onMounted(() => {
               :before-upload="beforeImageUpload"
               :custom-request="uploadCover"
               :max-count="1"
+              @preview="previewUploadImage"
               @remove="removeCover"
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <template #itemRender="{ file, actions }">
+                <div class="product-upload-card">
+                  <img
+                    :alt="file.name"
+                    :src="file.url || file.thumbUrl"
+                    class="product-upload-card-image"
+                  />
+                  <div class="product-upload-card-actions">
+                    <div class="product-upload-action-row">
+                      <button
+                        class="product-upload-action"
+                        title="查看图片"
+                        type="button"
+                        @click="() => actions.preview()"
+                      >
+                        <IconifyIcon icon="ant-design:eye-outlined" />
+                      </button>
+                      <button
+                        class="product-upload-action"
+                        title="删除图片"
+                        type="button"
+                        @click="() => actions.remove()"
+                      >
+                        <IconifyIcon icon="ant-design:delete-outlined" />
+                      </button>
+                    </div>
+                    <div class="product-upload-action-row">
+                      <button
+                        :disabled="getTranslateProgress(file.uid) > 0"
+                        class="product-upload-action"
+                        title="翻译图片"
+                        type="button"
+                        @click.stop="
+                          handleTranslateUploadImage('createCover', file)
+                        "
+                      >
+                        <IconifyIcon icon="mingcute:earth-line" />
+                      </button>
+                    </div>
+                  </div>
+                  <Progress
+                    v-if="getTranslateProgress(file.uid) > 0"
+                    :percent="getTranslateProgress(file.uid)"
+                    :show-info="false"
+                    class="product-upload-progress"
+                    size="small"
+                  />
+                </div>
+              </template>
+              <div v-if="!coverFileList?.length">上传</div>
             </Upload>
           </Form.Item>
           <Form.Item label="产品图片">
@@ -1008,11 +1266,61 @@ onMounted(() => {
               v-model:file-list="imageFileList"
               :before-upload="beforeImageUpload"
               :custom-request="uploadProductImage"
+              @preview="previewUploadImage"
               @remove="removeProductImage"
               accept="image/*"
               list-type="picture-card"
               multiple
             >
+              <template #itemRender="{ file, actions }">
+                <div class="product-upload-card">
+                  <img
+                    :alt="file.name"
+                    :src="file.url || file.thumbUrl"
+                    class="product-upload-card-image"
+                  />
+                  <div class="product-upload-card-actions">
+                    <div class="product-upload-action-row">
+                      <button
+                        class="product-upload-action"
+                        title="查看图片"
+                        type="button"
+                        @click="() => actions.preview()"
+                      >
+                        <IconifyIcon icon="ant-design:eye-outlined" />
+                      </button>
+                      <button
+                        class="product-upload-action"
+                        title="删除图片"
+                        type="button"
+                        @click="() => actions.remove()"
+                      >
+                        <IconifyIcon icon="ant-design:delete-outlined" />
+                      </button>
+                    </div>
+                    <div class="product-upload-action-row">
+                      <button
+                        :disabled="getTranslateProgress(file.uid) > 0"
+                        class="product-upload-action"
+                        title="翻译图片"
+                        type="button"
+                        @click.stop="
+                          handleTranslateUploadImage('createImage', file)
+                        "
+                      >
+                        <IconifyIcon icon="mingcute:earth-line" />
+                      </button>
+                    </div>
+                  </div>
+                  <Progress
+                    v-if="getTranslateProgress(file.uid) > 0"
+                    :percent="getTranslateProgress(file.uid)"
+                    :show-info="false"
+                    class="product-upload-progress"
+                    size="small"
+                  />
+                </div>
+              </template>
               <div>上传</div>
             </Upload>
           </Form.Item>
@@ -1082,11 +1390,61 @@ onMounted(() => {
               :before-upload="beforeImageUpload"
               :custom-request="uploadEditCover"
               :max-count="1"
+              @preview="previewUploadImage"
               @remove="removeEditCover"
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <template #itemRender="{ file, actions }">
+                <div class="product-upload-card">
+                  <img
+                    :alt="file.name"
+                    :src="file.url || file.thumbUrl"
+                    class="product-upload-card-image"
+                  />
+                  <div class="product-upload-card-actions">
+                    <div class="product-upload-action-row">
+                      <button
+                        class="product-upload-action"
+                        title="查看图片"
+                        type="button"
+                        @click="() => actions.preview()"
+                      >
+                        <IconifyIcon icon="ant-design:eye-outlined" />
+                      </button>
+                      <button
+                        class="product-upload-action"
+                        title="删除图片"
+                        type="button"
+                        @click="() => actions.remove()"
+                      >
+                        <IconifyIcon icon="ant-design:delete-outlined" />
+                      </button>
+                    </div>
+                    <div class="product-upload-action-row">
+                      <button
+                        :disabled="getTranslateProgress(file.uid) > 0"
+                        class="product-upload-action"
+                        title="翻译图片"
+                        type="button"
+                        @click.stop="
+                          handleTranslateUploadImage('editCover', file)
+                        "
+                      >
+                        <IconifyIcon icon="mingcute:earth-line" />
+                      </button>
+                    </div>
+                  </div>
+                  <Progress
+                    v-if="getTranslateProgress(file.uid) > 0"
+                    :percent="getTranslateProgress(file.uid)"
+                    :show-info="false"
+                    class="product-upload-progress"
+                    size="small"
+                  />
+                </div>
+              </template>
+              <div v-if="!editCoverFileList?.length">上传</div>
             </Upload>
           </Form.Item>
           <Form.Item label="产品图片">
@@ -1094,11 +1452,61 @@ onMounted(() => {
               v-model:file-list="editImageFileList"
               :before-upload="beforeImageUpload"
               :custom-request="uploadEditProductImage"
+              @preview="previewUploadImage"
               @remove="removeEditProductImage"
               accept="image/*"
               list-type="picture-card"
               multiple
             >
+              <template #itemRender="{ file, actions }">
+                <div class="product-upload-card">
+                  <img
+                    :alt="file.name"
+                    :src="file.url || file.thumbUrl"
+                    class="product-upload-card-image"
+                  />
+                  <div class="product-upload-card-actions">
+                    <div class="product-upload-action-row">
+                      <button
+                        class="product-upload-action"
+                        title="查看图片"
+                        type="button"
+                        @click="() => actions.preview()"
+                      >
+                        <IconifyIcon icon="ant-design:eye-outlined" />
+                      </button>
+                      <button
+                        class="product-upload-action"
+                        title="删除图片"
+                        type="button"
+                        @click="() => actions.remove()"
+                      >
+                        <IconifyIcon icon="ant-design:delete-outlined" />
+                      </button>
+                    </div>
+                    <div class="product-upload-action-row">
+                      <button
+                        :disabled="getTranslateProgress(file.uid) > 0"
+                        class="product-upload-action"
+                        title="翻译图片"
+                        type="button"
+                        @click.stop="
+                          handleTranslateUploadImage('editImage', file)
+                        "
+                      >
+                        <IconifyIcon icon="mingcute:earth-line" />
+                      </button>
+                    </div>
+                  </div>
+                  <Progress
+                    v-if="getTranslateProgress(file.uid) > 0"
+                    :percent="getTranslateProgress(file.uid)"
+                    :show-info="false"
+                    class="product-upload-progress"
+                    size="small"
+                  />
+                </div>
+              </template>
               <div>上传</div>
             </Upload>
           </Form.Item>
@@ -1239,10 +1647,22 @@ onMounted(() => {
         </div>
       </Form>
     </Modal>
+    <AntImage
+      :preview="{
+        visible: imagePreviewVisible,
+        onVisibleChange: handleImagePreviewVisibleChange,
+      }"
+      :src="imagePreviewUrl"
+      class="product-preview-image"
+    />
   </Page>
 </template>
 
 <style scoped>
+.product-preview-image {
+  display: none;
+}
+
 .product-cover {
   object-fit: cover;
   border-radius: 4px;
@@ -1259,6 +1679,80 @@ onMounted(() => {
 
 .product-form-full {
   grid-column: 1 / -1;
+}
+
+.product-upload-card {
+  position: relative;
+  width: 102px;
+  height: 126px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product-upload-card-image {
+  width: 100%;
+  height: 102px;
+  object-fit: cover;
+}
+
+.product-upload-card-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 102px;
+  background: rgb(0 0 0 / 45%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.product-upload-card:hover .product-upload-card-actions {
+  opacity: 1;
+}
+
+.product-upload-action-row {
+  display: flex;
+  gap: 10px;
+}
+
+.product-upload-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.product-upload-action:hover {
+  color: #69b1ff;
+}
+
+.product-upload-action:disabled {
+  color: rgb(255 255 255 / 55%);
+  cursor: not-allowed;
+}
+
+.product-upload-progress {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  left: 8px;
+  line-height: 1;
+}
+
+:deep(.ant-upload-list-picture-card .ant-upload-list-item-container) {
+  height: 126px;
 }
 
 .product-images {
