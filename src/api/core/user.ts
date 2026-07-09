@@ -49,3 +49,9 @@ export function createAdminUserApi(data: AdminUserApi.UserPayload) {
     data,
   );
 }
+
+export function deleteAdminUserApi(id: number | string) {
+  return requestClient.delete<AdminUserApi.UserResponse>(
+    `/admin/user/list/${id}`,
+  );
+}

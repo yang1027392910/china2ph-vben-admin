@@ -17,7 +17,11 @@ import {
   Tag,
 } from 'ant-design-vue';
 
-import { createAdminUserApi, getAdminUserListApi } from '#/api';
+import {
+  createAdminUserApi,
+  deleteAdminUserApi,
+  getAdminUserListApi,
+} from '#/api';
 
 type User = {
   canLottery: boolean;
@@ -168,10 +172,19 @@ async function createUser() {
   }
 }
 
-function remove(id: number | string) {
-  users.value = users.value.filter((item) => item.id !== id);
-  total.value = Math.max(total.value - 1, 0);
-  message.success('已删除');
+async function remove(id: number | string) {
+  try {
+    await deleteAdminUserApi(id);
+    message.success('已删除');
+
+    const targetPage =
+      users.value.length === 1 && queryForm.value.page > 1
+        ? queryForm.value.page - 1
+        : queryForm.value.page;
+    await queryUsers(targetPage);
+  } catch (error: any) {
+    message.error(error?.message || '删除失败');
+  }
 }
 
 function getCellValue(record: Record<string, any>, dataIndex: unknown) {
