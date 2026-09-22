@@ -11,6 +11,12 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
+        name: 'CouponManagement',
+        path: '/management/coupons',
+        component: () => import('#/views/manage/coupon/index.vue'),
+        meta: { title: '优惠券管理', icon: 'lucide:ticket' },
+      },
+      {
         name: 'UserManagement',
         path: '/management/users',
         component: () => import('#/views/manage/user/index.vue'),

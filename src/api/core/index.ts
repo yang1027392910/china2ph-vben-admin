@@ -1,6 +1,7 @@
 export * from './auth';
 export * from './banner';
 export * from './category';
+export * from './coupon';
 export * from './email-code-log';
 export * from './home-navigation';
 export * from './icon-library';
