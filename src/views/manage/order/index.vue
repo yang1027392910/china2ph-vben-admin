@@ -21,9 +21,11 @@ import {
   Space,
   Spin,
   Table,
+  Tag,
 } from 'ant-design-vue';
 
 import {
+  approveOrderPaymentApi,
   getOrderDetailApi,
   getOrderListApi,
   updateOrderApi,
@@ -44,6 +46,7 @@ const selectedId = ref<OrderApi.Id>();
 let detailRequest = 0;
 const editing = ref(false);
 const saving = ref(false);
+const approving = ref(false);
 const form = ref({ status: '', deliveryType: '', remark: '' });
 const quantityOpen = ref(false);
 const quantitySaving = ref(false);
@@ -55,6 +58,8 @@ const columns: TableColumnsType<OrderApi.Order> = [
   { title: '订单编号', key: 'orderNo', width: 200 },
   { title: '用户名', key: 'userName', width: 120 },
   { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
+  { title: '支付状态', key: 'paymentStatus', width: 120 },
+  { title: '支付方式', key: 'paymentMethod', width: 120 },
   { title: '订单金额', key: 'totalAmount', width: 130 },
   { title: '配送方式', key: 'deliveryType', width: 130 },
   { title: '备注', dataIndex: 'remark', key: 'remark', width: 200 },
@@ -71,6 +76,8 @@ const itemColumns: TableColumnsType<OrderApi.Item> = [
   { title: '操作', key: 'actions', width: 120 },
 ];
 const aliases: Record<string, string[]> = {
+  paymentStatus: ['paymentStatus', 'payment_status'],
+  paymentMethod: ['paymentMethod', 'payment_method'],
   orderNo: ['orderNo', 'order_no', 'orderNumber'],
   userName: ['userName', 'user_name', 'username'],
   totalAmount: ['totalAmount', 'total_amount', 'amount'],
@@ -85,7 +92,7 @@ function cell(record: Record<string, unknown>, key: string) {
   for (const field of aliases[key] ?? [key]) {
     const value = record[field];
     if (value !== undefined && value !== null && value !== '')
-      return String(value);
+      return displayField(key, value);
   }
   return '-';
 }
@@ -108,7 +115,58 @@ function display(value: unknown) {
       ? JSON.stringify(value)
       : String(value));
 }
+const paymentMethodLabels: Record<string, string> = {
+  0: 'None',
+  1: 'GCash',
+  2: 'Maya',
+};
+const paymentStatusLabels: Record<string, { color: string; text: string }> = {
+  0: { color: 'default', text: '未支付' },
+  1: { color: 'orange', text: '待审批' },
+  2: { color: 'green', text: '已支付（Paid）' },
+};
+function paymentStatusTag(value: unknown) {
+  return paymentStatusLabels[String(value)] ?? { color: 'default', text: display(value) };
+}
+function displayField(key: string, value: unknown) {
+  if (key === 'paymentMethod' || key === 'payment_method') {
+    return paymentMethodLabels[String(value)] ?? display(value);
+  }
+  if (key === 'status' && Number(value) === 3) return 'Completed';
+  if (key === 'paymentStatus' || key === 'payment_status') {
+    return paymentStatusTag(value).text;
+  }
+  return display(value);
+}
+const paymentPaid = computed(
+  () => Number(detail.value?.paymentStatus ?? detail.value?.payment_status) === 2,
+);
+async function approvePayment() {
+  if (!detail.value || approving.value || paymentPaid.value) return;
+  const orderId = detail.value.id;
+  approving.value = true;
+  try {
+    await approveOrderPaymentApi({ orderId });
+    if (detail.value?.id === orderId) {
+      const paymentKey = 'paymentStatus' in detail.value ? 'paymentStatus' : 'payment_status';
+      detail.value = { ...detail.value, [paymentKey]: 2, status: 3 };
+    }
+    message.success('支付已批准：Paid / Completed');
+    await Promise.all([
+      selectedId.value === orderId ? fetchDetail() : Promise.resolve(),
+      fetchOrders(),
+    ]);
+  } catch {
+    // The shared interceptor reports errors; allow retry without changing status.
+  } finally {
+    approving.value = false;
+  }
+}
 const labels: Record<string, string> = {
+  paymentMethod: '支付方式',
+  payment_method: '支付方式',
+  paymentStatus: '支付状态',
+  payment_status: '支付状态',
   id: '订单 ID',
   orderNo: '订单编号',
   order_no: '订单编号',
@@ -338,8 +396,14 @@ onMounted(() => {
           type="link"
           @click="openDetail(record as OrderApi.Order)"
           >
-查看详情
+{{ Number(record.paymentStatus ?? record.payment_status) === 1 ? '查看并审批' : '查看详情' }}
 </Button>
+        <Tag
+          v-else-if="column.key === 'paymentStatus'"
+          :color="paymentStatusTag(record.paymentStatus ?? record.payment_status).color"
+        >
+          {{ paymentStatusTag(record.paymentStatus ?? record.payment_status).text }}
+        </Tag>
         <template v-else>{{ cell(record, String(column.key)) }}</template>
       </template>
     </Table>
@@ -347,12 +411,23 @@ onMounted(() => {
       v-model:open="detailOpen"
       title="订单详情"
       width="min(100vw, 1000px)"
-      :mask-closable="!saving && !quantitySaving"
+      :mask-closable="!saving && !quantitySaving && !approving"
     >
       <Spin :spinning="detailLoading">
         <template v-if="detail">
           <div class="mb-4 flex items-center justify-between">
-            <span class="text-lg font-medium">订单信息</span><Button type="primary" @click="openEdit">编辑订单</Button>
+                        <span class="text-lg font-medium">订单信息</span>
+            <Space>
+              <Button
+                type="primary"
+                :loading="approving"
+                :disabled="paymentPaid || saving || quantitySaving"
+                @click="approvePayment"
+              >
+                Approve
+              </Button>
+              <Button :disabled="approving" @click="openEdit">编辑订单</Button>
+            </Space>
           </div>
           <Descriptions bordered :column="{ xs: 1, sm: 2 }" size="small">
             <Descriptions.Item
@@ -360,7 +435,13 @@ onMounted(() => {
               :key="key"
               :label="labels[key] ?? key"
               >
-{{ display(value) }}
+              <Tag
+                v-if="key === 'paymentStatus' || key === 'payment_status'"
+                :color="paymentStatusTag(value).color"
+              >
+                {{ paymentStatusTag(value).text }}
+              </Tag>
+              <template v-else>{{ displayField(key, value) }}</template>
 </Descriptions.Item>
           </Descriptions>
           <h3 class="mb-3 mt-6 text-lg font-medium">商品明细</h3>
@@ -375,7 +456,7 @@ onMounted(() => {
               <Button
                 v-if="column.key === 'actions'"
                 type="link"
-                :disabled="record.id === undefined || record.id === null"
+                :disabled="approving || record.id === undefined || record.id === null"
                 @click="openQuantity(record as OrderApi.Item)"
                 >
 修改数量

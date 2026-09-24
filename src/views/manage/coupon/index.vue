@@ -70,19 +70,19 @@ const editOpen = ref(false);
 const editId = ref<number>();
 const editType = ref<1 | 2>(1);
 const editForm = ref<{
-  amount: null | string;
+  amount: string | undefined;
   enabled: boolean;
-  validDays: null | number;
+  validDays: number | undefined;
 }>({ amount: '', validDays: 30, enabled: true });
 const saving = ref(false);
 const sendOpen = ref(false);
 const sending = ref(false);
 const sendForm = ref<{
-  amount: null | string;
+  amount: string | undefined;
   remark: string;
-  userId: null | number;
-  validDays: null | number;
-}>({ amount: '', remark: '', userId: null, validDays: 30 });
+  userId: number | undefined;
+  validDays: number | undefined;
+}>({ amount: '', remark: '', userId: undefined, validDays: 30 });
 const query = ref<CouponApi.ListQuery>({ page: 1, pageSize: 10 });
 const dates = ref<[Dayjs, Dayjs]>();
 const rows = ref<CouponApi.Coupon[]>([]);
@@ -148,12 +148,13 @@ function openEdit(config: CouponApi.Config) {
   editOpen.value = true;
 }
 function validReward(
-  amount: null | string,
-  days: null | number,
+  amount: null | string | undefined,
+  days: null | number | undefined,
   allowZero: boolean,
 ) {
   if (
     amount === null ||
+    amount === undefined ||
     !/^\d+(\.\d{1,2})?$/.test(amount) ||
     Number(amount) > 99_999_999.99 ||
     (allowZero ? Number(amount) < 0 : Number(amount) <= 0)
@@ -163,7 +164,13 @@ function validReward(
     );
     return false;
   }
-  if (days === null || !Number.isInteger(days) || days < 1 || days > 365_000) {
+  if (
+    days === null ||
+    days === undefined ||
+    !Number.isInteger(days) ||
+    days < 1 ||
+    days > 365_000
+  ) {
     message.warning('有效天数须为 1～365000 的整数');
     return false;
   }
@@ -260,7 +267,7 @@ async function loadDetail(id: number) {
   }
 }
 function openSend() {
-  sendForm.value = { amount: '', remark: '', userId: null, validDays: 30 };
+  sendForm.value = { amount: '', remark: '', userId: undefined, validDays: 30 };
   sendOpen.value = true;
 }
 async function sendCoupon() {
@@ -268,6 +275,7 @@ async function sendCoupon() {
   const form = sendForm.value;
   if (
     form.userId === null ||
+    form.userId === undefined ||
     !Number.isSafeInteger(form.userId) ||
     form.userId <= 0
   ) {
@@ -297,20 +305,18 @@ async function sendCoupon() {
     sending.value = false;
   }
 }
-async function disableCoupon(coupon: CouponApi.Coupon) {
-  if (disabling.value !== undefined || ![0, 1].includes(coupon.status)) return;
-  disabling.value = coupon.id;
+async function disableCoupon(id: number, status: CouponApi.Status) {
+  if (disabling.value !== undefined || ![0, 1].includes(status)) return;
+  disabling.value = id;
   try {
-    await disableCouponApi(coupon.id);
+    await disableCouponApi(id);
     message.success('优惠券已禁用');
   } catch {
     /* Refresh even if the coupon expired or was used before the request. */
   } finally {
     await Promise.all([
       loadList(),
-      ...(detailOpen.value && detailId.value === coupon.id
-        ? [loadDetail(coupon.id)]
-        : []),
+      ...(detailOpen.value && detailId.value === id ? [loadDetail(id)] : []),
     ]);
     disabling.value = undefined;
   }
@@ -336,9 +342,9 @@ onMounted(() => {
           </template>
         </Alert>
         <Spin :spinning="configLoading">
-          <Empty v-if="configError" description="奖励配置加载失败"
-            ><Button @click="loadConfigs">重新加载</Button></Empty
-          >
+          <Empty v-if="configError" description="奖励配置加载失败">
+            <Button @click="loadConfigs">重新加载</Button>
+          </Empty>
           <Empty
             v-else-if="!configLoading && configs.length === 0"
             description="暂无奖励配置"
@@ -349,23 +355,23 @@ onMounted(() => {
               :key="config.id"
               :title="typeLabels[config.type]"
             >
-              <template #extra
-                ><Tag :color="config.enabled ? 'green' : 'default'">{{
-                  config.enabled ? '已启用' : '已关闭'
-                }}</Tag></template
-              >
+              <template #extra>
+                <Tag :color="config.enabled ? 'green' : 'default'">
+                  {{ config.enabled ? '已启用' : '已关闭' }}
+                </Tag>
+              </template>
               <Descriptions :column="1">
-                <Descriptions.Item label="奖励类型">{{
-                  typeLabels[config.type]
-                }}</Descriptions.Item>
-                <Descriptions.Item label="金额"
-                  ><span class="text-2xl font-semibold"
+                <Descriptions.Item label="奖励类型">
+                  {{ typeLabels[config.type] }}
+                </Descriptions.Item>
+                <Descriptions.Item label="金额">
+                  <span class="text-2xl font-semibold"
                     >₱{{ config.amount }}</span
-                  ></Descriptions.Item
-                >
-                <Descriptions.Item label="有效天数"
-                  >{{ config.validDays }} 天</Descriptions.Item
-                >
+                  >
+                </Descriptions.Item>
+                <Descriptions.Item label="有效天数">
+                  {{ config.validDays }} 天
+                </Descriptions.Item>
               </Descriptions>
               <Button type="primary" @click="openEdit(config)">编辑配置</Button>
             </Card>
@@ -412,11 +418,11 @@ onMounted(() => {
             format="YYYY-MM-DD"
             @change="loadList(1)"
           />
-          <Space
-            ><Button :loading="loading" @click="loadList(1)">搜索</Button
+          <Space>
+            <Button :loading="loading" @click="loadList(1)">搜索</Button
             ><Button @click="resetQuery">重置</Button
-            ><Button type="primary" @click="openSend">派发优惠券</Button></Space
-          >
+            ><Button type="primary" @click="openSend">派发优惠券</Button>
+          </Space>
         </div>
         <Alert
           v-if="listError"
@@ -424,12 +430,11 @@ onMounted(() => {
           type="error"
           message="优惠券列表加载失败"
           show-icon
-          ><template #action
-            ><Button size="small" @click="loadList()"
-              >重新加载</Button
-            ></template
-          ></Alert
         >
+          <template #action>
+            <Button size="small" @click="loadList()"> 重新加载 </Button>
+          </template>
+        </Alert>
         <Table
           :columns="columns"
           :data-source="rows"
@@ -447,45 +452,47 @@ onMounted(() => {
           @change="handleTableChange"
         >
           <template #bodyCell="{ record, column, text }">
-            <template v-if="column.key === 'user'"
-              ><div>{{ display(record.email) }}</div>
+            <template v-if="column.key === 'user'">
+              <div>{{ display(record.email) }}</div>
               <div class="text-sm text-muted-foreground">
                 {{ display(record.nickname) }}
-              </div></template
-            >
-            <template v-else-if="column.key === 'type'">{{
-              typeLabels[record.type as CouponApi.Type]
-            }}</template>
-            <template v-else-if="column.key === 'source'">{{
-              sourceLabels[record.source as CouponApi.Source]
-            }}</template>
-            <template v-else-if="column.key === 'amount'"
-              >₱{{ record.amount }}</template
-            >
-            <template v-else-if="column.key === 'status'"
-              ><Tag :color="statusColors[record.status as CouponApi.Status]">{{
-                statusLabels[record.status as CouponApi.Status]
-              }}</Tag></template
-            >
+              </div>
+            </template>
+            <template v-else-if="column.key === 'type'">
+              {{ typeLabels[record.type as CouponApi.Type] }}
+            </template>
+            <template v-else-if="column.key === 'source'">
+              {{ sourceLabels[record.source as CouponApi.Source] }}
+            </template>
+            <template v-else-if="column.key === 'amount'">
+              ₱{{ record.amount }}
+            </template>
+            <template v-else-if="column.key === 'status'">
+              <Tag :color="statusColors[record.status as CouponApi.Status]">
+                {{ statusLabels[record.status as CouponApi.Status] }}
+              </Tag>
+            </template>
             <template v-else-if="column.key === 'actions'">
               <Space>
-                <Button size="small" type="link" @click="loadDetail(record.id)"
-                  >详情</Button
-                >
+                <Button size="small" type="link" @click="loadDetail(record.id)">
+                  详情
+                </Button>
                 <Popconfirm
                   v-if="record.status === 0 || record.status === 1"
                   title="确定禁用该优惠券吗？禁用后用户将无法使用。"
                   :disabled="disabling !== undefined"
-                  @confirm="disableCoupon(record)"
-                  ><Button
+                  @confirm="disableCoupon(record.id, record.status)"
+                >
+                  <Button
                     size="small"
                     type="link"
                     danger
                     :disabled="disabling !== undefined"
                     :loading="disabling === record.id"
-                    >禁用</Button
-                  ></Popconfirm
-                >
+                  >
+                    禁用
+                  </Button>
+                </Popconfirm>
               </Space>
             </template>
             <template v-else>{{ display(text) }}</template>
@@ -504,28 +511,30 @@ onMounted(() => {
       @ok="saveConfig"
     >
       <Form layout="vertical" :disabled="saving">
-        <Form.Item label="奖励类型"
-          ><Input :value="typeLabels[editType]" disabled
-        /></Form.Item>
-        <Form.Item label="金额（₱）" required
-          ><InputNumber
+        <Form.Item label="奖励类型">
+          <Input :value="typeLabels[editType]" disabled />
+        </Form.Item>
+        <Form.Item label="金额（₱）" required>
+          <InputNumber
             v-model:value="editForm.amount"
             string-mode
             :min="0"
             :max="99999999.99"
             :step="0.01"
             class="w-full"
-        /></Form.Item>
-        <Form.Item label="有效天数" required
-          ><InputNumber
+          />
+        </Form.Item>
+        <Form.Item label="有效天数" required>
+          <InputNumber
             v-model:value="editForm.validDays"
             :min="1"
             :max="365000"
             class="w-full"
-        /></Form.Item>
-        <Form.Item label="启用状态" required
-          ><Switch v-model:checked="editForm.enabled"
-        /></Form.Item>
+          />
+        </Form.Item>
+        <Form.Item label="启用状态" required>
+          <Switch v-model:checked="editForm.enabled" />
+        </Form.Item>
       </Form>
     </Modal>
     <Modal
@@ -546,37 +555,41 @@ onMounted(() => {
         message="派发后立即生效，有效期从派发时间开始计算。同一用户可拥有多张管理员派发券。"
       />
       <Form layout="vertical" :disabled="sending">
-        <Form.Item label="用户 ID" required
-          ><InputNumber
+        <Form.Item label="用户 ID" required>
+          <InputNumber
             v-model:value="sendForm.userId"
             :min="1"
             :max="Number.MAX_SAFE_INTEGER"
             class="w-full"
             placeholder="请输入已存在的用户 ID"
-        /></Form.Item>
-        <Form.Item label="金额（₱）" required
-          ><InputNumber
+          />
+        </Form.Item>
+        <Form.Item label="金额（₱）" required>
+          <InputNumber
             v-model:value="sendForm.amount"
             string-mode
             :min="0.01"
             :max="99999999.99"
             :step="0.01"
             class="w-full"
-        /></Form.Item>
-        <Form.Item label="有效天数" required
-          ><InputNumber
+          />
+        </Form.Item>
+        <Form.Item label="有效天数" required>
+          <InputNumber
             v-model:value="sendForm.validDays"
             :min="1"
             :max="365000"
             class="w-full"
-        /></Form.Item>
-        <Form.Item label="备注"
-          ><Input.TextArea
+          />
+        </Form.Item>
+        <Form.Item label="备注">
+          <Input.TextArea
             v-model:value="sendForm.remark"
             :maxlength="255"
             show-count
             :rows="3"
-        /></Form.Item>
+          />
+        </Form.Item>
       </Form>
     </Modal>
     <Drawer
@@ -587,41 +600,41 @@ onMounted(() => {
       <Spin :spinning="detailLoading">
         <Descriptions v-if="detail" :column="1" bordered>
           <Descriptions.Item label="券 ID">{{ detail.id }}</Descriptions.Item>
-          <Descriptions.Item label="类型">{{
-            typeLabels[detail.type]
-          }}</Descriptions.Item>
-          <Descriptions.Item label="金额"
-            >₱{{ detail.amount }}</Descriptions.Item
-          >
-          <Descriptions.Item label="状态"
-            ><Tag :color="statusColors[detail.status]">{{
-              statusLabels[detail.status]
-            }}</Tag></Descriptions.Item
-          >
-          <Descriptions.Item label="用户头像"
-            ><Avatar
+          <Descriptions.Item label="类型">
+            {{ typeLabels[detail.type] }}
+          </Descriptions.Item>
+          <Descriptions.Item label="金额">
+            ₱{{ detail.amount }}
+          </Descriptions.Item>
+          <Descriptions.Item label="状态">
+            <Tag :color="statusColors[detail.status]">
+              {{ statusLabels[detail.status] }}
+            </Tag>
+          </Descriptions.Item>
+          <Descriptions.Item label="用户头像">
+            <Avatar
               v-if="detail.avatar"
               :src="avatarUrl(detail.avatar)"
               :size="48"
-            /><span v-else>—</span></Descriptions.Item
-          >
-          <Descriptions.Item label="用户 ID">{{
-            detail.userId
-          }}</Descriptions.Item>
-          <Descriptions.Item label="邮箱">{{
-            display(detail.email)
-          }}</Descriptions.Item>
-          <Descriptions.Item label="昵称">{{
-            display(detail.nickname)
-          }}</Descriptions.Item>
-          <Descriptions.Item label="来源">{{
-            sourceLabels[detail.source]
-          }}</Descriptions.Item>
-          <Descriptions.Item label="备注"
-            ><span class="whitespace-pre-wrap break-all">{{
+            /><span v-else>—</span>
+          </Descriptions.Item>
+          <Descriptions.Item label="用户 ID">
+            {{ detail.userId }}
+          </Descriptions.Item>
+          <Descriptions.Item label="邮箱">
+            {{ display(detail.email) }}
+          </Descriptions.Item>
+          <Descriptions.Item label="昵称">
+            {{ display(detail.nickname) }}
+          </Descriptions.Item>
+          <Descriptions.Item label="来源">
+            {{ sourceLabels[detail.source] }}
+          </Descriptions.Item>
+          <Descriptions.Item label="备注">
+            <span class="whitespace-pre-wrap break-all">{{
               display(detail.remark)
-            }}</span></Descriptions.Item
-          >
+            }}</span>
+          </Descriptions.Item>
           <Descriptions.Item
             v-if="
               detail.orderId !== null &&
@@ -629,20 +642,22 @@ onMounted(() => {
               detail.orderId !== ''
             "
             label="关联订单 ID"
-            >{{ detail.orderId }}</Descriptions.Item
           >
+            {{ detail.orderId }}
+          </Descriptions.Item>
           <Descriptions.Item
             v-for="field in timeFields"
             :key="field.key"
             :label="field.title"
-            >{{ display(detail[field.key]) }}</Descriptions.Item
           >
+            {{ display(detail[field.key]) }}
+          </Descriptions.Item>
         </Descriptions>
-        <Empty v-else-if="!detailLoading" description="优惠券详情加载失败"
-          ><Button @click="detailId !== undefined && loadDetail(detailId)"
-            >重新加载</Button
-          ></Empty
-        >
+        <Empty v-else-if="!detailLoading" description="优惠券详情加载失败">
+          <Button @click="detailId !== undefined && loadDetail(detailId)">
+            重新加载
+          </Button>
+        </Empty>
       </Spin>
     </Drawer>
   </Page>

@@ -61,3 +61,7 @@ export function updateOrderItemApi(data: {
 }) {
   return requestClient.put('/admin/order/item/update', data);
 }
+
+export function approveOrderPaymentApi(data: { orderId: OrderApi.Id }) {
+  return requestClient.put('/admin/order/payment/approve', data);
+}

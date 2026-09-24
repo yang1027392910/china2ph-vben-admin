@@ -22,6 +22,7 @@ export namespace ProductApi {
     phPrice: number;
     profit: number;
     sales: number;
+    saleType: 1 | 2;
     shippingFee: number;
     status: number;
     stock: number;

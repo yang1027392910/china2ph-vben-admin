@@ -53,6 +53,7 @@ type Product = {
   phPrice: number;
   profit: number;
   sales: number;
+  saleType: 1 | 2;
   shippingFee: number;
   showSupplierContact: number;
   status: number;
@@ -101,6 +102,7 @@ const defaultForm: ProductForm = {
   minimumOrderQuantity: 1,
   phPrice: 180,
   profit: 60,
+  saleType: 1,
   sales: 0,
   shippingFee: 20,
   showSupplierContact: 0,
@@ -146,6 +148,11 @@ type TranslateImageScene =
   | 'createImage'
   | 'editCover'
   | 'editImage';
+
+const saleTypeOptions = [
+  { label: 'In Stock', value: 1 },
+  { label: 'Pre-order', value: 2 },
+];
 
 const hotTypeOptions = [
   { label: '全部', value: '' },
@@ -230,6 +237,7 @@ function normalizeProducts(data: any): Product[] {
     minimumOrderQuantity: Number(item.minimumOrderQuantity ?? 1),
     phPrice: Number(item.phPrice ?? 0),
     profit: Number(item.profit ?? 0),
+    saleType: Number(item.saleType) === 2 ? 2 : 1,
     sales: Number(item.sales ?? 0),
     shippingFee: Number(item.shippingFee ?? 0),
     showSupplierContact: Number(item.showSupplierContact ?? 0),
@@ -899,6 +907,7 @@ function buildProductPayload(form: ProductForm) {
     minimumOrderQuantity: Number(form.minimumOrderQuantity),
     phPrice: Number(form.phPrice),
     profit: Number(form.profit),
+    saleType: form.saleType,
     sales: Number(form.sales),
     shippingFee: Number(form.shippingFee),
     showSupplierContact: Number(form.showSupplierContact),
@@ -978,6 +987,7 @@ async function createProduct() {
     minimumOrderQuantity: Number(form.minimumOrderQuantity),
     phPrice: Number(form.phPrice),
     profit: Number(form.profit),
+    saleType: form.saleType,
     sales: Number(form.sales),
     shippingFee: Number(form.shippingFee),
     showSupplierContact: Number(form.showSupplierContact),
@@ -1324,30 +1334,18 @@ onMounted(() => {
               <div>上传</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="中国价格">
-            <InputNumber v-model:value="createForm.chinaPrice" class="w-full" />
-          </Form.Item>
-          <Form.Item label="运费">
-            <InputNumber
-              v-model:value="createForm.shippingFee"
+          <Form.Item label="销售类型">
+            <Select
+              v-model:value="createForm.saleType"
+              :options="saleTypeOptions"
               class="w-full"
             />
           </Form.Item>
           <Form.Item label="菲律宾价格">
             <InputNumber v-model:value="createForm.phPrice" class="w-full" />
           </Form.Item>
-          <Form.Item label="利润">
-            <InputNumber v-model:value="createForm.profit" class="w-full" />
-          </Form.Item>
           <Form.Item label="库存">
             <InputNumber v-model:value="createForm.stock" class="w-full" />
-          </Form.Item>
-          <Form.Item label="最低起订量">
-            <InputNumber
-              v-model:value="createForm.minimumOrderQuantity"
-              :min="1"
-              class="w-full"
-            />
           </Form.Item>
           <Form.Item label="销量">
             <InputNumber v-model:value="createForm.sales" class="w-full" />
@@ -1517,27 +1515,18 @@ onMounted(() => {
               @ai-generate="handleAiGenerateDescription"
             />
           </Form.Item>
-          <Form.Item label="中国价格">
-            <InputNumber v-model:value="editForm.chinaPrice" class="w-full" />
-          </Form.Item>
-          <Form.Item label="运费">
-            <InputNumber v-model:value="editForm.shippingFee" class="w-full" />
+          <Form.Item label="销售类型">
+            <Select
+              v-model:value="editForm.saleType"
+              :options="saleTypeOptions"
+              class="w-full"
+            />
           </Form.Item>
           <Form.Item label="菲律宾价格">
             <InputNumber v-model:value="editForm.phPrice" class="w-full" />
           </Form.Item>
-          <Form.Item label="利润">
-            <InputNumber v-model:value="editForm.profit" class="w-full" />
-          </Form.Item>
           <Form.Item label="库存">
             <InputNumber v-model:value="editForm.stock" class="w-full" />
-          </Form.Item>
-          <Form.Item label="最低起订量">
-            <InputNumber
-              v-model:value="editForm.minimumOrderQuantity"
-              :min="1"
-              class="w-full"
-            />
           </Form.Item>
           <Form.Item label="销量">
             <InputNumber v-model:value="editForm.sales" class="w-full" />
