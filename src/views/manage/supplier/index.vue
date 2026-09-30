@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps, UploadProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -29,6 +29,7 @@ import {
   updateSupplierApi,
   uploadAdminFileApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type Supplier = {
   city: string;
@@ -70,20 +71,20 @@ const defaultForm: SupplierForm = {
   status: 1,
 };
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
   { title: 'Logo', dataIndex: 'logo', key: 'logo', width: 90 },
-  { title: '供应商图片', dataIndex: 'images', key: 'images', width: 180 },
-  { title: '供应商名称', dataIndex: 'name', key: 'name', width: 180 },
-  { title: '城市', dataIndex: 'city', key: 'city', width: 120 },
+  { title: $t('app.supplierImage'), dataIndex: 'images', key: 'images', width: 180 },
+  { title: $t('app.supplierName'), dataIndex: 'name', key: 'name', width: 180 },
+  { title: $t('app.city'), dataIndex: 'city', key: 'city', width: 120 },
   {
-    title: '主营产品',
+    title: $t('app.mainProducts'),
     dataIndex: 'main_products',
     key: 'main_products',
     width: 180,
@@ -95,12 +96,12 @@ const columns = [
     key: 'contact_whatsapp',
     width: 150,
   },
-  { title: '展示联系', dataIndex: 'show_contact', key: 'show_contact', width: 100 },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '创建时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-  { title: '操作', key: 'actions', width: 140, fixed: 'right' },
-];
+  { title: $t('app.showContact'), dataIndex: 'show_contact', key: 'show_contact', width: 100 },
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.createdAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', width: 140, fixed: 'right' },
+]));
 
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
@@ -198,7 +199,7 @@ async function querySuppliers(page = queryForm.value.page) {
     suppliers.value = normalizeSuppliers(responseData);
     total.value = normalizeTotal(responseData, suppliers.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -277,7 +278,7 @@ function resolveImageUrl(url?: string) {
 
 function beforeLogoUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    message.error('请选择图片文件');
+    message.error($t('app.selectAnImageFile'));
     return false;
   }
   return true;
@@ -295,7 +296,7 @@ function createUploadRequest(
       const logoUrl = getUploadedImageUrl(responseData);
 
       if (!logoUrl) {
-        throw new Error('上传接口未返回图片地址');
+        throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
       }
 
       target.value.logo = logoUrl;
@@ -308,12 +309,12 @@ function createUploadRequest(
         },
       ];
       options.onSuccess?.(responseData);
-      message.success('Logo 上传成功');
+      message.success($t('app.logoUploaded'));
     } catch (error: any) {
       target.value.logo = '';
       fileList.value = [];
       options.onError?.(error);
-      message.error(error?.message || '上传失败');
+      message.error(error?.message || $t('app.uploadFailed'));
     }
   };
 
@@ -335,7 +336,7 @@ function createImagesUploadRequest(
       const imageUrl = getUploadedImageUrl(responseData);
 
       if (!imageUrl) {
-        throw new Error('上传接口未返回图片地址');
+        throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
       }
 
       target.value.images = [...target.value.images, imageUrl];
@@ -349,10 +350,10 @@ function createImagesUploadRequest(
         },
       ];
       options.onSuccess?.(responseData);
-      message.success('图片上传成功');
+      message.success($t('app.imageUploaded'));
     } catch (error: any) {
       options.onError?.(error);
-      message.error(error?.message || '上传失败');
+      message.error(error?.message || $t('app.uploadFailed'));
     }
   };
 
@@ -419,22 +420,22 @@ function validateSupplierPayload(
   payload: ReturnType<typeof buildSupplierPayload>,
 ) {
   if (!payload.name) {
-    message.error('请输入供应商名称');
+    message.error($t('app.enterASupplierName'));
     return false;
   }
 
   if (!payload.city) {
-    message.error('请输入城市');
+    message.error($t('app.enterACity'));
     return false;
   }
 
   if (!payload.main_products) {
-    message.error('请输入主营产品');
+    message.error($t('app.enterTheMainProducts'));
     return false;
   }
 
   if (!Number.isFinite(payload.sort)) {
-    message.error('请输入正确的排序');
+    message.error($t('app.enterAValidSortOrder'));
     return false;
   }
 
@@ -452,10 +453,10 @@ async function createSupplier() {
     createLoading.value = true;
     await createSupplierApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     querySuppliers(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -475,10 +476,10 @@ async function updateSupplier() {
       id: editForm.value.id,
     });
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
     querySuppliers(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -490,9 +491,9 @@ async function removeSupplier(id: number | string) {
     await deleteSupplierApi(id);
     suppliers.value = suppliers.value.filter((item) => item.id !== id);
     total.value = Math.max(total.value - 1, 0);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -504,28 +505,28 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="商品供应商">
+  <Page :title="$t('app.productSuppliers')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="关键词">
+        <Form.Item :label="$t('app.keyword')">
           <Input
             v-model:value="queryForm.keyword"
             allow-clear
-            placeholder="供应商名称/主营产品"
+            :placeholder="$t('app.supplierNameOrMainProducts')"
             style="width: 210px"
             @press-enter="querySuppliers(1)"
           />
         </Form.Item>
-        <Form.Item label="城市">
+        <Form.Item :label="$t('app.city')">
           <Input
             v-model:value="queryForm.city"
             allow-clear
-            placeholder="城市"
+            :placeholder="$t('app.city')"
             style="width: 140px"
             @press-enter="querySuppliers(1)"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -534,9 +535,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="querySuppliers(1)">查询</Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增供应商</Button>
+        <Button :loading="queryLoading" @click="querySuppliers(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addSupplier') }}</Button>
       </Space>
     </div>
 
@@ -548,7 +549,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       row-key="id"
@@ -558,13 +559,13 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <a @click="openEdit(record as Supplier)">编辑</a>
+            <a @click="openEdit(record as Supplier)">{{ $t('app.edit') }}</a>
             <Popconfirm
-              title="确定删除？"
+              :title="$t('app.deleteThisItem')"
               @confirm="() => removeSupplier(record.id)"
             >
               <a>
-                {{ deleteLoadingId === record.id ? '删除中' : '删除' }}
+                {{ deleteLoadingId === record.id ? $t('app.deleting') : $t('app.delete') }}
               </a>
             </Popconfirm>
           </Space>
@@ -604,12 +605,12 @@ onMounted(() => {
         </template>
         <template v-else-if="column.key === 'show_contact'">
           <Tag :color="record.show_contact === 1 ? 'green' : 'default'">
-            {{ record.show_contact === 1 ? '展示' : '隐藏' }}
+            {{ record.show_contact === 1 ? $t('app.show') : $t('app.hide') }}
           </Tag>
         </template>
         <template v-else-if="column.key === 'status'">
           <Tag :color="record.status === 1 ? 'green' : 'red'">
-            {{ record.status === 1 ? '启用' : '禁用' }}
+            {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
           </Tag>
         </template>
         <template v-else-if="column.key === 'createdAt'">
@@ -624,14 +625,14 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增商品供应商"
+      :title="$t('app.addProductSupplier')"
       width="720px"
       @ok="createSupplier"
     >
       <Form layout="vertical">
         <div class="supplier-form-grid">
-          <Form.Item class="supplier-form-full" label="供应商名称" required>
-            <Input v-model:value="createForm.name" placeholder="请输入供应商名称" />
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierName')" required>
+            <Input v-model:value="createForm.name" :placeholder="$t('app.enterASupplierName')" />
           </Form.Item>
           <Form.Item class="supplier-form-full" label="Logo">
             <Upload
@@ -643,10 +644,10 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item class="supplier-form-full" label="供应商图片">
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierImage')">
             <Upload
               v-model:file-list="imageFileList"
               :before-upload="beforeLogoUpload"
@@ -656,20 +657,20 @@ onMounted(() => {
               list-type="picture-card"
               multiple
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="城市" required>
-            <Input v-model:value="createForm.city" placeholder="义乌" />
+          <Form.Item :label="$t('app.city')" required>
+            <Input v-model:value="createForm.city" :placeholder="$t('app.yiwu')" />
           </Form.Item>
-          <Form.Item label="主营产品" required>
+          <Form.Item :label="$t('app.mainProducts')" required>
             <Input
               v-model:value="createForm.main_products"
-              placeholder="手机配件、日用品"
+              :placeholder="$t('app.phoneAccessoriesHouseholdEssentials')"
             />
           </Form.Item>
           <Form.Item label="MOQ">
-            <Input v-model:value="createForm.moq" placeholder="100件" />
+            <Input v-model:value="createForm.moq" :placeholder="$t('app.text100Units')" />
           </Form.Item>
           <Form.Item label="WhatsApp">
             <Input
@@ -677,32 +678,32 @@ onMounted(() => {
               placeholder="+86..."
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="createForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item label="展示联系方式">
+          <Form.Item :label="$t('app.showContactDetails')">
             <Switch
               v-model:checked="createForm.show_contact"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item class="supplier-form-full" label="描述">
+          <Form.Item class="supplier-form-full" :label="$t('app.description')">
             <Input.TextArea
               v-model:value="createForm.description"
               :rows="4"
-              placeholder="请输入供应商描述"
+              :placeholder="$t('app.enterASupplierDescription')"
             />
           </Form.Item>
         </div>
@@ -712,14 +713,14 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading"
-      title="编辑商品供应商"
+      :title="$t('app.editProductSupplier')"
       width="720px"
       @ok="updateSupplier"
     >
       <Form layout="vertical">
         <div class="supplier-form-grid">
-          <Form.Item class="supplier-form-full" label="供应商名称" required>
-            <Input v-model:value="editForm.name" placeholder="请输入供应商名称" />
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierName')" required>
+            <Input v-model:value="editForm.name" :placeholder="$t('app.enterASupplierName')" />
           </Form.Item>
           <Form.Item class="supplier-form-full" label="Logo">
             <Upload
@@ -731,10 +732,10 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item class="supplier-form-full" label="供应商图片">
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierImage')">
             <Upload
               v-model:file-list="editImageFileList"
               :before-upload="beforeLogoUpload"
@@ -744,20 +745,20 @@ onMounted(() => {
               list-type="picture-card"
               multiple
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="城市" required>
-            <Input v-model:value="editForm.city" placeholder="义乌" />
+          <Form.Item :label="$t('app.city')" required>
+            <Input v-model:value="editForm.city" :placeholder="$t('app.yiwu')" />
           </Form.Item>
-          <Form.Item label="主营产品" required>
+          <Form.Item :label="$t('app.mainProducts')" required>
             <Input
               v-model:value="editForm.main_products"
-              placeholder="手机配件、日用品"
+              :placeholder="$t('app.phoneAccessoriesHouseholdEssentials')"
             />
           </Form.Item>
           <Form.Item label="MOQ">
-            <Input v-model:value="editForm.moq" placeholder="100件" />
+            <Input v-model:value="editForm.moq" :placeholder="$t('app.text100Units')" />
           </Form.Item>
           <Form.Item label="WhatsApp">
             <Input
@@ -765,32 +766,32 @@ onMounted(() => {
               placeholder="+86..."
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="editForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item label="展示联系方式">
+          <Form.Item :label="$t('app.showContactDetails')">
             <Switch
               v-model:checked="editForm.show_contact"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item class="supplier-form-full" label="描述">
+          <Form.Item class="supplier-form-full" :label="$t('app.description')">
             <Input.TextArea
               v-model:value="editForm.description"
               :rows="4"
-              placeholder="请输入供应商描述"
+              :placeholder="$t('app.enterASupplierDescription')"
             />
           </Form.Item>
         </div>

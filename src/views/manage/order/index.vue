@@ -31,6 +31,7 @@ import {
   updateOrderApi,
   updateOrderItemApi,
 } from '#/api/core/order';
+import { $t } from '#/locales';
 
 const defaults = { keyword: '', status: '', userName: '', page: 1, pageSize: 10 };
 const query = ref({ ...defaults });
@@ -53,28 +54,28 @@ const quantitySaving = ref(false);
 const selectedItem = ref<OrderApi.Item>();
 const quantity = ref<number | undefined>(1);
 
-const columns: TableColumnsType<OrderApi.Order> = [
-  { title: '订单 ID', dataIndex: 'id', key: 'id', width: 100 },
-  { title: '订单编号', key: 'orderNo', width: 200 },
-  { title: '用户名', key: 'userName', width: 120 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
-  { title: '支付状态', key: 'paymentStatus', width: 120 },
-  { title: '支付方式', key: 'paymentMethod', width: 120 },
-  { title: '订单金额', key: 'totalAmount', width: 130 },
-  { title: '配送方式', key: 'deliveryType', width: 130 },
-  { title: '备注', dataIndex: 'remark', key: 'remark', width: 200 },
-  { title: '创建时间', key: 'createdAt', width: 180 },
-  { title: '操作', key: 'actions', fixed: 'right', width: 100 },
-];
-const itemColumns: TableColumnsType<OrderApi.Item> = [
-  { title: '明细 ID', dataIndex: 'id', key: 'id', width: 100 },
-  { title: '商品名称', key: 'productName', width: 200 },
-  { title: '商品 ID', key: 'productId', width: 100 },
-  { title: '单价', key: 'price', width: 120 },
-  { title: '数量', dataIndex: 'quantity', key: 'quantity', width: 100 },
-  { title: '小计', key: 'subtotal', width: 120 },
-  { title: '操作', key: 'actions', width: 120 },
-];
+const columns = computed<TableColumnsType<OrderApi.Order>>(() => ([
+  { title: $t('app.orderId'), dataIndex: 'id', key: 'id', width: 100 },
+  { title: $t('app.orderNumber'), key: 'orderNo', width: 200 },
+  { title: $t('app.username'), key: 'userName', width: 120 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 100 },
+  { title: $t('app.paymentStatus'), key: 'paymentStatus', width: 120 },
+  { title: $t('app.paymentMethod'), key: 'paymentMethod', width: 120 },
+  { title: $t('app.orderAmount'), key: 'totalAmount', width: 130 },
+  { title: $t('app.deliveryMethod'), key: 'deliveryType', width: 130 },
+  { title: $t('app.remarks'), dataIndex: 'remark', key: 'remark', width: 200 },
+  { title: $t('app.createdAt'), key: 'createdAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', fixed: 'right', width: 100 },
+]));
+const itemColumns = computed<TableColumnsType<OrderApi.Item>>(() => ([
+  { title: $t('app.itemId'), dataIndex: 'id', key: 'id', width: 100 },
+  { title: $t('app.productName'), key: 'productName', width: 200 },
+  { title: $t('app.productId2'), key: 'productId', width: 100 },
+  { title: $t('app.unitPrice'), key: 'price', width: 120 },
+  { title: $t('app.quantity'), dataIndex: 'quantity', key: 'quantity', width: 100 },
+  { title: $t('app.subtotal'), key: 'subtotal', width: 120 },
+  { title: $t('app.actions'), key: 'actions', width: 120 },
+]));
 const aliases: Record<string, string[]> = {
   paymentStatus: ['paymentStatus', 'payment_status'],
   paymentMethod: ['paymentMethod', 'payment_method'],
@@ -115,34 +116,34 @@ function display(value: unknown) {
       ? JSON.stringify(value)
       : String(value));
 }
-const paymentMethodLabels: Record<string, string> = {
-  0: 'None',
+const paymentMethodLabels = computed<Record<string, string>>(() => ({
+  0: $t('app.none'),
   1: 'GCash',
   2: 'Maya',
-};
-const paymentStatusLabels: Record<string, { color: string; text: string }> = {
-  0: { color: 'default', text: '未支付' },
-  1: { color: 'orange', text: '待审批' },
-  2: { color: 'green', text: '已支付（Paid）' },
-};
+}));
+const paymentStatusLabels = computed<Record<string, { color: string; text: string }>>(() => ({
+  0: { color: 'default', text: $t('app.unpaid') },
+  1: { color: 'orange', text: $t('app.pendingApproval') },
+  2: { color: 'green', text: $t('app.paid') },
+}));
 function paymentStatusTag(value: unknown) {
-  return paymentStatusLabels[String(value)] ?? { color: 'default', text: display(value) };
+  return paymentStatusLabels.value[String(value)] ?? { color: 'default', text: display(value) };
 }
 function displayField(key: string, value: unknown) {
   if (key === 'paymentMethod' || key === 'payment_method') {
-    return paymentMethodLabels[String(value)] ?? display(value);
+    return paymentMethodLabels.value[String(value)] ?? display(value);
   }
-  if (key === 'status' && Number(value) === 3) return 'Completed';
+  if (key === 'status' && Number(value) === 3) return $t('app.completed');
   if (key === 'paymentStatus' || key === 'payment_status') {
     return paymentStatusTag(value).text;
   }
   return display(value);
 }
-const paymentPaid = computed(
-  () => Number(detail.value?.paymentStatus ?? detail.value?.payment_status) === 2,
+const paymentPendingApproval = computed(
+  () => Number(detail.value?.paymentStatus ?? detail.value?.payment_status) === 1,
 );
 async function approvePayment() {
-  if (!detail.value || approving.value || paymentPaid.value) return;
+  if (!detail.value || approving.value || !paymentPendingApproval.value) return;
   const orderId = detail.value.id;
   approving.value = true;
   try {
@@ -151,7 +152,7 @@ async function approvePayment() {
       const paymentKey = 'paymentStatus' in detail.value ? 'paymentStatus' : 'payment_status';
       detail.value = { ...detail.value, [paymentKey]: 2, status: 3 };
     }
-    message.success('支付已批准：Paid / Completed');
+    message.success($t('app.paymentApprovedPaidCompleted'));
     await Promise.all([
       selectedId.value === orderId ? fetchDetail() : Promise.resolve(),
       fetchOrders(),
@@ -162,27 +163,27 @@ async function approvePayment() {
     approving.value = false;
   }
 }
-const labels: Record<string, string> = {
-  paymentMethod: '支付方式',
-  payment_method: '支付方式',
-  paymentStatus: '支付状态',
-  payment_status: '支付状态',
-  id: '订单 ID',
-  orderNo: '订单编号',
-  order_no: '订单编号',
-  userName: '用户名',
-  user_name: '用户名',
-  status: '状态',
-  totalAmount: '订单金额',
-  total_amount: '订单金额',
-  deliveryType: '配送方式',
-  delivery_type: '配送方式',
-  remark: '备注',
-  createdAt: '创建时间',
-  created_at: '创建时间',
-  updatedAt: '更新时间',
-  updated_at: '更新时间',
-};
+const labels = computed<Record<string, string>>(() => ({
+  paymentMethod: $t('app.paymentMethod'),
+  payment_method: $t('app.paymentMethod'),
+  paymentStatus: $t('app.paymentStatus'),
+  payment_status: $t('app.paymentStatus'),
+  id: $t('app.orderId'),
+  orderNo: $t('app.orderNumber'),
+  order_no: $t('app.orderNumber'),
+  userName: $t('app.username'),
+  user_name: $t('app.username'),
+  status: $t('app.status'),
+  totalAmount: $t('app.orderAmount'),
+  total_amount: $t('app.orderAmount'),
+  deliveryType: $t('app.deliveryMethod'),
+  delivery_type: $t('app.deliveryMethod'),
+  remark: $t('app.remarks'),
+  createdAt: $t('app.createdAt'),
+  created_at: $t('app.createdAt'),
+  updatedAt: $t('app.updatedAt'),
+  updated_at: $t('app.updatedAt'),
+}));
 async function fetchOrders(page = query.value.page) {
   const request = ++listRequest;
   query.value.page = page;
@@ -201,7 +202,7 @@ async function fetchOrders(page = query.value.page) {
     const list = Array.isArray(data)
       ? data
       : (data.list ?? data.records ?? data.rows);
-    if (!Array.isArray(list)) throw new Error('订单列表返回格式不符合预期');
+    if (!Array.isArray(list)) throw new Error($t('app.unexpectedOrderListResponseFormat'));
     orders.value = list;
     total.value = Array.isArray(data)
       ? list.length
@@ -270,14 +271,14 @@ async function saveOrder() {
   const originalDelivery = original.deliveryType ?? original.delivery_type;
   if (status !== String(original.status ?? '')) {
     if (!status) {
-      message.warning('状态不能为空');
+      message.warning($t('app.statusIsRequired'));
       return;
     }
     payload.status = preserveType(status, original.status);
   }
   if (deliveryType !== String(originalDelivery ?? '')) {
     if (!deliveryType) {
-      message.warning('配送方式不能为空');
+      message.warning($t('app.deliveryMethodIsRequired'));
       return;
     }
     payload.deliveryType = preserveType(deliveryType, originalDelivery);
@@ -285,14 +286,14 @@ async function saveOrder() {
   if (form.value.remark !== (original.remark ?? ''))
     payload.remark = form.value.remark;
   if (Object.keys(payload).length === 1) {
-    message.info('请至少修改一项内容');
+    message.info($t('app.changeAtLeastOneField'));
     return;
   }
   saving.value = true;
   try {
     await updateOrderApi(payload);
     editing.value = false;
-    message.success('订单已更新');
+    message.success($t('app.orderUpdated'));
     await Promise.all([fetchDetail(), fetchOrders()]);
   } catch {
     // Keep the form open so the user can correct or retry the update.
@@ -308,7 +309,7 @@ function openQuantity(item: OrderApi.Item) {
 async function saveQuantity() {
   if (!selectedItem.value || quantitySaving.value) return;
   if (!Number.isSafeInteger(quantity.value) || Number(quantity.value) <= 0) {
-    message.warning('商品数量必须为正整数');
+    message.warning($t('app.quantityMustBeAPositiveInteger'));
     return;
   }
   quantitySaving.value = true;
@@ -318,7 +319,7 @@ async function saveQuantity() {
       quantity: Number(quantity.value),
     });
     quantityOpen.value = false;
-    message.success('商品数量已更新');
+    message.success($t('app.quantityUpdated'));
     await Promise.all([fetchDetail(), fetchOrders()]);
   } catch {
     // Keep the input available for retry.
@@ -332,39 +333,37 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="订单管理" description="查询订单、查看商品明细及修改订单信息">
+  <Page :title="$t('app.orderManagement')" :description="$t('app.searchOrdersViewItemsAndEditOrderDetails')">
     <Form
       layout="inline"
       class="mb-4 flex flex-wrap gap-y-3"
       :model="query"
       @finish="fetchOrders(1)"
     >
-      <Form.Item label="关键词">
+      <Form.Item :label="$t('app.keyword')">
 <Input
           v-model:value="query.keyword"
           allow-clear
-          placeholder="搜索订单"
+          :placeholder="$t('app.searchOrders')"
       />
 </Form.Item>
-      <Form.Item label="用户名">
+      <Form.Item :label="$t('app.username')">
 <Input
           v-model:value="query.userName"
           allow-clear
-          placeholder="请输入用户名"
+          :placeholder="$t('app.enterAUsername')"
       />
 </Form.Item>
-      <Form.Item label="状态">
+      <Form.Item :label="$t('app.status')">
 <Input
           v-model:value="query.status"
           allow-clear
-          placeholder="请输入状态值"
+          :placeholder="$t('app.enterAStatusValue')"
       />
 </Form.Item>
       <Form.Item>
 <Space>
-<Button type="primary" html-type="submit" :loading="loading">
-查询
-</Button><Button @click="resetQuery">重置</Button>
+<Button type="primary" html-type="submit" :loading="loading">{{ $t('app.search') }}</Button><Button @click="resetQuery">{{ $t('app.reset') }}</Button>
 </Space>
 </Form.Item>
     </Form>
@@ -372,7 +371,7 @@ onMounted(() => {
       v-if="listError"
       type="error"
       show-icon
-      message="订单加载失败，请重新查询"
+      :message="$t('app.failedToLoadOrdersPleaseTryAgain')"
       class="mb-4"
     />
     <Table
@@ -386,7 +385,7 @@ onMounted(() => {
         pageSize: query.pageSize,
         total,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
       }"
       @change="changePage"
     >
@@ -396,7 +395,7 @@ onMounted(() => {
           type="link"
           @click="openDetail(record as OrderApi.Order)"
           >
-{{ Number(record.paymentStatus ?? record.payment_status) === 1 ? '查看并审批' : '查看详情' }}
+{{ Number(record.paymentStatus ?? record.payment_status) === 1 ? $t('app.reviewPayment') : $t('app.viewDetails') }}
 </Button>
         <Tag
           v-else-if="column.key === 'paymentStatus'"
@@ -409,24 +408,25 @@ onMounted(() => {
     </Table>
     <Drawer
       v-model:open="detailOpen"
-      title="订单详情"
+      :title="$t('app.orderDetails')"
       width="min(100vw, 1000px)"
       :mask-closable="!saving && !quantitySaving && !approving"
     >
       <Spin :spinning="detailLoading">
         <template v-if="detail">
           <div class="mb-4 flex items-center justify-between">
-                        <span class="text-lg font-medium">订单信息</span>
+                        <span class="text-lg font-medium">{{ $t('app.orderInformation') }}</span>
             <Space>
               <Button
                 type="primary"
+                v-if="paymentPendingApproval"
                 :loading="approving"
-                :disabled="paymentPaid || saving || quantitySaving"
+                :disabled="saving || quantitySaving"
                 @click="approvePayment"
               >
-                Approve
+                {{ $t('app.approve') }}
               </Button>
-              <Button :disabled="approving" @click="openEdit">编辑订单</Button>
+              <Button :disabled="approving" @click="openEdit">{{ $t('app.editOrder') }}</Button>
             </Space>
           </div>
           <Descriptions bordered :column="{ xs: 1, sm: 2 }" size="small">
@@ -444,7 +444,7 @@ onMounted(() => {
               <template v-else>{{ displayField(key, value) }}</template>
 </Descriptions.Item>
           </Descriptions>
-          <h3 class="mb-3 mt-6 text-lg font-medium">商品明细</h3>
+          <h3 class="mb-3 mt-6 text-lg font-medium">{{ $t('app.orderItems') }}</h3>
           <Table
             :columns="itemColumns"
             :data-source="items"
@@ -459,20 +459,20 @@ onMounted(() => {
                 :disabled="approving || record.id === undefined || record.id === null"
                 @click="openQuantity(record as OrderApi.Item)"
                 >
-修改数量
+{{ $t('app.editQuantity') }}
 </Button>
               <template v-else>{{ cell(record, String(column.key)) }}</template>
             </template>
           </Table>
         </template>
-        <Empty v-else-if="!detailLoading" description="订单详情加载失败">
-<Button @click="fetchDetail">重试</Button>
+        <Empty v-else-if="!detailLoading" :description="$t('app.failedToLoadOrderDetails')">
+<Button @click="fetchDetail">{{ $t('app.retry') }}</Button>
 </Empty>
       </Spin>
     </Drawer>
     <Modal
       v-model:open="editing"
-      title="编辑订单"
+      :title="$t('app.editOrder')"
       :confirm-loading="saving"
       :closable="!saving"
       :mask-closable="!saving"
@@ -481,23 +481,23 @@ onMounted(() => {
       @ok="saveOrder"
     >
       <Form layout="vertical" :disabled="saving">
-        <Form.Item label="状态">
-<Input v-model:value="form.status" placeholder="请输入状态值" />
+        <Form.Item :label="$t('app.status')">
+<Input v-model:value="form.status" :placeholder="$t('app.enterAStatusValue')" />
 </Form.Item>
-        <Form.Item label="配送方式">
+        <Form.Item :label="$t('app.deliveryMethod')">
 <Input
             v-model:value="form.deliveryType"
-            placeholder="请输入配送方式值"
+            :placeholder="$t('app.enterADeliveryMethodValue')"
         />
 </Form.Item>
-        <Form.Item label="备注">
+        <Form.Item :label="$t('app.remarks')">
 <Input.TextArea v-model:value="form.remark" :rows="4" allow-clear />
 </Form.Item>
       </Form>
     </Modal>
     <Modal
       v-model:open="quantityOpen"
-      title="修改商品数量"
+      :title="$t('app.editItemQuantity')"
       :confirm-loading="quantitySaving"
       :closable="!quantitySaving"
       :mask-closable="!quantitySaving"
@@ -505,11 +505,9 @@ onMounted(() => {
       :cancel-button-props="{ disabled: quantitySaving }"
       @ok="saveQuantity"
     >
-      <p class="mb-4">
-        明细 ID：{{ selectedItem?.id }}。保存后将重新计算订单金额。
-      </p>
+      <p class="mb-4">{{ $t('app.itemIdValueSavingWillRecalculateTheOrderAmount', { value1: selectedItem?.id }) }}</p>
       <Form layout="vertical">
-<Form.Item label="商品数量" required>
+<Form.Item :label="$t('app.itemQuantity')" required>
 <InputNumber
             v-model:value="quantity"
             :min="1"

@@ -7,41 +7,43 @@ import { ProfilePasswordSetting, z } from '@vben/common-ui';
 
 import { message } from 'ant-design-vue';
 
+import { $t } from '#/locales';
+
 const formSchema = computed((): VbenFormSchema[] => {
   return [
     {
       fieldName: 'oldPassword',
-      label: '旧密码',
+      label: $t('app.currentPassword'),
       component: 'VbenInputPassword',
       componentProps: {
-        placeholder: '请输入旧密码',
+        placeholder: $t('app.enterYourCurrentPassword'),
       },
     },
     {
       fieldName: 'newPassword',
-      label: '新密码',
+      label: $t('app.newPassword'),
       component: 'VbenInputPassword',
       componentProps: {
         passwordStrength: true,
-        placeholder: '请输入新密码',
+        placeholder: $t('app.enterANewPassword'),
       },
     },
     {
       fieldName: 'confirmPassword',
-      label: '确认密码',
+      label: $t('app.confirmPassword'),
       component: 'VbenInputPassword',
       componentProps: {
         passwordStrength: true,
-        placeholder: '请再次输入新密码',
+        placeholder: $t('app.enterYourNewPasswordAgain'),
       },
       dependencies: {
         rules(values) {
           const { newPassword } = values;
           return z
-            .string({ required_error: '请再次输入新密码' })
-            .min(1, { message: '请再次输入新密码' })
+            .string({ required_error: $t('app.enterYourNewPasswordAgain') })
+            .min(1, { message: $t('app.enterYourNewPasswordAgain') })
             .refine((value) => value === newPassword, {
-              message: '两次输入的密码不一致',
+              message: $t('app.passwordsDoNotMatch'),
             });
         },
         triggerFields: ['newPassword'],
@@ -51,7 +53,7 @@ const formSchema = computed((): VbenFormSchema[] => {
 });
 
 function handleSubmit() {
-  message.success('密码修改成功');
+  message.success($t('app.passwordChanged'));
 }
 </script>
 <template>

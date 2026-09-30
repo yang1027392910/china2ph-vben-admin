@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -27,6 +27,7 @@ import {
   getHotProductListApi,
   getProductListApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type HotType = 'month' | 'new_alert' | 'today' | 'week';
 
@@ -94,11 +95,11 @@ const productOptions = ref<ProductOption[]>([]);
 
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
 const hotTypeOptions = [
   { label: 'today', value: 'today' },
@@ -107,22 +108,22 @@ const hotTypeOptions = [
   { label: 'new_alert', value: 'new_alert' },
 ];
 
-const columns = [
-  { title: '热门类型', dataIndex: 'hotType', key: 'hotType', width: 120 },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '商品ID', dataIndex: 'productId', key: 'productId', width: 100 },
+const columns = computed(() => ([
+  { title: $t('app.featuredType'), dataIndex: 'hotType', key: 'hotType', width: 120 },
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.productId'), dataIndex: 'productId', key: 'productId', width: 100 },
   {
-    title: '所属类目',
+    title: $t('app.category2'),
     dataIndex: 'categoryName',
     key: 'categoryName',
     width: 140,
   },
-  { title: '商品标题', dataIndex: 'title', key: 'title', width: 260 },
-  { title: '封面', dataIndex: 'cover', key: 'cover', width: 88 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '创建时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-  { title: '操作', key: 'actions', width: 100 },
-];
+  { title: $t('app.productTitle'), dataIndex: 'title', key: 'title', width: 260 },
+  { title: $t('app.cover'), dataIndex: 'cover', key: 'cover', width: 88 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.createdAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', width: 100 },
+]));
 
 function normalizeList(data: any) {
   return Array.isArray(data)
@@ -144,7 +145,7 @@ function normalizeHotProducts(data: any): HotProduct[] {
         item.categoryName ??
         item.category?.name ??
         categoryMap.value[categoryId] ??
-        (categoryId ? `分类 ${categoryId}` : ''),
+        (categoryId ? $t('app.categoryValue', { value1: categoryId }) : ''),
       cover: item.cover ?? item.product?.cover ?? product?.cover ?? '',
       createdAt: item.createdAt ?? '',
       hotType: item.hotType ?? item.type ?? '',
@@ -167,7 +168,7 @@ function normalizeProductOptions(data: any): ProductOption[] {
     .map((item: any) => ({
       categoryId: Number(item.categoryId ?? 0),
       cover: item.cover ?? '',
-      label: item.title ? `${item.title} (ID: ${item.id})` : `商品 ${item.id}`,
+      label: item.title ? `${item.title} (ID: ${item.id})` : $t('app.productValue', { value1: item.id }),
       title: item.title ?? '',
       value: Number(item.id),
     }))
@@ -232,7 +233,7 @@ async function queryHotProducts(page = queryForm.value.page) {
     hotProducts.value = normalizeHotProducts(responseData);
     total.value = normalizeTotal(responseData, hotProducts.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -245,7 +246,7 @@ async function queryProductOptions() {
     productOptions.value = normalizeProductOptions(responseData);
     productMap.value = buildProductMap(productOptions.value);
   } catch (error: any) {
-    message.error(error?.message || '产品查询失败');
+    message.error(error?.message || $t('app.failedToLoadProducts'));
   } finally {
     productLoading.value = false;
   }
@@ -256,7 +257,7 @@ async function queryCategoryMap() {
     const responseData = await getCategoryListApi({ status: '1' });
     categoryMap.value = normalizeCategoryMap(responseData);
   } catch (error: any) {
-    message.error(error?.message || '分类查询失败');
+    message.error(error?.message || $t('app.failedToLoadCategories'));
   }
 }
 
@@ -291,17 +292,17 @@ async function createHotProduct() {
   };
 
   if (!payload.productId) {
-    message.error('请选择产品');
+    message.error($t('app.selectAProduct'));
     return;
   }
 
   if (!payload.hotType) {
-    message.error('请选择热门类型');
+    message.error($t('app.selectAFeaturedType'));
     return;
   }
 
   if (!Number.isFinite(payload.sort) || payload.sort < 1) {
-    message.error('请输入正确的排序');
+    message.error($t('app.enterAValidSortOrder'));
     return;
   }
 
@@ -309,10 +310,10 @@ async function createHotProduct() {
     createLoading.value = true;
     await createHotProductApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     queryHotProducts(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -324,9 +325,9 @@ async function removeHotProduct(id: number | string) {
     await deleteHotProductApi({ id });
     hotProducts.value = hotProducts.value.filter((item) => item.id !== id);
     total.value = Math.max(total.value - 1, 0);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -340,26 +341,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="首页热门产品">
+  <Page :title="$t('app.homepageFeaturedProducts')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="热门类型">
+        <Form.Item :label="$t('app.featuredType')">
           <Select
             v-model:value="queryForm.hotType"
-            :options="[{ label: '全部', value: '' }, ...hotTypeOptions]"
+            :options="[{ label: $t('app.all'), value: '' }, ...hotTypeOptions]"
             style="width: 120px"
           />
         </Form.Item>
-        <Form.Item label="关键词">
+        <Form.Item :label="$t('app.keyword')">
           <Input
             v-model:value="queryForm.keyword"
             allow-clear
-            placeholder="商品标题"
+            :placeholder="$t('app.productTitle')"
             style="width: 180px"
             @press-enter="queryHotProducts(1)"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -368,11 +369,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="queryHotProducts(1)">
-          查询
-        </Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增热门产品</Button>
+        <Button :loading="queryLoading" @click="queryHotProducts(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addFeaturedProduct') }}</Button>
       </Space>
     </div>
 
@@ -384,7 +383,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       row-key="id"
@@ -394,7 +393,7 @@ onMounted(() => {
         <template v-if="column.key === 'actions'">
           <Space>
             <Popconfirm
-              title="确定删除？"
+              :title="$t('app.deleteThisItem')"
               @confirm="() => removeHotProduct(record.id)"
             >
               <Button
@@ -403,8 +402,8 @@ onMounted(() => {
                 size="small"
                 type="link"
               >
-                删除
-              </Button>
+{{ $t('app.delete') }}
+</Button>
             </Popconfirm>
           </Space>
         </template>
@@ -419,7 +418,7 @@ onMounted(() => {
           <span v-else>-</span>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else-if="column.key === 'createdAt'">
           {{ record.createdAt || '-' }}
@@ -433,36 +432,36 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增热门产品"
+      :title="$t('app.addFeaturedProduct')"
       width="560px"
       @ok="createHotProduct"
     >
       <Form layout="vertical">
-        <Form.Item label="产品" required>
+        <Form.Item :label="$t('app.product2')" required>
           <Select
             v-model:value="createForm.productId"
             :loading="productLoading"
             :options="productOptions"
             option-filter-prop="label"
-            placeholder="请选择产品"
+            :placeholder="$t('app.selectAProduct')"
             show-search
           />
         </Form.Item>
-        <Form.Item label="热门类型" required>
+        <Form.Item :label="$t('app.featuredType')" required>
           <Select
             v-model:value="createForm.hotType"
             :options="hotTypeOptions"
-            placeholder="请选择热门类型"
+            :placeholder="$t('app.selectAFeaturedType')"
           />
         </Form.Item>
-        <Form.Item label="排序" required>
+        <Form.Item :label="$t('app.sortOrder')" required>
           <InputNumber
             v-model:value="createForm.sort"
             :min="1"
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="启用">
+        <Form.Item :label="$t('app.enable')">
           <Switch
             v-model:checked="createForm.status"
             :checked-value="1"

@@ -3,7 +3,7 @@ import type { TableColumnsType, TableProps } from 'ant-design-vue';
 
 import type { UserVerificationApi } from '#/api';
 
-import { onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -26,6 +26,7 @@ import {
   getUserVerificationListApi,
   rejectUserVerificationApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type VerificationRecord = UserVerificationApi.VerificationRecord;
 type VerificationStatus = UserVerificationApi.VerificationStatus;
@@ -50,44 +51,44 @@ const reviewRemark = ref('');
 const detailVisible = ref(false);
 const detailRecord = ref<VerificationRecord>();
 
-const statusOptions = [
-  { label: '待审核', value: 0 },
-  { label: '已通过', value: 1 },
-  { label: '已拒绝', value: 2 },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.pendingReview'), value: 0 },
+  { label: $t('app.approved'), value: 1 },
+  { label: $t('app.rejected'), value: 2 },
+]));
 
-const statusMap: Record<VerificationStatus, { color: string; text: string }> = {
-  0: { color: 'orange', text: '待审核' },
-  1: { color: 'green', text: '已通过' },
-  2: { color: 'red', text: '已拒绝' },
-};
+const statusMap = computed<Record<VerificationStatus, { color: string; text: string }>>(() => ({
+  0: { color: 'orange', text: $t('app.pendingReview') },
+  1: { color: 'green', text: $t('app.approved') },
+  2: { color: 'red', text: $t('app.rejected') },
+}));
 
-const columns: TableColumnsType<VerificationRecord> = [
+const columns = computed<TableColumnsType<VerificationRecord>>(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
-  { title: '用户名', dataIndex: 'userName', key: 'userName', width: 120 },
-  { title: '姓名', dataIndex: 'fullName', key: 'fullName', width: 120 },
-  { title: '联系电话', dataIndex: 'phone', key: 'phone', width: 150 },
-  { title: '邮箱', dataIndex: 'email', key: 'email', width: 210 },
-  { title: '店铺名称', dataIndex: 'shopName', key: 'shopName', width: 160 },
+  { title: $t('app.username'), dataIndex: 'userName', key: 'userName', width: 120 },
+  { title: $t('app.name'), dataIndex: 'fullName', key: 'fullName', width: 120 },
+  { title: $t('app.contactPhone'), dataIndex: 'phone', key: 'phone', width: 150 },
+  { title: $t('app.email'), dataIndex: 'email', key: 'email', width: 210 },
+  { title: $t('app.storeName'), dataIndex: 'shopName', key: 'shopName', width: 160 },
   {
-    title: '经营类型',
+    title: $t('app.businessType'),
     dataIndex: 'businessType',
     key: 'businessType',
     width: 130,
   },
-  { title: '城市', dataIndex: 'city', key: 'city', width: 120 },
+  { title: $t('app.city'), dataIndex: 'city', key: 'city', width: 120 },
   {
-    title: '店铺照片',
+    title: $t('app.storePhotos'),
     dataIndex: 'storePhotos',
     key: 'storePhotos',
     width: 110,
   },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
-  { title: '审核备注', dataIndex: 'remark', key: 'remark', width: 180 },
-  { title: '申请时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-  { title: '审核时间', dataIndex: 'reviewedAt', key: 'reviewedAt', width: 180 },
-  { title: '操作', key: 'actions', fixed: 'right', width: 210 },
-];
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 100 },
+  { title: $t('app.reviewRemarks'), dataIndex: 'remark', key: 'remark', width: 180 },
+  { title: $t('app.appliedAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+  { title: $t('app.reviewedAt'), dataIndex: 'reviewedAt', key: 'reviewedAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', fixed: 'right', width: 210 },
+]));
 
 function normalizeStorePhotos(value: unknown): string[] {
   if (Array.isArray(value)) {
@@ -174,7 +175,7 @@ async function queryRecords() {
     records.value = normalizeList(responseData);
     total.value = normalizeTotal(responseData, records.value.length);
   } catch (error: any) {
-    message.error(error?.message || '用户认证列表加载失败');
+    message.error(error?.message || $t('app.failedToLoadVerificationRequests'));
   } finally {
     queryLoading.value = false;
   }
@@ -221,7 +222,7 @@ async function submitReview() {
 
   const remark = reviewRemark.value.trim();
   if (reviewType.value === 'reject' && !remark) {
-    message.error('请填写拒绝原因');
+    message.error($t('app.enterAReasonForRejection'));
     return;
   }
 
@@ -234,19 +235,19 @@ async function submitReview() {
       : rejectUserVerificationApi(currentRecord.value.id, payload));
 
     message.success(
-      reviewType.value === 'approve' ? '审核已通过' : '已拒绝申请',
+      reviewType.value === 'approve' ? $t('app.verificationApproved') : $t('app.applicationRejected'),
     );
     reviewVisible.value = false;
     await queryRecords();
   } catch (error: any) {
-    message.error(error?.message || '审核操作失败');
+    message.error(error?.message || $t('app.reviewFailed'));
   } finally {
     reviewLoading.value = false;
   }
 }
 
 function getStatusMeta(status: VerificationStatus) {
-  return statusMap[status];
+  return statusMap.value[status];
 }
 
 onMounted(() => {
@@ -255,31 +256,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="用户认证管理" description="审核用户提交的店铺认证资料">
+  <Page :title="$t('app.userVerification')" :description="$t('app.reviewStoreVerificationDocumentsSubmittedByUsers')">
     <Form class="mb-4" layout="inline">
-      <Form.Item label="关键词">
+      <Form.Item :label="$t('app.keyword')">
         <Input
           v-model:value="filters.keyword"
           allow-clear
-          placeholder="姓名、电话、邮箱或店铺名称"
+          :placeholder="$t('app.namePhoneEmailOrStoreName')"
           @press-enter="handleSearch"
         />
       </Form.Item>
-      <Form.Item label="审核状态">
+      <Form.Item :label="$t('app.reviewStatus')">
         <Select
           v-model:value="filters.status"
           :options="statusOptions"
           allow-clear
           class="verification-filter-select"
-          placeholder="全部状态"
+          :placeholder="$t('app.allStatuses')"
         />
       </Form.Item>
       <Form.Item>
         <Space>
-          <Button :loading="queryLoading" type="primary" @click="handleSearch">
-            查询
-          </Button>
-          <Button @click="resetFilters">重置</Button>
+          <Button :loading="queryLoading" type="primary" @click="handleSearch">{{ $t('app.search') }}</Button>
+          <Button @click="resetFilters">{{ $t('app.reset') }}</Button>
         </Space>
       </Form.Item>
     </Form>
@@ -292,7 +291,7 @@ onMounted(() => {
         current: filters.page,
         pageSize: filters.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       :scroll="{ x: 2000 }"
@@ -327,24 +326,24 @@ onMounted(() => {
               type="link"
               @click="openDetail(record as VerificationRecord)"
             >
-              详情
-            </Button>
+{{ $t('app.details') }}
+</Button>
             <template v-if="record.status === 0">
               <Button
                 size="small"
                 type="link"
                 @click="openReview(record as VerificationRecord, 'approve')"
               >
-                通过
-              </Button>
+{{ $t('app.approve') }}
+</Button>
               <Button
                 danger
                 size="small"
                 type="link"
                 @click="openReview(record as VerificationRecord, 'reject')"
               >
-                拒绝
-              </Button>
+{{ $t('app.reject') }}
+</Button>
             </template>
           </Space>
         </template>
@@ -357,41 +356,41 @@ onMounted(() => {
     <Modal
       v-model:open="detailVisible"
       :footer="null"
-      title="认证申请详情"
+      :title="$t('app.verificationRequestDetails')"
       width="760px"
     >
       <Descriptions v-if="detailRecord" :column="2" bordered>
-        <Descriptions.Item label="申请ID">
+        <Descriptions.Item :label="$t('app.applicationId')">
           {{ detailRecord.id }}
         </Descriptions.Item>
-        <Descriptions.Item label="用户名">
+        <Descriptions.Item :label="$t('app.username')">
           {{ detailRecord.userName || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="姓名">
+        <Descriptions.Item :label="$t('app.name')">
           {{ detailRecord.fullName || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="联系电话">
+        <Descriptions.Item :label="$t('app.contactPhone')">
           {{ detailRecord.phone || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="邮箱">
+        <Descriptions.Item :label="$t('app.email')">
           {{ detailRecord.email || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="城市">
+        <Descriptions.Item :label="$t('app.city')">
           {{ detailRecord.city || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item :span="2" label="地址">
+        <Descriptions.Item :span="2" :label="$t('app.address')">
           {{ detailRecord.address || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="店铺名称">
+        <Descriptions.Item :label="$t('app.storeName')">
           {{ detailRecord.shopName || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="经营类型">
+        <Descriptions.Item :label="$t('app.businessType')">
           {{ detailRecord.businessType || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item :span="2" label="主营产品">
+        <Descriptions.Item :span="2" :label="$t('app.mainProducts')">
           {{ detailRecord.storeDescription || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item :span="2" label="店铺照片">
+        <Descriptions.Item :span="2" :label="$t('app.storePhotos')">
           <AntImage.PreviewGroup v-if="detailRecord.storePhotos.length > 0">
             <Space wrap>
               <AntImage
@@ -406,21 +405,21 @@ onMounted(() => {
           </AntImage.PreviewGroup>
           <span v-else>-</span>
         </Descriptions.Item>
-        <Descriptions.Item label="审核状态">
+        <Descriptions.Item :label="$t('app.reviewStatus')">
           <Tag :color="getStatusMeta(detailRecord.status).color">
             {{ getStatusMeta(detailRecord.status).text }}
           </Tag>
         </Descriptions.Item>
-        <Descriptions.Item label="审核时间">
+        <Descriptions.Item :label="$t('app.reviewedAt')">
           {{ detailRecord.reviewedAt || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item :span="2" label="审核备注">
+        <Descriptions.Item :span="2" :label="$t('app.reviewRemarks')">
           {{ detailRecord.remark || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="申请时间">
+        <Descriptions.Item :label="$t('app.appliedAt')">
           {{ detailRecord.createdAt || '-' }}
         </Descriptions.Item>
-        <Descriptions.Item label="更新时间">
+        <Descriptions.Item :label="$t('app.updatedAt')">
           {{ detailRecord.updatedAt || '-' }}
         </Descriptions.Item>
       </Descriptions>
@@ -430,20 +429,20 @@ onMounted(() => {
       v-model:open="reviewVisible"
       :confirm-loading="reviewLoading"
       :ok-button-props="{ danger: reviewType === 'reject' }"
-      :ok-text="reviewType === 'approve' ? '确认通过' : '确认拒绝'"
-      :title="reviewType === 'approve' ? '通过认证申请' : '拒绝认证申请'"
+      :ok-text="reviewType === 'approve' ? $t('app.confirmApproval') : $t('app.confirmRejection')"
+      :title="reviewType === 'approve' ? $t('app.approveVerificationRequest') : $t('app.rejectVerificationRequest')"
       @ok="submitReview"
     >
       <Form layout="vertical">
         <Form.Item
-          :label="reviewType === 'approve' ? '审核备注' : '拒绝原因'"
+          :label="reviewType === 'approve' ? $t('app.reviewRemarks') : $t('app.rejectionReason')"
           :required="reviewType === 'reject'"
         >
           <Input.TextArea
             v-model:value="reviewRemark"
             :maxlength="255"
             :rows="4"
-            placeholder="请输入审核备注"
+            :placeholder="$t('app.enterReviewRemarks')"
             show-count
           />
         </Form.Item>

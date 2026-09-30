@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps, UploadProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -30,6 +30,7 @@ import {
   updateBannerApi,
   uploadAdminFileApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type Banner = {
   actionType: string;
@@ -68,44 +69,44 @@ const defaultForm: BannerForm = {
   title: '',
 };
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
-const actionTypeOptions = [
-  { label: '商品', value: 'product' },
-  { label: '分类', value: 'category' },
-  { label: '链接', value: 'url' },
-  { label: '无跳转', value: 'none' },
-];
+const actionTypeOptions = computed(() => ([
+  { label: $t('app.product'), value: 'product' },
+  { label: $t('app.category'), value: 'category' },
+  { label: $t('app.link'), value: 'url' },
+  { label: $t('app.noRedirect'), value: 'none' },
+]));
 
-const pageTypeOptions = [
-  { label: '首页', value: 'home' },
-  { label: '客服页', value: 'customer' },
-  { label: '登录页', value: 'login' },
-];
+const pageTypeOptions = computed(() => ([
+  { label: $t('app.home'), value: 'home' },
+  { label: $t('app.supportPage'), value: 'customer' },
+  { label: $t('app.loginPage'), value: 'login' },
+]));
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
-  { title: '图片', dataIndex: 'image', key: 'image', width: 120 },
-  { title: '页面类型', dataIndex: 'pageType', key: 'pageType', width: 110 },
-  { title: '标题', dataIndex: 'title', key: 'title', width: 180 },
-  { title: '副标题', dataIndex: 'subtitle', key: 'subtitle', width: 180 },
-  { title: '跳转类型', dataIndex: 'actionType', key: 'actionType', width: 110 },
+  { title: $t('app.image'), dataIndex: 'image', key: 'image', width: 120 },
+  { title: $t('app.pageType'), dataIndex: 'pageType', key: 'pageType', width: 110 },
+  { title: $t('app.title'), dataIndex: 'title', key: 'title', width: 180 },
+  { title: $t('app.subtitle'), dataIndex: 'subtitle', key: 'subtitle', width: 180 },
+  { title: $t('app.linkType'), dataIndex: 'actionType', key: 'actionType', width: 110 },
   {
-    title: '跳转值',
+    title: $t('app.linkTarget'),
     dataIndex: 'actionValue',
     key: 'actionValue',
     width: 140,
   },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '开始时间', dataIndex: 'startTime', key: 'startTime', width: 180 },
-  { title: '结束时间', dataIndex: 'endTime', key: 'endTime', width: 180 },
-  { title: '操作', key: 'actions', width: 100 },
-];
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.startTime'), dataIndex: 'startTime', key: 'startTime', width: 180 },
+  { title: $t('app.endTime'), dataIndex: 'endTime', key: 'endTime', width: 180 },
+  { title: $t('app.actions'), key: 'actions', width: 100 },
+]));
 
 const banners = ref<Banner[]>([]);
 const queryForm = ref({ ...defaultQuery });
@@ -202,7 +203,7 @@ async function queryBanners(page = queryForm.value.page) {
     banners.value = normalizeBanners(responseData);
     total.value = normalizeTotal(responseData, banners.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -246,7 +247,7 @@ function openEdit(record: Banner) {
 
 function beforeImageUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    message.error('请选择图片文件');
+    message.error($t('app.selectAnImageFile'));
     return false;
   }
   return true;
@@ -260,7 +261,7 @@ const uploadImage: UploadProps['customRequest'] = async (options) => {
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     createForm.value.image = imageUrl;
@@ -273,12 +274,12 @@ const uploadImage: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('图片上传成功');
+    message.success($t('app.imageUploaded'));
   } catch (error: any) {
     createForm.value.image = '';
     imageFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -290,7 +291,7 @@ const uploadEditImage: UploadProps['customRequest'] = async (options) => {
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     editForm.value.image = imageUrl;
@@ -303,12 +304,12 @@ const uploadEditImage: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('图片上传成功');
+    message.success($t('app.imageUploaded'));
   } catch (error: any) {
     editForm.value.image = '';
     editImageFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -364,17 +365,17 @@ function buildBannerPayload(form: BannerForm) {
 
 function validateBannerPayload(payload: ReturnType<typeof buildBannerPayload>) {
   if (!payload.title) {
-    message.error('请输入标题');
+    message.error($t('app.enterATitle'));
     return false;
   }
 
   if (!payload.image) {
-    message.error('请上传图片');
+    message.error($t('app.uploadAnImage'));
     return false;
   }
 
   if (!payload.startTime || !payload.endTime) {
-    message.error('请选择展示时间');
+    message.error($t('app.selectADisplayPeriod'));
     return false;
   }
 
@@ -392,10 +393,10 @@ async function createBanner() {
     createLoading.value = true;
     await createBannerApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     queryBanners(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -415,10 +416,10 @@ async function updateBanner() {
       id: editForm.value.id,
     });
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
     queryBanners(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -430,9 +431,9 @@ async function removeBanner(id: number | string) {
     await deleteBannerApi({ id });
     banners.value = banners.value.filter((item) => item.id !== id);
     total.value = Math.max(total.value - 1, 0);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -444,19 +445,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="Banner 管理">
+  <Page :title="$t('app.bannerManagement2')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="关键词">
+        <Form.Item :label="$t('app.keyword')">
           <Input
             v-model:value="queryForm.keyword"
             allow-clear
-            placeholder="标题/副标题"
+            :placeholder="$t('app.titleOrSubtitle')"
             style="width: 200px"
             @press-enter="queryBanners(1)"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -465,9 +466,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="queryBanners(1)">查询</Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增 Banner</Button>
+        <Button :loading="queryLoading" @click="queryBanners(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addBanner') }}</Button>
       </Space>
     </div>
 
@@ -479,7 +480,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       row-key="id"
@@ -493,10 +494,10 @@ onMounted(() => {
               type="link"
               @click="openEdit(record as Banner)"
             >
-              编辑
-            </Button>
+{{ $t('app.edit') }}
+</Button>
             <Popconfirm
-              title="确定删除？"
+              :title="$t('app.deleteThisItem')"
               @confirm="() => removeBanner(record.id)"
             >
               <Button
@@ -505,8 +506,8 @@ onMounted(() => {
                 size="small"
                 type="link"
               >
-                删除
-              </Button>
+{{ $t('app.delete') }}
+</Button>
             </Popconfirm>
           </Space>
         </template>
@@ -521,10 +522,10 @@ onMounted(() => {
           <span v-else>-</span>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else-if="column.key === 'pageType'">
-          {{ record.pageType === 'customer' ? '客服页' : '首页' }}
+          {{ record.pageType === 'customer' ? $t('app.supportPage') : $t('app.home') }}
         </template>
         <template v-else>
           {{ record[column.dataIndex as keyof Banner] || '-' }}
@@ -535,19 +536,19 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增 Banner"
+      :title="$t('app.addBanner')"
       width="720px"
       @ok="createBanner"
     >
       <Form layout="vertical">
         <div class="banner-form-grid">
-          <Form.Item label="标题" required>
-            <Input v-model:value="createForm.title" placeholder="首页大促" />
+          <Form.Item :label="$t('app.title')" required>
+            <Input v-model:value="createForm.title" :placeholder="$t('app.homepageSale')" />
           </Form.Item>
-          <Form.Item label="副标题">
-            <Input v-model:value="createForm.subtitle" placeholder="限时优惠" />
+          <Form.Item :label="$t('app.subtitle')">
+            <Input v-model:value="createForm.subtitle" :placeholder="$t('app.limitedTimeOffer')" />
           </Form.Item>
-          <Form.Item class="banner-form-full" label="图片" required>
+          <Form.Item class="banner-form-full" :label="$t('app.image')" required>
             <Upload
               v-model:file-list="imageFileList"
               :before-upload="beforeImageUpload"
@@ -557,39 +558,39 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="跳转类型">
+          <Form.Item :label="$t('app.linkType')">
             <Select
               v-model:value="createForm.actionType"
               :options="actionTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="页面类型">
+          <Form.Item :label="$t('app.pageType')">
             <Select
               v-model:value="createForm.pageType"
               :options="pageTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="跳转值">
+          <Form.Item :label="$t('app.linkTarget')">
             <Input v-model:value="createForm.actionValue" placeholder="1001" />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="createForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item label="开始时间" required>
+          <Form.Item :label="$t('app.startTime')" required>
             <DatePicker
               :show-time="{ format: 'HH:mm:ss' }"
               :value="dayjs(createForm.startTime, dateTimeFormat)"
@@ -599,7 +600,7 @@ onMounted(() => {
               @change="setStartTime"
             />
           </Form.Item>
-          <Form.Item label="结束时间" required>
+          <Form.Item :label="$t('app.endTime')" required>
             <DatePicker
               :show-time="{ format: 'HH:mm:ss' }"
               :value="dayjs(createForm.endTime, dateTimeFormat)"
@@ -616,19 +617,19 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading"
-      title="编辑 Banner"
+      :title="$t('app.editBanner')"
       width="720px"
       @ok="updateBanner"
     >
       <Form layout="vertical">
         <div class="banner-form-grid">
-          <Form.Item label="标题" required>
-            <Input v-model:value="editForm.title" placeholder="首页大促" />
+          <Form.Item :label="$t('app.title')" required>
+            <Input v-model:value="editForm.title" :placeholder="$t('app.homepageSale')" />
           </Form.Item>
-          <Form.Item label="副标题">
-            <Input v-model:value="editForm.subtitle" placeholder="限时优惠" />
+          <Form.Item :label="$t('app.subtitle')">
+            <Input v-model:value="editForm.subtitle" :placeholder="$t('app.limitedTimeOffer')" />
           </Form.Item>
-          <Form.Item class="banner-form-full" label="图片" required>
+          <Form.Item class="banner-form-full" :label="$t('app.image')" required>
             <Upload
               v-model:file-list="editImageFileList"
               :before-upload="beforeImageUpload"
@@ -638,40 +639,40 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="跳转类型">
+          <Form.Item :label="$t('app.linkType')">
             <Select
               v-model:value="editForm.actionType"
               :options="actionTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="页面类型">
+          <Form.Item :label="$t('app.pageType')">
             <Select
               v-model:value="editForm.pageType"
               :disabled="true"
               :options="pageTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="跳转值">
+          <Form.Item :label="$t('app.linkTarget')">
             <Input v-model:value="editForm.actionValue" placeholder="1001" />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="editForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"
               :un-checked-value="0"
             />
           </Form.Item>
-          <Form.Item label="开始时间" required>
+          <Form.Item :label="$t('app.startTime')" required>
             <DatePicker
               :show-time="{ format: 'HH:mm:ss' }"
               :value="dayjs(editForm.startTime, dateTimeFormat)"
@@ -681,7 +682,7 @@ onMounted(() => {
               @change="setEditStartTime"
             />
           </Form.Item>
-          <Form.Item label="结束时间" required>
+          <Form.Item :label="$t('app.endTime')" required>
             <DatePicker
               :show-time="{ format: 'HH:mm:ss' }"
               :value="dayjs(editForm.endTime, dateTimeFormat)"

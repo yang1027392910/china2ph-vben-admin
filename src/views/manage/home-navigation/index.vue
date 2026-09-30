@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
@@ -29,6 +29,7 @@ import {
   getIconLibraryListApi,
   updateHomeNavigationApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type HomeNavigation = {
   color: string;
@@ -60,21 +61,21 @@ const defaultForm: HomeNavigationForm = {
   jumpValue: '/order/list',
   sort: 0,
   status: 1,
-  title: '待处理',
+  get title() { return $t('app.pending'); },
   value: '20',
 };
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
-const jumpTypeOptions = [
-  { label: '站内路径', value: 'path' },
-  { label: '外部链接', value: 'url' },
-  { label: '不跳转', value: 'none' },
-];
+const jumpTypeOptions = computed(() => ([
+  { label: $t('app.internalPath'), value: 'path' },
+  { label: $t('app.externalLink'), value: 'url' },
+  { label: $t('app.noNavigation'), value: 'none' },
+]));
 
 const iconOptions = ref([
   {
@@ -95,18 +96,18 @@ const iconOptions = ref([
   },
 ]);
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
-  { title: '标题', dataIndex: 'title', key: 'title', width: 140 },
-  { title: '数值', dataIndex: 'value', key: 'value', width: 100 },
-  { title: '图标', dataIndex: 'icon', key: 'icon', width: 260 },
-  { title: '颜色', dataIndex: 'color', key: 'color', width: 120 },
-  { title: '跳转类型', dataIndex: 'jumpType', key: 'jumpType', width: 110 },
-  { title: '跳转值', dataIndex: 'jumpValue', key: 'jumpValue', width: 180 },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '操作', key: 'actions', fixed: 'right', width: 140 },
-];
+  { title: $t('app.title'), dataIndex: 'title', key: 'title', width: 140 },
+  { title: $t('app.value'), dataIndex: 'value', key: 'value', width: 100 },
+  { title: $t('app.icon'), dataIndex: 'icon', key: 'icon', width: 260 },
+  { title: $t('app.color'), dataIndex: 'color', key: 'color', width: 120 },
+  { title: $t('app.linkType'), dataIndex: 'jumpType', key: 'jumpType', width: 110 },
+  { title: $t('app.linkTarget'), dataIndex: 'jumpValue', key: 'jumpValue', width: 180 },
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.actions'), key: 'actions', fixed: 'right', width: 140 },
+]));
 
 const navigations = ref<HomeNavigation[]>([]);
 const queryForm = ref({ ...defaultQuery });
@@ -182,19 +183,19 @@ function buildPayload(form: HomeNavigationForm) {
 
 function validatePayload(payload: ReturnType<typeof buildPayload>) {
   if (!payload.title) {
-    message.error('请输入标题');
+    message.error($t('app.enterATitle'));
     return false;
   }
   if (!payload.value) {
-    message.error('请输入数值');
+    message.error($t('app.enterAValue'));
     return false;
   }
   if (!payload.icon) {
-    message.error('请选择图标');
+    message.error($t('app.selectAnIcon'));
     return false;
   }
   if (payload.jumpType !== 'none' && !payload.jumpValue) {
-    message.error('请输入跳转值');
+    message.error($t('app.enterALinkTarget'));
     return false;
   }
   return true;
@@ -213,7 +214,7 @@ async function queryNavigations(page = queryForm.value.page) {
     navigations.value = normalizeNavigations(responseData);
     total.value = normalizeTotal(responseData, navigations.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -252,7 +253,7 @@ async function queryIcons() {
       ? options
       : [{ label: defaultIcon, value: defaultIcon }];
   } catch (error: any) {
-    message.error(error?.message || '图标列表加载失败');
+    message.error(error?.message || $t('app.failedToLoadIcons'));
   } finally {
     iconLoading.value = false;
   }
@@ -262,17 +263,17 @@ async function addIcon(icon: string) {
   const iconName = icon.trim();
 
   if (!iconName) {
-    message.warning('请输入 Icon 名称');
+    message.warning($t('app.enterAnIconName'));
     return;
   }
 
   if (!iconName.includes(':')) {
-    message.warning('Icon 名称格式应类似 solar:icon-name');
+    message.warning($t('app.useAnIconNameSuchAsSolarIconName'));
     return;
   }
 
   if (iconOptions.value.some((item) => item.value === iconName)) {
-    message.info('该 Icon 已在下拉选项中');
+    message.info($t('app.thisIconIsAlreadyInTheList'));
     return;
   }
 
@@ -280,9 +281,9 @@ async function addIcon(icon: string) {
     iconCreating.value = true;
     await createIconLibraryApi({ iconValue: iconName });
     await queryIcons();
-    message.success('Icon 新增成功');
+    message.success($t('app.iconAdded'));
   } catch (error: any) {
-    message.error(error?.message || 'Icon 新增失败');
+    message.error(error?.message || $t('app.failedToAddIcon'));
   } finally {
     iconCreating.value = false;
   }
@@ -296,10 +297,10 @@ async function createNavigation() {
     createLoading.value = true;
     await createHomeNavigationApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     queryNavigations(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -313,10 +314,10 @@ async function updateNavigation() {
     editLoading.value = true;
     await updateHomeNavigationApi({ ...payload, id: editForm.value.id });
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
     queryNavigations(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -326,10 +327,10 @@ async function removeNavigation(id: number | string) {
   try {
     deleteLoadingId.value = id;
     await deleteHomeNavigationApi(id);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
     queryNavigations(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -342,19 +343,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="首页导航">
+  <Page :title="$t('app.homeNavigation')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="标题">
+        <Form.Item :label="$t('app.title')">
           <Input
             v-model:value="queryForm.title"
             allow-clear
-            placeholder="请输入标题"
+            :placeholder="$t('app.enterATitle')"
             style="width: 180px"
             @press-enter="queryNavigations(1)"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -363,9 +364,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="queryNavigations(1)">查询</Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增首页导航</Button>
+        <Button :loading="queryLoading" @click="queryNavigations(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addHomeNavigation') }}</Button>
       </Space>
     </div>
 
@@ -377,7 +378,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       :scroll="{ x: 1250 }"
@@ -387,11 +388,9 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <Button size="small" type="link" @click="openEdit(record)">
-              编辑
-            </Button>
+            <Button size="small" type="link" @click="openEdit(record)">{{ $t('app.edit') }}</Button>
             <Popconfirm
-              title="确定删除这条首页导航吗？"
+              :title="$t('app.deleteThisHomeNavigationItem')"
               @confirm="() => removeNavigation(record.id)"
             >
               <Button
@@ -400,8 +399,8 @@ onMounted(() => {
                 size="small"
                 type="link"
               >
-                删除
-              </Button>
+{{ $t('app.delete') }}
+</Button>
             </Popconfirm>
           </Space>
         </template>
@@ -421,7 +420,7 @@ onMounted(() => {
           </Space>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else>
           {{ record[column.dataIndex as keyof HomeNavigation] ?? '-' }}
@@ -432,19 +431,19 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增首页导航"
+      :title="$t('app.addHomeNavigation')"
       width="680px"
       @ok="createNavigation"
     >
       <Form layout="vertical">
         <div class="navigation-form-grid">
-          <Form.Item label="标题" required>
-            <Input v-model:value="createForm.title" placeholder="待处理" />
+          <Form.Item :label="$t('app.title')" required>
+            <Input v-model:value="createForm.title" :placeholder="$t('app.pending')" />
           </Form.Item>
-          <Form.Item label="数值" required>
+          <Form.Item :label="$t('app.value')" required>
             <Input v-model:value="createForm.value" placeholder="20" />
           </Form.Item>
-          <Form.Item class="navigation-form-full" label="图标" required>
+          <Form.Item class="navigation-form-full" :label="$t('app.icon')" required>
             <div class="icon-field">
               <span class="icon-preview">
                 <IconifyIcon :icon="createForm.icon" />
@@ -453,7 +452,7 @@ onMounted(() => {
                 v-model:value="createForm.icon"
                 :loading="iconLoading"
                 :options="iconOptions"
-                placeholder="输入 Icon 名称或从下拉中选择"
+                :placeholder="$t('app.enterAnIconNameOrSelectOne')"
               >
                 <template #option="{ label, value }">
                   <Space>
@@ -466,37 +465,37 @@ onMounted(() => {
                 :loading="iconCreating"
                 @click="addIcon(createForm.icon)"
               >
-                增加
-              </Button>
+{{ $t('app.add') }}
+</Button>
             </div>
           </Form.Item>
-          <Form.Item label="跳转类型">
+          <Form.Item :label="$t('app.linkType')">
             <Select
               v-model:value="createForm.jumpType"
               :options="jumpTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="跳转值" :required="createForm.jumpType !== 'none'">
+          <Form.Item :label="$t('app.linkTarget')" :required="createForm.jumpType !== 'none'">
             <Input
               v-model:value="createForm.jumpValue"
               :disabled="createForm.jumpType === 'none'"
               placeholder="/order/list"
             />
           </Form.Item>
-          <Form.Item label="颜色">
+          <Form.Item :label="$t('app.color')">
             <div class="color-field">
               <input v-model="createForm.color" type="color" />
               <Input v-model:value="createForm.color" />
             </div>
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="createForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
@@ -510,19 +509,19 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading"
-      title="编辑首页导航"
+      :title="$t('app.editHomeNavigation')"
       width="680px"
       @ok="updateNavigation"
     >
       <Form layout="vertical">
         <div class="navigation-form-grid">
-          <Form.Item label="标题" required>
+          <Form.Item :label="$t('app.title')" required>
             <Input v-model:value="editForm.title" />
           </Form.Item>
-          <Form.Item label="数值" required>
+          <Form.Item :label="$t('app.value')" required>
             <Input v-model:value="editForm.value" />
           </Form.Item>
-          <Form.Item class="navigation-form-full" label="图标" required>
+          <Form.Item class="navigation-form-full" :label="$t('app.icon')" required>
             <div class="icon-field">
               <span class="icon-preview">
                 <IconifyIcon :icon="editForm.icon" />
@@ -531,7 +530,7 @@ onMounted(() => {
                 v-model:value="editForm.icon"
                 :loading="iconLoading"
                 :options="iconOptions"
-                placeholder="输入 Icon 名称或从下拉中选择"
+                :placeholder="$t('app.enterAnIconNameOrSelectOne')"
               >
                 <template #option="{ label, value }">
                   <Space>
@@ -540,37 +539,35 @@ onMounted(() => {
                   </Space>
                 </template>
               </AutoComplete>
-              <Button :loading="iconCreating" @click="addIcon(editForm.icon)">
-                增加
-              </Button>
+              <Button :loading="iconCreating" @click="addIcon(editForm.icon)">{{ $t('app.add') }}</Button>
             </div>
           </Form.Item>
-          <Form.Item label="跳转类型">
+          <Form.Item :label="$t('app.linkType')">
             <Select
               v-model:value="editForm.jumpType"
               :options="jumpTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="跳转值" :required="editForm.jumpType !== 'none'">
+          <Form.Item :label="$t('app.linkTarget')" :required="editForm.jumpType !== 'none'">
             <Input
               v-model:value="editForm.jumpValue"
               :disabled="editForm.jumpType === 'none'"
             />
           </Form.Item>
-          <Form.Item label="颜色">
+          <Form.Item :label="$t('app.color')">
             <div class="color-field">
               <input v-model="editForm.color" type="color" />
               <Input v-model:value="editForm.color" />
             </div>
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="editForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"

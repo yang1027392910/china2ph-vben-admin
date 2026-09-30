@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -25,6 +25,7 @@ import {
   getProcurementContactListApi,
   updateProcurementContactApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type ProcurementContact = {
   contactType: string;
@@ -57,11 +58,11 @@ const defaultForm: ProcurementContactForm = {
   status: 1,
 };
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
 const contactTypeOptions = [
   { label: 'Messenger', value: 'messenger' },
@@ -71,27 +72,27 @@ const contactTypeOptions = [
   { label: 'Phone', value: 'phone' },
 ];
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
   {
-    title: '联系方式',
+    title: $t('app.contactMethod'),
     dataIndex: 'contactType',
     key: 'contactType',
     width: 130,
   },
   {
-    title: '联系值',
+    title: $t('app.contactValue'),
     dataIndex: 'contactValue',
     key: 'contactValue',
     width: 220,
   },
-  { title: '描述', dataIndex: 'description', key: 'description', width: 240 },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '创建时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-  { title: '更新时间', dataIndex: 'updatedAt', key: 'updatedAt', width: 180 },
-  { title: '操作', key: 'actions', width: 140 },
-];
+  { title: $t('app.description'), dataIndex: 'description', key: 'description', width: 240 },
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.createdAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+  { title: $t('app.updatedAt'), dataIndex: 'updatedAt', key: 'updatedAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', width: 140 },
+]));
 
 const contacts = ref<ProcurementContact[]>([]);
 const queryForm = ref({ ...defaultQuery });
@@ -157,7 +158,7 @@ async function queryContacts(page = queryForm.value.page) {
     contacts.value = normalizeContacts(responseData);
     total.value = normalizeTotal(responseData, contacts.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -190,17 +191,17 @@ function openEdit(record: ProcurementContact) {
 
 function validatePayload(payload: ReturnType<typeof buildPayload>) {
   if (!payload.contact_type) {
-    message.error('请选择联系方式');
+    message.error($t('app.selectAContactMethod'));
     return false;
   }
 
   if (!payload.contact_value) {
-    message.error('请输入联系值');
+    message.error($t('app.enterAContactValue'));
     return false;
   }
 
   if (!Number.isFinite(payload.sort)) {
-    message.error('请输入正确的排序');
+    message.error($t('app.enterAValidSortOrder'));
     return false;
   }
 
@@ -218,10 +219,10 @@ async function createContact() {
     createLoading.value = true;
     await createProcurementContactApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     queryContacts(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -241,10 +242,10 @@ async function updateContact() {
       id: editForm.value.id,
     });
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
     queryContacts(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -256,9 +257,9 @@ async function removeContact(id: number | string) {
     await deleteProcurementContactApi(id);
     contacts.value = contacts.value.filter((item) => item.id !== id);
     total.value = Math.max(total.value - 1, 0);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -270,17 +271,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="客服管理">
+  <Page :title="$t('app.customerSupport')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="联系方式">
+        <Form.Item :label="$t('app.contactMethod')">
           <Select
             v-model:value="queryForm.contactType"
-            :options="[{ label: '全部', value: '' }, ...contactTypeOptions]"
+            :options="[{ label: $t('app.all'), value: '' }, ...contactTypeOptions]"
             style="width: 130px"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -289,9 +290,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="queryContacts(1)">查询</Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增客服</Button>
+        <Button :loading="queryLoading" @click="queryContacts(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addSupportContact') }}</Button>
       </Space>
     </div>
 
@@ -303,7 +304,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       row-key="id"
@@ -317,10 +318,10 @@ onMounted(() => {
               type="link"
               @click="openEdit(record as ProcurementContact)"
             >
-              编辑
-            </Button>
+{{ $t('app.edit') }}
+</Button>
             <Popconfirm
-              title="确定删除？"
+              :title="$t('app.deleteThisItem')"
               @confirm="() => removeContact(record.id)"
             >
               <Button
@@ -329,13 +330,13 @@ onMounted(() => {
                 size="small"
                 type="link"
               >
-                删除
-              </Button>
+{{ $t('app.delete') }}
+</Button>
             </Popconfirm>
           </Space>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else>
           {{ record[column.dataIndex as keyof ProcurementContact] || '-' }}
@@ -346,38 +347,38 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增客服"
+      :title="$t('app.addSupportContact')"
       width="620px"
       @ok="createContact"
     >
       <Form layout="vertical">
         <div class="contact-form-grid">
-          <Form.Item label="联系方式" required>
+          <Form.Item :label="$t('app.contactMethod')" required>
             <Select
               v-model:value="createForm.contactType"
               :options="contactTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="联系值" required>
+          <Form.Item :label="$t('app.contactValue')" required>
             <Input
               v-model:value="createForm.contactValue"
-              placeholder="请输入账号、链接或号码"
+              :placeholder="$t('app.enterAnAccountLinkOrPhoneNumber')"
             />
           </Form.Item>
-          <Form.Item class="contact-form-full" label="描述">
+          <Form.Item class="contact-form-full" :label="$t('app.description')">
             <Input.TextArea
               v-model:value="createForm.description"
               :auto-size="{ minRows: 3, maxRows: 5 }"
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="createForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
@@ -391,38 +392,38 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading"
-      title="编辑客服"
+      :title="$t('app.editSupportContact')"
       width="620px"
       @ok="updateContact"
     >
       <Form layout="vertical">
         <div class="contact-form-grid">
-          <Form.Item label="联系方式" required>
+          <Form.Item :label="$t('app.contactMethod')" required>
             <Select
               v-model:value="editForm.contactType"
               :options="contactTypeOptions"
             />
           </Form.Item>
-          <Form.Item label="联系值" required>
+          <Form.Item :label="$t('app.contactValue')" required>
             <Input
               v-model:value="editForm.contactValue"
-              placeholder="请输入账号、链接或号码"
+              :placeholder="$t('app.enterAnAccountLinkOrPhoneNumber')"
             />
           </Form.Item>
-          <Form.Item class="contact-form-full" label="描述">
+          <Form.Item class="contact-form-full" :label="$t('app.description')">
             <Input.TextArea
               v-model:value="editForm.description"
               :auto-size="{ minRows: 3, maxRows: 5 }"
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="editForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"

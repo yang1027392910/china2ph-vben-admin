@@ -41,6 +41,7 @@ import {
   uploadProductImageApi,
 } from '#/api';
 import { RichTextEditor, sanitizeRichTextHtml } from '#/components/rich-text-editor';
+import { $t } from '#/locales';
 
 type Product = {
   categoryId: number;
@@ -149,43 +150,43 @@ type TranslateImageScene =
   | 'editCover'
   | 'editImage';
 
-const saleTypeOptions = [
-  { label: 'In Stock', value: 1 },
-  { label: 'Pre-order', value: 2 },
-];
+const saleTypeOptions = computed(() => [
+  { label: $t('app.inStock'), value: 1 },
+  { label: $t('app.preOrder'), value: 2 },
+]);
 
-const hotTypeOptions = [
-  { label: '全部', value: '' },
+const hotTypeOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
   { label: 'today', value: 'today' },
   { label: 'week', value: 'week' },
   { label: 'month', value: 'month' },
   { label: 'new_alert', value: 'new_alert' },
-];
+]));
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id' },
-  { title: '标题', dataIndex: 'title', key: 'title' },
-  { title: '封面图', dataIndex: 'cover', key: 'cover' },
-  { title: '产品图片', dataIndex: 'images', key: 'images' },
-  { title: '分类ID', dataIndex: 'categoryId', key: 'categoryId' },
-  { title: '中国价格', dataIndex: 'chinaPrice', key: 'chinaPrice' },
-  { title: '菲律宾价格', dataIndex: 'phPrice', key: 'phPrice' },
-  { title: '库存', dataIndex: 'stock', key: 'stock' },
+  { title: $t('app.title'), dataIndex: 'title', key: 'title' },
+  { title: $t('app.coverImage'), dataIndex: 'cover', key: 'cover' },
+  { title: $t('app.productImages'), dataIndex: 'images', key: 'images' },
+  { title: $t('app.categoryId'), dataIndex: 'categoryId', key: 'categoryId' },
+  { title: $t('app.chinaPrice'), dataIndex: 'chinaPrice', key: 'chinaPrice' },
+  { title: $t('app.philippinesPrice'), dataIndex: 'phPrice', key: 'phPrice' },
+  { title: $t('app.stock'), dataIndex: 'stock', key: 'stock' },
   {
-    title: '最低起订量',
+    title: $t('app.minimumOrderQuantity'),
     dataIndex: 'minimumOrderQuantity',
     key: 'minimumOrderQuantity',
   },
-  { title: '销量', dataIndex: 'sales', key: 'sales' },
-  { title: '状态', dataIndex: 'status', key: 'status' },
-  { title: '操作', key: 'actions' },
-];
+  { title: $t('app.sales'), dataIndex: 'sales', key: 'sales' },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status' },
+  { title: $t('app.actions'), key: 'actions' },
+]));
 
-const authorizedUserPreviewColumns = [
-  { title: '用户', dataIndex: 'email', key: 'email' },
-  { title: '用户ID', dataIndex: 'userId', key: 'userId', width: 100 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
-];
+const authorizedUserPreviewColumns = computed(() => ([
+  { title: $t('app.user'), dataIndex: 'email', key: 'email' },
+  { title: $t('app.userId2'), dataIndex: 'userId', key: 'userId', width: 100 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 100 },
+]));
 
 const authorizedUserPreviewRows = computed<AuthorizedUserPreviewRow[]>(() => {
   const originalUserIdSet = new Set(originalAuthorizedUserIds.value);
@@ -213,14 +214,14 @@ const authorizedUserPreviewRows = computed<AuthorizedUserPreviewRow[]>(() => {
   });
 });
 
-const authorizedUserStatusMap: Record<
+const authorizedUserStatusMap = computed<Record<
   AuthorizedUserPreviewRow['status'],
   { color: string; text: string }
-> = {
-  added: { color: 'green', text: '新增' },
-  removed: { color: 'red', text: '待移除' },
-  unchanged: { color: 'blue', text: '已授权' },
-};
+>>(() => ({
+  added: { color: 'green', text: $t('app.add2') },
+  removed: { color: 'red', text: $t('app.pendingRemoval') },
+  unchanged: { color: 'blue', text: $t('app.authorized') },
+}));
 
 function normalizeProducts(data: any): Product[] {
   const list = Array.isArray(data)
@@ -318,7 +319,7 @@ function normalizeCategoryOptions(data: any): CategoryOption[] {
 
   return list
     .map((item: any) => ({
-      label: item.name ?? item.title ?? `分类 ${item.id}`,
+      label: item.name ?? item.title ?? $t('app.categoryValue', { value1: item.id }),
       value: Number(item.id),
     }))
     .filter((item: CategoryOption) => Number.isFinite(item.value));
@@ -354,7 +355,7 @@ function normalizeUserOptions(data: any): UserOption[] {
 function getUserOptionLabel(userId: number) {
   return (
     userOptions.value.find((item) => item.value === userId)?.label ||
-    `用户 ${userId}`
+    $t('app.userValue', { value1: userId })
   );
 }
 
@@ -373,25 +374,25 @@ function updateSelectedAuthorizedUsers(nextValue: unknown) {
   }
 
   Modal.confirm({
-    cancelText: '取消',
-    content: `将移除 ${removedUserIds
+    cancelText: $t('app.cancel'),
+    content: $t('app.removeValueSAccessToSupplierContactDetailsThisTakes', { value1: removedUserIds
       .map((userId) => getUserOptionLabel(userId))
-      .join('、')} 的供应商联系方式查看权限，保存后生效。`,
-    okText: '确认移除',
+      .join('、') }),
+    okText: $t('app.confirmRemoval'),
     okType: 'danger',
     onOk: () => {
       selectedAuthorizedUserIds.value = nextUserIds;
     },
-    title: '确认移除授权用户？',
+    title: $t('app.removeAuthorizedUser'),
   });
 }
 
 async function copyAuthorizedUser(value: string) {
   try {
     await navigator.clipboard.writeText(value);
-    message.success('复制成功');
+    message.success($t('app.copied'));
   } catch {
-    message.error('复制失败');
+    message.error($t('app.copyFailed'));
   }
 }
 
@@ -458,7 +459,7 @@ const previewUploadImage: UploadProps['onPreview'] = async (file) => {
   const previewUrl = resolveImageUrl(file.url || file.thumbUrl || responseUrl);
 
   if (!previewUrl) {
-    message.warning('暂无可预览图片');
+    message.warning($t('app.noImagesToPreview'));
     return;
   }
 
@@ -565,7 +566,7 @@ async function handleTranslateUploadImage(
   const rawImageUrl = getUploadFileRawUrl(file);
 
   if (!rawImageUrl) {
-    message.warning('暂无可翻译的图片');
+    message.warning($t('app.noImagesToTranslate'));
     return;
   }
 
@@ -585,7 +586,7 @@ async function handleTranslateUploadImage(
     const translatedImageUrl = getUploadedImageUrl(responseData);
 
     if (!translatedImageUrl) {
-      throw new Error('翻译接口未返回图片地址');
+      throw new Error($t('app.theTranslationResponseDidNotIncludeAnImageUrl'));
     }
 
     setTranslateProgress(uid, 100);
@@ -630,10 +631,10 @@ async function handleTranslateUploadImage(
     }
 
     window.setTimeout(() => clearTranslateProgress(uid), 500);
-    message.success('图片翻译成功');
+    message.success($t('app.imageTranslated'));
   } catch (error: any) {
     clearTranslateProgress(uid);
-    message.error(error?.message || '图片翻译失败');
+    message.error(error?.message || $t('app.imageTranslationFailed'));
   } finally {
     if (progressTimer) {
       window.clearInterval(progressTimer);
@@ -655,7 +656,7 @@ async function queryProducts(page = queryForm.value.page) {
     products.value = normalizeProducts(responseData);
     total.value = normalizeTotal(responseData, products.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -685,7 +686,7 @@ async function queryCategoryOptions() {
         categoryOptions.value[0]?.value ?? defaultForm.categoryId;
     }
   } catch (error: any) {
-    message.error(error?.message || '分类查询失败');
+    message.error(error?.message || $t('app.failedToLoadCategories'));
   } finally {
     categoryLoading.value = false;
   }
@@ -736,7 +737,7 @@ async function openEdit(record: Product) {
     permissions.forEach((permission) => {
       if (!optionUserIds.has(permission.userId)) {
         options.push({
-          label: permission.email || `用户 ${permission.userId}`,
+          label: permission.email || $t('app.userValue', { value1: permission.userId }),
           value: permission.userId,
         });
       }
@@ -748,7 +749,7 @@ async function openEdit(record: Product) {
     selectedAuthorizedUserIds.value = [...authorizedUserIds];
   } catch (error: any) {
     if (loadVersion === contactPermissionLoadVersion) {
-      message.error(error?.message || '授权用户加载失败');
+      message.error(error?.message || $t('app.failedToLoadAuthorizedUsers'));
     }
   } finally {
     if (loadVersion === contactPermissionLoadVersion) {
@@ -759,7 +760,7 @@ async function openEdit(record: Product) {
 
 function beforeImageUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    message.error('请选择图片文件');
+    message.error($t('app.selectAnImageFile'));
     return false;
   }
   return true;
@@ -773,18 +774,18 @@ const uploadCover: UploadProps['customRequest'] = async (options) => {
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     createForm.value.cover = imageUrl;
     coverFileList.value = [buildUploadFile(file, imageUrl)];
     options.onSuccess?.(responseData);
-    message.success('封面上传成功');
+    message.success($t('app.coverUploaded'));
   } catch (error: any) {
     createForm.value.cover = '';
     coverFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -796,7 +797,7 @@ const uploadProductImage: UploadProps['customRequest'] = async (options) => {
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     createForm.value.images = [...createForm.value.images, imageUrl];
@@ -805,10 +806,10 @@ const uploadProductImage: UploadProps['customRequest'] = async (options) => {
       buildUploadFile(file, imageUrl),
     ];
     options.onSuccess?.(responseData);
-    message.success('图片上传成功');
+    message.success($t('app.imageUploaded'));
   } catch (error: any) {
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -820,18 +821,18 @@ const uploadEditCover: UploadProps['customRequest'] = async (options) => {
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     editForm.value.cover = imageUrl;
     editCoverFileList.value = [buildUploadFile(file, imageUrl)];
     options.onSuccess?.(responseData);
-    message.success('封面上传成功');
+    message.success($t('app.coverUploaded'));
   } catch (error: any) {
     editForm.value.cover = '';
     editCoverFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -845,7 +846,7 @@ const uploadEditProductImage: UploadProps['customRequest'] = async (
     const imageUrl = getUploadedImageUrl(responseData);
 
     if (!imageUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     editForm.value.images = [...editForm.value.images, imageUrl];
@@ -854,10 +855,10 @@ const uploadEditProductImage: UploadProps['customRequest'] = async (
       buildUploadFile(file, imageUrl),
     ];
     options.onSuccess?.(responseData);
-    message.success('图片上传成功');
+    message.success($t('app.imageUploaded'));
   } catch (error: any) {
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -926,7 +927,7 @@ function validateProductPayload(
   payload: ReturnType<typeof buildProductPayload>,
 ) {
   if (!payload.title) {
-    message.error('请输入商品标题');
+    message.error($t('app.enterAProductTitle'));
     return false;
   }
 
@@ -937,7 +938,7 @@ async function handleAiGenerateDescription() {
   const product = editForm.value;
 
   if (!product.id) {
-    message.error('请先选择商品');
+    message.error($t('app.selectAProductFirst'));
     return;
   }
 
@@ -961,14 +962,14 @@ async function handleAiGenerateDescription() {
     const description = getAiGeneratedDescription(responseData);
 
     if (!description) {
-      message.error('AI生成接口未返回商品描述');
+      message.error($t('app.theAiResponseDidNotIncludeAProductDescription'));
       return;
     }
 
     product.description = description;
-    message.success('AI生成成功');
+    message.success($t('app.aiGenerationCompleted'));
   } catch (error: any) {
-    message.error(error?.message || 'AI生成失败');
+    message.error(error?.message || $t('app.aiGenerationFailed'));
   } finally {
     aiGenerateLoading.value = false;
   }
@@ -1002,7 +1003,7 @@ async function createProduct() {
   };
 
   if (!payload.title) {
-    message.error('请输入商品标题');
+    message.error($t('app.enterAProductTitle'));
     return;
   }
 
@@ -1018,9 +1019,9 @@ async function createProduct() {
     });
     total.value += 1;
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -1065,10 +1066,10 @@ async function updateProduct() {
     ]);
 
     editVisible.value = false;
-    message.success('保存成功');
+    message.success($t('app.savedSuccessfully'));
     await queryProducts();
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -1077,7 +1078,7 @@ async function updateProduct() {
 function remove(id: number | string) {
   products.value = products.value.filter((i) => i.id !== id);
   total.value = Math.max(total.value - 1, 0);
-  message.success('已删除');
+  message.success($t('app.deleted'));
 }
 
 onMounted(() => {
@@ -1087,31 +1088,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="商品管理">
+  <Page :title="$t('app.productManagement')">
     <div class="mb-4 flex gap-2">
       <Select
         v-model:value="queryForm.hotType"
         :options="hotTypeOptions"
-        placeholder="热门类型"
+        :placeholder="$t('app.featuredType')"
         style="width: 140px"
       />
       <Select
         v-model:value="queryForm.category"
         :loading="categoryLoading"
-        :options="[{ label: '全部分类', value: '' }, ...categoryOptions]"
+        :options="[{ label: $t('app.allCategories'), value: '' }, ...categoryOptions]"
         allow-clear
-        placeholder="请选择分类"
+        :placeholder="$t('app.selectACategory')"
         style="width: 180px"
       />
       <Input
         v-model:value="queryForm.title"
         allow-clear
-        placeholder="请输入商品标题"
+        :placeholder="$t('app.enterAProductTitle')"
         style="width: 240px"
         @press-enter="queryProducts(1)"
       />
-      <Button :loading="queryLoading" @click="queryProducts(1)">查询</Button>
-      <Button type="primary" @click="openCreate">新增商品</Button>
+      <Button :loading="queryLoading" @click="queryProducts(1)">{{ $t('app.search') }}</Button>
+      <Button type="primary" @click="openCreate">{{ $t('app.addProduct') }}</Button>
     </div>
 
     <Table
@@ -1129,14 +1130,14 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <a @click="openEdit(record as Product)">编辑</a>
-            <Popconfirm title="确定删除？" @confirm="() => remove(record.id)">
-              <a>删除</a>
+            <a @click="openEdit(record as Product)">{{ $t('app.edit') }}</a>
+            <Popconfirm :title="$t('app.deleteThisItem')" @confirm="() => remove(record.id)">
+              <a>{{ $t('app.delete') }}</a>
             </Popconfirm>
           </Space>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else-if="column.key === 'cover'">
           <AntImage
@@ -1145,7 +1146,7 @@ onMounted(() => {
             :src="resolveImageUrl(record.cover)"
             :width="48"
             class="product-cover"
-            @error="message.error('图片加载失败')"
+            @error="message.error($t('app.imageFailedToLoad'))"
           />
           <span v-else>-</span>
         </template>
@@ -1158,7 +1159,7 @@ onMounted(() => {
                   :src="resolveImageUrl(record.images[0])"
                   :width="48"
                   class="product-cover"
-                  @error="message.error('图片加载失败')"
+                  @error="message.error($t('app.imageFailedToLoad'))"
                 />
                 <span
                   v-if="record.images.length > 1"
@@ -1174,7 +1175,7 @@ onMounted(() => {
               >
                 <AntImage
                   :src="resolveImageUrl(image)"
-                  @error="message.error('图片加载失败')"
+                  @error="message.error($t('app.imageFailedToLoad'))"
                 />
               </div>
             </AntImage.PreviewGroup>
@@ -1190,25 +1191,25 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增商品"
+      :title="$t('app.addProduct')"
       width="820px"
       @ok="createProduct"
     >
       <Form layout="vertical">
         <div class="product-form-grid">
-          <Form.Item class="product-form-full" label="商品标题" required>
+          <Form.Item class="product-form-full" :label="$t('app.productTitle')" required>
             <Input v-model:value="createForm.title" />
           </Form.Item>
-          <Form.Item label="产品类型" required>
+          <Form.Item :label="$t('app.productType')" required>
             <Select
               v-model:value="createForm.categoryId"
               :loading="categoryLoading"
               :options="categoryOptions"
               class="w-full"
-              placeholder="请选择分类"
+              :placeholder="$t('app.selectACategory')"
             />
           </Form.Item>
-          <Form.Item label="封面图">
+          <Form.Item :label="$t('app.coverImage')">
             <Upload
               v-model:file-list="coverFileList"
               :before-upload="beforeImageUpload"
@@ -1230,7 +1231,7 @@ onMounted(() => {
                     <div class="product-upload-action-row">
                       <button
                         class="product-upload-action"
-                        title="查看图片"
+                        :title="$t('app.viewImage')"
                         type="button"
                         @click="() => actions.preview()"
                       >
@@ -1238,7 +1239,7 @@ onMounted(() => {
                       </button>
                       <button
                         class="product-upload-action"
-                        title="删除图片"
+                        :title="$t('app.deleteImage')"
                         type="button"
                         @click="() => actions.remove()"
                       >
@@ -1249,7 +1250,7 @@ onMounted(() => {
                       <button
                         :disabled="getTranslateProgress(file.uid) > 0"
                         class="product-upload-action"
-                        title="翻译图片"
+                        :title="$t('app.translateImage')"
                         type="button"
                         @click.stop="
                           handleTranslateUploadImage('createCover', file)
@@ -1268,10 +1269,10 @@ onMounted(() => {
                   />
                 </div>
               </template>
-              <div v-if="!coverFileList?.length">上传</div>
+              <div v-if="!coverFileList?.length">{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="产品图片">
+          <Form.Item :label="$t('app.productImages')">
             <Upload
               v-model:file-list="imageFileList"
               :before-upload="beforeImageUpload"
@@ -1293,7 +1294,7 @@ onMounted(() => {
                     <div class="product-upload-action-row">
                       <button
                         class="product-upload-action"
-                        title="查看图片"
+                        :title="$t('app.viewImage')"
                         type="button"
                         @click="() => actions.preview()"
                       >
@@ -1301,7 +1302,7 @@ onMounted(() => {
                       </button>
                       <button
                         class="product-upload-action"
-                        title="删除图片"
+                        :title="$t('app.deleteImage')"
                         type="button"
                         @click="() => actions.remove()"
                       >
@@ -1312,7 +1313,7 @@ onMounted(() => {
                       <button
                         :disabled="getTranslateProgress(file.uid) > 0"
                         class="product-upload-action"
-                        title="翻译图片"
+                        :title="$t('app.translateImage')"
                         type="button"
                         @click.stop="
                           handleTranslateUploadImage('createImage', file)
@@ -1331,26 +1332,26 @@ onMounted(() => {
                   />
                 </div>
               </template>
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="销售类型">
+          <Form.Item :label="$t('app.saleType')">
             <Select
               v-model:value="createForm.saleType"
               :options="saleTypeOptions"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="菲律宾价格">
+          <Form.Item :label="$t('app.philippinesPrice')">
             <InputNumber v-model:value="createForm.phPrice" class="w-full" />
           </Form.Item>
-          <Form.Item label="库存">
+          <Form.Item :label="$t('app.stock')">
             <InputNumber v-model:value="createForm.stock" class="w-full" />
           </Form.Item>
-          <Form.Item label="销量">
+          <Form.Item :label="$t('app.sales')">
             <InputNumber v-model:value="createForm.sales" class="w-full" />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
@@ -1364,25 +1365,25 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading || contactPermissionLoading"
-      title="编辑商品"
+      :title="$t('app.editProduct')"
       width="820px"
       @ok="updateProduct"
     >
       <Form layout="vertical">
         <div class="product-form-grid">
-          <Form.Item class="product-form-full" label="商品标题" required>
+          <Form.Item class="product-form-full" :label="$t('app.productTitle')" required>
             <Input v-model:value="editForm.title" />
           </Form.Item>
-          <Form.Item label="产品类型" required>
+          <Form.Item :label="$t('app.productType')" required>
             <Select
               v-model:value="editForm.categoryId"
               :loading="categoryLoading"
               :options="categoryOptions"
               class="w-full"
-              placeholder="请选择分类"
+              :placeholder="$t('app.selectACategory')"
             />
           </Form.Item>
-          <Form.Item label="封面图">
+          <Form.Item :label="$t('app.coverImage')">
             <Upload
               v-model:file-list="editCoverFileList"
               :before-upload="beforeImageUpload"
@@ -1404,7 +1405,7 @@ onMounted(() => {
                     <div class="product-upload-action-row">
                       <button
                         class="product-upload-action"
-                        title="查看图片"
+                        :title="$t('app.viewImage')"
                         type="button"
                         @click="() => actions.preview()"
                       >
@@ -1412,7 +1413,7 @@ onMounted(() => {
                       </button>
                       <button
                         class="product-upload-action"
-                        title="删除图片"
+                        :title="$t('app.deleteImage')"
                         type="button"
                         @click="() => actions.remove()"
                       >
@@ -1423,7 +1424,7 @@ onMounted(() => {
                       <button
                         :disabled="getTranslateProgress(file.uid) > 0"
                         class="product-upload-action"
-                        title="翻译图片"
+                        :title="$t('app.translateImage')"
                         type="button"
                         @click.stop="
                           handleTranslateUploadImage('editCover', file)
@@ -1442,10 +1443,10 @@ onMounted(() => {
                   />
                 </div>
               </template>
-              <div v-if="!editCoverFileList?.length">上传</div>
+              <div v-if="!editCoverFileList?.length">{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="产品图片">
+          <Form.Item :label="$t('app.productImages')">
             <Upload
               v-model:file-list="editImageFileList"
               :before-upload="beforeImageUpload"
@@ -1467,7 +1468,7 @@ onMounted(() => {
                     <div class="product-upload-action-row">
                       <button
                         class="product-upload-action"
-                        title="查看图片"
+                        :title="$t('app.viewImage')"
                         type="button"
                         @click="() => actions.preview()"
                       >
@@ -1475,7 +1476,7 @@ onMounted(() => {
                       </button>
                       <button
                         class="product-upload-action"
-                        title="删除图片"
+                        :title="$t('app.deleteImage')"
                         type="button"
                         @click="() => actions.remove()"
                       >
@@ -1486,7 +1487,7 @@ onMounted(() => {
                       <button
                         :disabled="getTranslateProgress(file.uid) > 0"
                         class="product-upload-action"
-                        title="翻译图片"
+                        :title="$t('app.translateImage')"
                         type="button"
                         @click.stop="
                           handleTranslateUploadImage('editImage', file)
@@ -1505,33 +1506,33 @@ onMounted(() => {
                   />
                 </div>
               </template>
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item class="product-form-full" label="商品描述">
+          <Form.Item class="product-form-full" :label="$t('app.productDescription')">
             <RichTextEditor
               v-model="editForm.description"
               :ai-loading="aiGenerateLoading"
               @ai-generate="handleAiGenerateDescription"
             />
           </Form.Item>
-          <Form.Item label="销售类型">
+          <Form.Item :label="$t('app.saleType')">
             <Select
               v-model:value="editForm.saleType"
               :options="saleTypeOptions"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="菲律宾价格">
+          <Form.Item :label="$t('app.philippinesPrice')">
             <InputNumber v-model:value="editForm.phPrice" class="w-full" />
           </Form.Item>
-          <Form.Item label="库存">
+          <Form.Item :label="$t('app.stock')">
             <InputNumber v-model:value="editForm.stock" class="w-full" />
           </Form.Item>
-          <Form.Item label="销量">
+          <Form.Item :label="$t('app.sales')">
             <InputNumber v-model:value="editForm.sales" class="w-full" />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"
@@ -1539,8 +1540,8 @@ onMounted(() => {
             />
           </Form.Item>
           <div class="product-form-full supplier-contact-section">
-            <div class="supplier-contact-title">供应商联系方式</div>
-            <Form.Item label="开启供应商联系方式">
+            <div class="supplier-contact-title">{{ $t('app.supplierContactDetails') }}</div>
+            <Form.Item :label="$t('app.showSupplierContactDetails')">
               <Switch
                 v-model:checked="editForm.showSupplierContact"
                 :checked-value="1"
@@ -1552,19 +1553,19 @@ onMounted(() => {
               v-if="editForm.showSupplierContact === 1"
               class="supplier-contact-grid"
             >
-              <Form.Item label="供应商名称">
+              <Form.Item :label="$t('app.supplierName')">
                 <Input v-model:value="editForm.supplierName" />
               </Form.Item>
               <Form.Item label="WhatsApp">
                 <Input v-model:value="editForm.supplierWhatsapp" />
               </Form.Item>
-              <Form.Item label="微信">
+              <Form.Item :label="$t('app.wechat')">
                 <Input v-model:value="editForm.supplierWechat" />
               </Form.Item>
-              <Form.Item label="电话">
+              <Form.Item :label="$t('app.phone')">
                 <Input v-model:value="editForm.supplierPhone" />
               </Form.Item>
-              <Form.Item class="product-form-full" label="授权用户">
+              <Form.Item class="product-form-full" :label="$t('app.authorizedUsers')">
                 <Select
                   :filter-option="true"
                   :loading="contactPermissionLoading"
@@ -1573,14 +1574,14 @@ onMounted(() => {
                   allow-clear
                   mode="multiple"
                   option-filter-prop="label"
-                  placeholder="请选择可查看供应商联系方式的用户"
+                  :placeholder="$t('app.selectUsersWhoCanViewSupplierContactDetails')"
                   show-search
                   @change="updateSelectedAuthorizedUsers"
                 >
                   <template #notFoundContent>
                     <Empty
                       :image="Empty.PRESENTED_IMAGE_SIMPLE"
-                      description="暂无用户"
+                      :description="$t('app.noUsers')"
                     />
                   </template>
                 </Select>
@@ -1617,8 +1618,8 @@ onMounted(() => {
                           type="link"
                           @click="copyAuthorizedUser(record.email)"
                         >
-                          复制
-                        </Button>
+{{ $t('app.copy') }}
+</Button>
                       </Space>
                     </template>
                     <template v-else>

@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue';
 
-import { onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
 import { Button, Form, Input, Select, Space, Table, Tag } from 'ant-design-vue';
 
 import { getLoginLogListApi } from '#/api';
+import { $t } from '#/locales';
 
 type LoginLog = {
   account: string;
@@ -34,28 +35,28 @@ const logs = ref<LoginLog[]>([]);
 const total = ref(0);
 const queryLoading = ref(false);
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
-  { title: '登录账号', dataIndex: 'account', key: 'account', width: 160 },
-  { title: '登录状态', dataIndex: 'status', key: 'status', width: 110 },
-  { title: '登录地点', dataIndex: 'city', key: 'city', width: 120 },
-  { title: '设备', dataIndex: 'device', key: 'device', width: 120 },
-  { title: '操作系统', dataIndex: 'os', key: 'os', width: 140 },
-  { title: '登录时间', dataIndex: 'loginAt', key: 'loginAt', width: 180 },
-];
+  { title: $t('app.loginAccount'), dataIndex: 'account', key: 'account', width: 160 },
+  { title: $t('app.loginStatus'), dataIndex: 'status', key: 'status', width: 110 },
+  { title: $t('app.loginLocation'), dataIndex: 'city', key: 'city', width: 120 },
+  { title: $t('app.device'), dataIndex: 'device', key: 'device', width: 120 },
+  { title: $t('app.operatingSystem'), dataIndex: 'os', key: 'os', width: 140 },
+  { title: $t('app.loginTime'), dataIndex: 'loginAt', key: 'loginAt', width: 180 },
+]));
 
-const statusOptions = [
-  { label: '成功', value: 'success' },
-  { label: '失败', value: 'fail' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.success'), value: 'success' },
+  { label: $t('app.failed'), value: 'fail' },
+]));
 
-const statusMap: Record<string, { color: string; text: string }> = {
-  0: { color: 'red', text: '失败' },
-  1: { color: 'green', text: '成功' },
-  fail: { color: 'red', text: '失败' },
-  failed: { color: 'red', text: '失败' },
-  success: { color: 'green', text: '成功' },
-};
+const statusMap = computed<Record<string, { color: string; text: string }>>(() => ({
+  0: { color: 'red', text: $t('app.failed') },
+  1: { color: 'green', text: $t('app.success') },
+  fail: { color: 'red', text: $t('app.failed') },
+  failed: { color: 'red', text: $t('app.failed') },
+  success: { color: 'green', text: $t('app.success') },
+}));
 
 function normalizeLogs(data: any): LoginLog[] {
   const list = Array.isArray(data)
@@ -124,7 +125,7 @@ function handleTableChange(pagination: TableProps['pagination']) {
 
 function getStatusMeta(status: number | string) {
   return (
-    statusMap[String(status)] ?? { color: 'default', text: String(status) }
+    statusMap.value[String(status)] ?? { color: 'default', text: String(status) }
   );
 }
 
@@ -134,33 +135,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="登录日志">
+  <Page :title="$t('app.loginLogs')">
     <Form class="mb-4" layout="inline">
-      <Form.Item label="登录账号">
+      <Form.Item :label="$t('app.loginAccount')">
         <Input
           v-model:value="filters.account"
           allow-clear
-          placeholder="请输入账号"
+          :placeholder="$t('app.enterAnAccount')"
         />
       </Form.Item>
-      <Form.Item label="IP 地址">
-        <Input v-model:value="filters.ip" allow-clear placeholder="请输入 IP" />
+      <Form.Item :label="$t('app.ipAddress')">
+        <Input v-model:value="filters.ip" allow-clear :placeholder="$t('app.enterAnIpAddress')" />
       </Form.Item>
-      <Form.Item label="登录状态">
+      <Form.Item :label="$t('app.loginStatus')">
         <Select
           v-model:value="filters.status"
           :options="statusOptions"
           allow-clear
           class="log-filter-select"
-          placeholder="请选择"
+          :placeholder="$t('app.selectAnOption')"
         />
       </Form.Item>
       <Form.Item>
         <Space>
-          <Button :loading="queryLoading" type="primary" @click="handleSearch">
-            查询
-          </Button>
-          <Button @click="resetFilters">重置</Button>
+          <Button :loading="queryLoading" type="primary" @click="handleSearch">{{ $t('app.search') }}</Button>
+          <Button @click="resetFilters">{{ $t('app.reset') }}</Button>
         </Space>
       </Form.Item>
     </Form>

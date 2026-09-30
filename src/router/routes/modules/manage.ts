@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
     path: '/management',
     meta: {
       icon: 'lucide:settings',
-      title: '系统管理',
+      title: 'app.systemManagement',
       order: 20,
     },
     children: [
@@ -14,14 +14,14 @@ const routes: RouteRecordRaw[] = [
         name: 'CouponManagement',
         path: '/management/coupons',
         component: () => import('#/views/manage/coupon/index.vue'),
-        meta: { title: '优惠券管理', icon: 'lucide:ticket' },
+        meta: { title: 'app.couponManagement', icon: 'lucide:ticket' },
       },
       {
         name: 'UserManagement',
         path: '/management/users',
         component: () => import('#/views/manage/user/index.vue'),
         meta: {
-          title: '用户管理',
+          title: 'app.userManagement',
           icon: 'lucide:user',
         },
       },
@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/user-verifications',
         component: () => import('#/views/manage/user-verification/index.vue'),
         meta: {
-          title: '用户认证管理',
+          title: 'app.userVerification',
           icon: 'lucide:user-check',
         },
       },
@@ -39,7 +39,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/email-codes',
         component: () => import('#/views/manage/email-code/index.vue'),
         meta: {
-          title: '邮箱验证码记录',
+          title: 'app.emailVerificationCodes',
           icon: 'lucide:mail-check',
         },
       },
@@ -48,7 +48,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/login-logs',
         component: () => import('#/views/manage/login-log/index.vue'),
         meta: {
-          title: '登录日志',
+          title: 'app.loginLogs',
           icon: 'lucide:clipboard-list',
         },
       },
@@ -57,7 +57,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/banners',
         component: () => import('#/views/manage/banner/index.vue'),
         meta: {
-          title: 'Banner管理',
+          title: 'app.bannerManagement',
           icon: 'lucide:image',
         },
       },
@@ -66,7 +66,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/home-navigation',
         component: () => import('#/views/manage/home-navigation/index.vue'),
         meta: {
-          title: '首页导航',
+          title: 'app.homeNavigation',
           icon: 'lucide:layout-grid',
         },
       },
@@ -75,7 +75,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/procurement-contacts',
         component: () => import('#/views/manage/procurement-contact/index.vue'),
         meta: {
-          title: '客服管理',
+          title: 'app.customerSupport',
           icon: 'lucide:headphones',
         },
       },
@@ -86,7 +86,7 @@ const routes: RouteRecordRaw[] = [
     path: '/management/products',
     redirect: '/management/products/list',
     meta: {
-      title: '商品管理',
+      title: 'app.productManagement',
       icon: 'lucide:package',
       order: 21,
     },
@@ -96,7 +96,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/products/list',
         component: () => import('#/views/manage/product/index.vue'),
         meta: {
-          title: '商品列表',
+          title: 'app.productList',
           icon: 'lucide:list',
         },
       },
@@ -105,7 +105,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/products/categories',
         component: () => import('#/views/manage/category/index.vue'),
         meta: {
-          title: '商品分类管理',
+          title: 'app.productCategories',
           icon: 'lucide:folder',
         },
       },
@@ -114,7 +114,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/products/home-hot',
         component: () => import('#/views/manage/home-hot/index.vue'),
         meta: {
-          title: '首页热门',
+          title: 'app.featuredProducts',
           icon: 'lucide:fire',
         },
       },
@@ -123,7 +123,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/products/suppliers',
         component: () => import('#/views/manage/supplier/index.vue'),
         meta: {
-          title: '商品供应商',
+          title: 'app.productSuppliers',
           icon: 'lucide:store',
         },
       },
@@ -132,7 +132,7 @@ const routes: RouteRecordRaw[] = [
         path: '/management/products/logistics-suppliers',
         component: () => import('#/views/manage/logistics-supplier/index.vue'),
         meta: {
-          title: '物流供应商',
+          title: 'app.logisticsSuppliers',
           icon: 'lucide:ship',
         },
       },

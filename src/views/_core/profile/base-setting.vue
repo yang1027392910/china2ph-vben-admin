@@ -8,49 +8,50 @@ import { computed, onMounted, ref } from 'vue';
 import { ProfileBaseSetting } from '@vben/common-ui';
 
 import { getUserInfoApi } from '#/api';
+import { $t } from '#/locales';
 
 const profileBaseSettingRef = ref();
 
-const MOCK_ROLES_OPTIONS: BasicOption[] = [
+const MOCK_ROLES_OPTIONS = computed<BasicOption[]>(() => ([
   {
-    label: '管理员',
+    label: $t('app.administrator'),
     value: 'super',
   },
   {
-    label: '用户',
+    label: $t('app.user'),
     value: 'user',
   },
   {
-    label: '测试',
+    label: $t('app.test'),
     value: 'test',
   },
-];
+]));
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
     {
       fieldName: 'realName',
       component: 'Input',
-      label: '姓名',
+      label: $t('app.name'),
     },
     {
       fieldName: 'username',
       component: 'Input',
-      label: '用户名',
+      label: $t('app.username'),
     },
     {
       fieldName: 'roles',
       component: 'Select',
       componentProps: {
         mode: 'tags',
-        options: MOCK_ROLES_OPTIONS,
+        options: MOCK_ROLES_OPTIONS.value,
       },
-      label: '角色',
+      label: $t('app.roles'),
     },
     {
       fieldName: 'introduction',
       component: 'Textarea',
-      label: '个人简介',
+      label: $t('app.bio'),
     },
   ];
 });

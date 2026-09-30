@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableProps, UploadProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -28,6 +28,8 @@ import {
   updateLogisticsSupplierApi,
   uploadAdminFileApi,
 } from '#/api';
+import { SHIPPING_METHOD } from '#/api/core/logistics-supplier';
+import { $t } from '#/locales';
 
 type LogisticsSupplier = {
   createdAt?: string;
@@ -57,65 +59,65 @@ const defaultForm: LogisticsSupplierForm = {
   logo: '',
   name: '',
   pricingMethod: 'Per kg',
-  shippingMethod: '海运',
+  shippingMethod: SHIPPING_METHOD.sea,
   sort: 1,
   status: 1,
   unitPrice: 0,
 };
 
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '0' },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.enable'), value: '1' },
+  { label: $t('app.disable'), value: '0' },
+]));
 
-const shippingMethodOptions = [
-  { label: '海运', value: '海运' },
-  { label: '空运', value: '空运' },
-  { label: '陆运', value: '陆运' },
-  { label: '快递', value: '快递' },
-];
+const shippingMethodOptions = computed(() => ([
+  { label: $t('app.seaFreight'), value: SHIPPING_METHOD.sea },
+  { label: $t('app.airFreight'), value: SHIPPING_METHOD.air },
+  { label: $t('app.roadFreight'), value: SHIPPING_METHOD.road },
+  { label: $t('app.expressDelivery'), value: SHIPPING_METHOD.express },
+]));
 
-const queryShippingMethodOptions = [
-  { label: '全部', value: '' },
-  { label: '海运', value: '海运' },
-  { label: '空运', value: '空运' },
-];
+const queryShippingMethodOptions = computed(() => ([
+  { label: $t('app.all'), value: '' },
+  { label: $t('app.seaFreight'), value: SHIPPING_METHOD.sea },
+  { label: $t('app.airFreight'), value: SHIPPING_METHOD.air },
+]));
 
-const pricingMethodOptions = [
-  { label: 'Per kg', value: 'Per kg' },
-  { label: 'Per Item', value: 'Per Item' },
-  { label: 'By Volume', value: 'By Volume' },
-];
+const pricingMethodOptions = computed(() => [
+  { label: $t('app.perKg'), value: 'Per kg' },
+  { label: $t('app.perItem'), value: 'Per Item' },
+  { label: $t('app.byVolume'), value: 'By Volume' },
+]);
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
   { title: 'Logo', dataIndex: 'logo', key: 'logo', width: 90 },
-  { title: '供应商名称', dataIndex: 'name', key: 'name', width: 180 },
+  { title: $t('app.supplierName'), dataIndex: 'name', key: 'name', width: 180 },
   {
-    title: '运输方式',
+    title: $t('app.shippingMethod'),
     dataIndex: 'shippingMethod',
     key: 'shippingMethod',
     width: 120,
   },
   {
-    title: '配送时效',
+    title: $t('app.deliveryTime'),
     dataIndex: 'deliveryTime',
     key: 'deliveryTime',
     width: 130,
   },
-  { title: '单价', dataIndex: 'unitPrice', key: 'unitPrice', width: 100 },
+  { title: $t('app.unitPrice'), dataIndex: 'unitPrice', key: 'unitPrice', width: 100 },
   {
-    title: '计价方式',
+    title: $t('app.pricingMethod'),
     dataIndex: 'pricingMethod',
     key: 'pricingMethod',
     width: 120,
   },
-  { title: '排序', dataIndex: 'sort', key: 'sort', width: 80 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 80 },
-  { title: '创建时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-  { title: '操作', key: 'actions', width: 140 },
-];
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort', width: 80 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 80 },
+  { title: $t('app.createdAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+  { title: $t('app.actions'), key: 'actions', width: 140 },
+]));
 
 const suppliers = ref<LogisticsSupplier[]>([]);
 const queryForm = ref({ ...defaultQuery });
@@ -177,7 +179,7 @@ async function querySuppliers(page = queryForm.value.page) {
     suppliers.value = normalizeSuppliers(responseData);
     total.value = normalizeTotal(responseData, suppliers.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -254,7 +256,7 @@ function resolveImageUrl(url?: string) {
 
 function beforeLogoUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    message.error('请选择图片文件');
+    message.error($t('app.selectAnImageFile'));
     return false;
   }
   return true;
@@ -268,7 +270,7 @@ const uploadLogo: UploadProps['customRequest'] = async (options) => {
     const logoUrl = getUploadedImageUrl(responseData);
 
     if (!logoUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     createForm.value.logo = logoUrl;
@@ -281,12 +283,12 @@ const uploadLogo: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('Logo 上传成功');
+    message.success($t('app.logoUploaded'));
   } catch (error: any) {
     createForm.value.logo = '';
     logoFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -298,7 +300,7 @@ const uploadEditLogo: UploadProps['customRequest'] = async (options) => {
     const logoUrl = getUploadedImageUrl(responseData);
 
     if (!logoUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     editForm.value.logo = logoUrl;
@@ -311,12 +313,12 @@ const uploadEditLogo: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('Logo 上传成功');
+    message.success($t('app.logoUploaded'));
   } catch (error: any) {
     editForm.value.logo = '';
     editLogoFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -347,27 +349,27 @@ function validateSupplierPayload(
   payload: ReturnType<typeof buildSupplierPayload>,
 ) {
   if (!payload.name) {
-    message.error('请输入供应商名称');
+    message.error($t('app.enterASupplierName'));
     return false;
   }
 
   if (!payload.shippingMethod) {
-    message.error('请选择运输方式');
+    message.error($t('app.selectAShippingMethod'));
     return false;
   }
 
   if (!payload.deliveryTime) {
-    message.error('请输入配送时效');
+    message.error($t('app.enterADeliveryTime'));
     return false;
   }
 
   if (!payload.pricingMethod) {
-    message.error('请选择计价方式');
+    message.error($t('app.selectAPricingMethod'));
     return false;
   }
 
   if (!Number.isFinite(payload.unitPrice) || payload.unitPrice < 0) {
-    message.error('请输入正确的单价');
+    message.error($t('app.enterAValidUnitPrice'));
     return false;
   }
 
@@ -388,27 +390,27 @@ async function createSupplier() {
   };
 
   if (!payload.name) {
-    message.error('请输入供应商名称');
+    message.error($t('app.enterASupplierName'));
     return;
   }
 
   if (!payload.shippingMethod) {
-    message.error('请选择运输方式');
+    message.error($t('app.selectAShippingMethod'));
     return;
   }
 
   if (!payload.deliveryTime) {
-    message.error('请输入配送时效');
+    message.error($t('app.enterADeliveryTime'));
     return;
   }
 
   if (!payload.pricingMethod) {
-    message.error('请选择计价方式');
+    message.error($t('app.selectAPricingMethod'));
     return;
   }
 
   if (!Number.isFinite(payload.unitPrice) || payload.unitPrice < 0) {
-    message.error('请输入正确的单价');
+    message.error($t('app.enterAValidUnitPrice'));
     return;
   }
 
@@ -416,10 +418,10 @@ async function createSupplier() {
     createLoading.value = true;
     await createLogisticsSupplierApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     querySuppliers(1);
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -439,10 +441,10 @@ async function updateSupplier() {
       id: editForm.value.id,
     });
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
     querySuppliers(queryForm.value.page);
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -454,9 +456,9 @@ async function removeSupplier(id: number | string) {
     await deleteLogisticsSupplierApi(id);
     suppliers.value = suppliers.value.filter((item) => item.id !== id);
     total.value = Math.max(total.value - 1, 0);
-    message.success('删除成功');
+    message.success($t('app.deletedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -468,26 +470,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="物流供应商">
+  <Page :title="$t('app.logisticsSuppliers')">
     <div class="mb-4 flex flex-wrap items-end gap-3">
       <Form layout="inline">
-        <Form.Item label="关键词">
+        <Form.Item :label="$t('app.keyword')">
           <Input
             v-model:value="queryForm.keyword"
             allow-clear
-            placeholder="供应商名称/运输方式"
+            :placeholder="$t('app.supplierNameOrShippingMethod')"
             style="width: 200px"
             @press-enter="querySuppliers(1)"
           />
         </Form.Item>
-        <Form.Item label="运输方式">
+        <Form.Item :label="$t('app.shippingMethod')">
           <Select
             v-model:value="queryForm.shippingMethod"
             :options="queryShippingMethodOptions"
             style="width: 120px"
           />
         </Form.Item>
-        <Form.Item label="状态">
+        <Form.Item :label="$t('app.status')">
           <Select
             v-model:value="queryForm.status"
             :options="statusOptions"
@@ -496,9 +498,9 @@ onMounted(() => {
         </Form.Item>
       </Form>
       <Space>
-        <Button :loading="queryLoading" @click="querySuppliers(1)">查询</Button>
-        <Button @click="resetQuery">重置</Button>
-        <Button type="primary" @click="openCreate">新增供应商</Button>
+        <Button :loading="queryLoading" @click="querySuppliers(1)">{{ $t('app.search') }}</Button>
+        <Button @click="resetQuery">{{ $t('app.reset') }}</Button>
+        <Button type="primary" @click="openCreate">{{ $t('app.addSupplier') }}</Button>
       </Space>
     </div>
 
@@ -510,7 +512,7 @@ onMounted(() => {
         current: queryForm.page,
         pageSize: queryForm.pageSize,
         showSizeChanger: true,
-        showTotal: (count: number) => `共 ${count} 条`,
+        showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
         total,
       }"
       row-key="id"
@@ -519,19 +521,25 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <a @click="openEdit(record as LogisticsSupplier)">编辑</a>
+            <a @click="openEdit(record as LogisticsSupplier)">{{ $t('app.edit') }}</a>
             <Popconfirm
-              title="确定删除？"
+              :title="$t('app.deleteThisItem')"
               @confirm="() => removeSupplier(record.id)"
             >
               <a>
-                {{ deleteLoadingId === record.id ? '删除中' : '删除' }}
+                {{ deleteLoadingId === record.id ? $t('app.deleting') : $t('app.delete') }}
               </a>
             </Popconfirm>
           </Space>
         </template>
+        <template v-else-if="column.key === 'shippingMethod'">
+          {{ shippingMethodOptions.find((option) => option.value === record.shippingMethod)?.label ?? record.shippingMethod }}
+        </template>
+        <template v-else-if="column.key === 'pricingMethod'">
+          {{ pricingMethodOptions.find((option) => option.value === record.pricingMethod)?.label ?? record.pricingMethod }}
+        </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === 1 ? '启用' : '禁用' }}
+          {{ record.status === 1 ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else-if="column.key === 'logo'">
           <AntImage
@@ -558,14 +566,14 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增物流供应商"
+      :title="$t('app.addLogisticsSupplier')"
       width="620px"
       @ok="createSupplier"
     >
       <Form layout="vertical">
         <div class="supplier-form-grid">
-          <Form.Item class="supplier-form-full" label="供应商名称" required>
-            <Input v-model:value="createForm.name" placeholder="顺丰海运" />
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierName')" required>
+            <Input v-model:value="createForm.name" :placeholder="$t('app.sfSeaFreight')" />
           </Form.Item>
           <Form.Item class="supplier-form-full" label="Logo">
             <Upload
@@ -577,22 +585,22 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="运输方式" required>
+          <Form.Item :label="$t('app.shippingMethod')" required>
             <Select
               v-model:value="createForm.shippingMethod"
               :options="shippingMethodOptions"
             />
           </Form.Item>
-          <Form.Item label="配送时效" required>
+          <Form.Item :label="$t('app.deliveryTime')" required>
             <Input
               v-model:value="createForm.deliveryTime"
-              placeholder="7-15天"
+              :placeholder="$t('app.text715Days')"
             />
           </Form.Item>
-          <Form.Item label="单价" required>
+          <Form.Item :label="$t('app.unitPrice')" required>
             <InputNumber
               v-model:value="createForm.unitPrice"
               :min="0"
@@ -600,20 +608,20 @@ onMounted(() => {
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="计价方式" required>
+          <Form.Item :label="$t('app.pricingMethod')" required>
             <Select
               v-model:value="createForm.pricingMethod"
               :options="pricingMethodOptions"
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="createForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="createForm.status"
               :checked-value="1"
@@ -627,14 +635,14 @@ onMounted(() => {
     <Modal
       v-model:open="editVisible"
       :confirm-loading="editLoading"
-      title="编辑物流供应商"
+      :title="$t('app.editLogisticsSupplier')"
       width="620px"
       @ok="updateSupplier"
     >
       <Form layout="vertical">
         <div class="supplier-form-grid">
-          <Form.Item class="supplier-form-full" label="供应商名称" required>
-            <Input v-model:value="editForm.name" placeholder="顺丰海运" />
+          <Form.Item class="supplier-form-full" :label="$t('app.supplierName')" required>
+            <Input v-model:value="editForm.name" :placeholder="$t('app.sfSeaFreight')" />
           </Form.Item>
           <Form.Item class="supplier-form-full" label="Logo">
             <Upload
@@ -646,19 +654,19 @@ onMounted(() => {
               accept="image/*"
               list-type="picture-card"
             >
-              <div>上传</div>
+              <div>{{ $t('app.upload') }}</div>
             </Upload>
           </Form.Item>
-          <Form.Item label="运输方式" required>
+          <Form.Item :label="$t('app.shippingMethod')" required>
             <Select
               v-model:value="editForm.shippingMethod"
               :options="shippingMethodOptions"
             />
           </Form.Item>
-          <Form.Item label="配送时效" required>
-            <Input v-model:value="editForm.deliveryTime" placeholder="7-15天" />
+          <Form.Item :label="$t('app.deliveryTime')" required>
+            <Input v-model:value="editForm.deliveryTime" :placeholder="$t('app.text715Days')" />
           </Form.Item>
-          <Form.Item label="单价" required>
+          <Form.Item :label="$t('app.unitPrice')" required>
             <InputNumber
               v-model:value="editForm.unitPrice"
               :min="0"
@@ -666,20 +674,20 @@ onMounted(() => {
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="计价方式" required>
+          <Form.Item :label="$t('app.pricingMethod')" required>
             <Select
               v-model:value="editForm.pricingMethod"
               :options="pricingMethodOptions"
             />
           </Form.Item>
-          <Form.Item label="排序">
+          <Form.Item :label="$t('app.sortOrder')">
             <InputNumber
               v-model:value="editForm.sort"
               :min="0"
               class="w-full"
             />
           </Form.Item>
-          <Form.Item label="启用">
+          <Form.Item :label="$t('app.enable')">
             <Switch
               v-model:checked="editForm.status"
               :checked-value="1"

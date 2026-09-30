@@ -3,6 +3,8 @@ import { Page } from '@vben/common-ui';
 
 import { Button, Card, message, notification, Space } from 'ant-design-vue';
 
+import { $t } from '#/locales';
+
 type NotificationType = 'error' | 'info' | 'success' | 'warning';
 
 function info() {
@@ -26,7 +28,7 @@ function success() {
 function notify(type: NotificationType) {
   notification[type]({
     duration: 2500,
-    message: '说点啥呢',
+    message: $t('app.saySomething'),
     type,
   });
 }
@@ -34,10 +36,10 @@ function notify(type: NotificationType) {
 
 <template>
   <Page
-    description="支持多语言，主题功能集成切换等"
-    title="Ant Design Vue组件使用演示"
+    :description="$t('app.includesLanguageSwitchingAndThemeControls')"
+    :title="$t('app.antDesignVueComponentExamples')"
   >
-    <Card class="mb-5" title="按钮">
+    <Card class="mb-5" :title="$t('app.button')">
       <Space>
         <Button>Default</Button>
         <Button type="primary"> Primary </Button>
@@ -47,19 +49,19 @@ function notify(type: NotificationType) {
     </Card>
     <Card class="mb-5" title="Message">
       <Space>
-        <Button @click="info"> 信息 </Button>
-        <Button danger @click="error"> 错误 </Button>
-        <Button @click="warning"> 警告 </Button>
-        <Button @click="success"> 成功 </Button>
+        <Button @click="info">{{ $t('app.information') }}</Button>
+        <Button danger @click="error">{{ $t('app.error') }}</Button>
+        <Button @click="warning">{{ $t('app.warning') }}</Button>
+        <Button @click="success">{{ $t('app.success') }}</Button>
       </Space>
     </Card>
 
     <Card class="mb-5" title="Notification">
       <Space>
-        <Button @click="notify('info')"> 信息 </Button>
-        <Button danger @click="notify('error')"> 错误 </Button>
-        <Button @click="notify('warning')"> 警告 </Button>
-        <Button @click="notify('success')"> 成功 </Button>
+        <Button @click="notify('info')">{{ $t('app.information') }}</Button>
+        <Button danger @click="notify('error')">{{ $t('app.error') }}</Button>
+        <Button @click="notify('warning')">{{ $t('app.warning') }}</Button>
+        <Button @click="notify('success')">{{ $t('app.success') }}</Button>
       </Space>
     </Card>
   </Page>

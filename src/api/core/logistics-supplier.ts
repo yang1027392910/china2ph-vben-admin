@@ -1,5 +1,13 @@
 import { requestClient } from '#/api/request';
 
+// Backend protocol values must remain unchanged when the UI language switches.
+export const SHIPPING_METHOD = {
+  sea: '海运',
+  air: '空运',
+  road: '陆运',
+  express: '快递',
+} as const;
+
 export namespace LogisticsSupplierApi {
   export interface LogisticsSupplierQuery {
     keyword?: string;

@@ -3,6 +3,8 @@ import { nextTick, ref, watch } from 'vue';
 
 import { Button } from 'ant-design-vue';
 
+import { $t } from '#/locales';
+
 const props = withDefaults(
   defineProps<{
     aiLoading?: boolean;
@@ -12,7 +14,7 @@ const props = withDefaults(
   {
     aiLoading: false,
     modelValue: '',
-    placeholder: '请输入内容',
+    placeholder: '',
   },
 );
 
@@ -47,7 +49,7 @@ function createLink() {
     selection && selection.rangeCount > 0
       ? selection.getRangeAt(0).cloneRange()
       : undefined;
-  const href = window.prompt('请输入链接地址');
+  const href = window.prompt($t('app.enterALinkUrl'));
 
   if (!href) {
     return;
@@ -86,27 +88,21 @@ watch(
       <Button size="small" @mousedown.prevent="format('bold')">B</Button>
       <Button size="small" @mousedown.prevent="format('italic')">I</Button>
       <Button size="small" @mousedown.prevent="format('underline')">U</Button>
-      <Button size="small" @mousedown.prevent="format('insertUnorderedList')">
-        列表
-      </Button>
-      <Button size="small" @mousedown.prevent="format('insertOrderedList')">
-        编号
-      </Button>
-      <Button size="small" @mousedown.prevent="createLink">链接</Button>
-      <Button size="small" @mousedown.prevent="format('removeFormat')">
-        清除格式
-      </Button>
+      <Button size="small" @mousedown.prevent="format('insertUnorderedList')">{{ $t('app.bulletedList') }}</Button>
+      <Button size="small" @mousedown.prevent="format('insertOrderedList')">{{ $t('app.numberedList') }}</Button>
+      <Button size="small" @mousedown.prevent="createLink">{{ $t('app.link') }}</Button>
+      <Button size="small" @mousedown.prevent="format('removeFormat')">{{ $t('app.clearFormatting') }}</Button>
       <Button
         :loading="aiLoading"
         size="small"
         @mousedown.prevent="generateByAi"
       >
-        AI生成
-      </Button>
+{{ $t('app.generateWithAi') }}
+</Button>
     </div>
     <div
       ref="editorRef"
-      :data-placeholder="placeholder"
+      :data-placeholder="placeholder || $t('app.enterContent')"
       class="rich-text-content"
       contenteditable="true"
       @input="updateModel"

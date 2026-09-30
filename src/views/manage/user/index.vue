@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableColumnsType, TableProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -22,6 +22,7 @@ import {
   deleteAdminUserApi,
   getAdminUserListApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type User = {
   canLottery: boolean;
@@ -61,17 +62,17 @@ const createVisible = ref(false);
 const createLoading = ref(false);
 const createForm = ref<UserForm>({ ...defaultForm });
 
-const columns: TableColumnsType<User> = [
+const columns = computed<TableColumnsType<User>>(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id' },
-  { title: '昵称', dataIndex: 'nickname', key: 'nickname' },
-  { title: '邮箱', dataIndex: 'email', key: 'email' },
-  { title: 'IP 归属地', dataIndex: 'ipLocation', key: 'ipLocation' },
-  { title: '邀请码', dataIndex: 'inviteCode', key: 'inviteCode' },
-  { title: '邀请人数', dataIndex: 'inviteCount', key: 'inviteCount' },
-  { title: '可抽奖', dataIndex: 'canLottery', key: 'canLottery' },
-  { title: '角色', dataIndex: 'role', key: 'role' },
-  { title: '操作', key: 'actions' },
-];
+  { title: $t('app.nickname'), dataIndex: 'nickname', key: 'nickname' },
+  { title: $t('app.email'), dataIndex: 'email', key: 'email' },
+  { title: $t('app.ipLocation'), dataIndex: 'ipLocation', key: 'ipLocation' },
+  { title: $t('app.invitationCode'), dataIndex: 'inviteCode', key: 'inviteCode' },
+  { title: $t('app.invitedUsers'), dataIndex: 'inviteCount', key: 'inviteCount' },
+  { title: $t('app.eligibleForLuckyDraw'), dataIndex: 'canLottery', key: 'canLottery' },
+  { title: $t('app.roles'), dataIndex: 'role', key: 'role' },
+  { title: $t('app.actions'), key: 'actions' },
+]));
 
 function normalizeUsers(data: any): User[] {
   const list = Array.isArray(data)
@@ -117,7 +118,7 @@ async function queryUsers(page = queryForm.value.page) {
     users.value = normalizeUsers(responseData);
     total.value = normalizeTotal(responseData, users.value.length);
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -150,12 +151,12 @@ async function createUser() {
   };
 
   if (!payload.name) {
-    message.error('请输入姓名');
+    message.error($t('app.enterAName'));
     return;
   }
 
   if (!payload.email) {
-    message.error('请输入邮箱');
+    message.error($t('app.enterAnEmailAddress'));
     return;
   }
 
@@ -163,10 +164,10 @@ async function createUser() {
     createLoading.value = true;
     await createAdminUserApi(payload);
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
     await queryUsers();
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -175,7 +176,7 @@ async function createUser() {
 async function remove(id: number | string) {
   try {
     await deleteAdminUserApi(id);
-    message.success('已删除');
+    message.success($t('app.deleted'));
 
     const targetPage =
       users.value.length === 1 && queryForm.value.page > 1
@@ -183,7 +184,7 @@ async function remove(id: number | string) {
         : queryForm.value.page;
     await queryUsers(targetPage);
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   }
 }
 
@@ -201,17 +202,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="用户管理" description="用户列表">
+  <Page :title="$t('app.userManagement')" :description="$t('app.userList')">
     <div class="mb-4 flex flex-wrap gap-2">
       <Input
         v-model:value="queryForm.username"
         allow-clear
         class="w-60"
-        placeholder="请输入用户名"
+        :placeholder="$t('app.enterAUsername')"
         @press-enter="handleQuery"
       />
-      <Button :loading="queryLoading" @click="handleQuery">查询</Button>
-      <Button type="primary" @click="openCreate">新建用户</Button>
+      <Button :loading="queryLoading" @click="handleQuery">{{ $t('app.search') }}</Button>
+      <Button type="primary" @click="openCreate">{{ $t('app.createUser') }}</Button>
     </div>
 
     <Table
@@ -231,14 +232,14 @@ onMounted(() => {
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <Popconfirm title="确定删除?" @confirm="() => remove(record.id)">
-              <a>删除</a>
+            <Popconfirm :title="$t('app.deleteThisItem2')" @confirm="() => remove(record.id)">
+              <a>{{ $t('app.delete') }}</a>
             </Popconfirm>
           </Space>
         </template>
         <template v-else-if="column.key === 'canLottery'">
           <Tag :color="record.canLottery ? 'green' : 'default'">
-            {{ record.canLottery ? '是' : '否' }}
+            {{ record.canLottery ? $t('app.yes') : $t('app.no') }}
           </Tag>
         </template>
         <template v-else>
@@ -250,17 +251,17 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新建用户"
+      :title="$t('app.createUser')"
       @ok="createUser"
     >
       <Form layout="vertical">
-        <Form.Item label="姓名" required>
+        <Form.Item :label="$t('app.name')" required>
           <Input v-model:value="createForm.name" />
         </Form.Item>
-        <Form.Item label="邮箱" required>
+        <Form.Item :label="$t('app.email')" required>
           <Input v-model:value="createForm.email" />
         </Form.Item>
-        <Form.Item label="角色">
+        <Form.Item :label="$t('app.roles')">
           <Input v-model:value="createForm.role" />
         </Form.Item>
       </Form>

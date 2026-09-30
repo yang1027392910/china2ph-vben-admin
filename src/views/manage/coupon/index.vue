@@ -4,7 +4,7 @@ import type { Dayjs } from 'dayjs';
 
 import type { CouponApi } from '#/api/core/coupon';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -40,16 +40,17 @@ import {
   sendCouponApi,
   updateCouponConfigApi,
 } from '#/api/core/coupon';
+import { $t } from '#/locales';
 
-const typeLabels = { 1: '注册奖励', 2: '认证奖励', 3: '系统派发' };
-const statusLabels = {
-  0: '未解锁',
-  1: '可使用',
-  2: '已使用',
-  3: '已过期',
-  4: '已禁用',
-};
-const sourceLabels = { 1: '系统自动发放', 2: '管理员派发' };
+const typeLabels = computed(() => ({ 1: $t('app.registrationReward'), 2: $t('app.verificationReward'), 3: $t('app.systemGrant') }));
+const statusLabels = computed(() => ({
+  0: $t('app.locked'),
+  1: $t('app.available'),
+  2: $t('app.used'),
+  3: $t('app.expired'),
+  4: $t('app.disabled'),
+}));
+const sourceLabels = computed(() => ({ 1: $t('app.automaticallyIssued'), 2: $t('app.adminGrant') }));
 const statusColors = {
   0: 'purple',
   1: 'green',
@@ -96,26 +97,26 @@ const detail = ref<CouponApi.Coupon>();
 const detailLoading = ref(false);
 let detailRequest = 0;
 const disabling = ref<number>();
-const timeFields = [
-  { key: 'activatedAt', title: '激活时间' },
-  { key: 'expiredAt', title: '到期时间' },
-  { key: 'usedAt', title: '使用时间' },
-  { key: 'createdAt', title: '创建时间' },
-  { key: 'updatedAt', title: '更新时间' },
-] as const;
-const columns: TableColumnsType<CouponApi.Coupon> = [
-  { title: '券 ID', dataIndex: 'id', width: 100 },
-  { title: '用户 ID', dataIndex: 'userId', width: 100 },
-  { title: '邮箱 / 昵称', key: 'user', width: 230 },
-  { title: '类型', key: 'type', width: 120 },
-  { title: '金额', key: 'amount', width: 130 },
-  { title: '状态', key: 'status', width: 100 },
-  { title: '来源', key: 'source', width: 140 },
-  ...timeFields
+const timeFields = computed(() => ([
+  { key: 'activatedAt', title: $t('app.activatedAt') },
+  { key: 'expiredAt', title: $t('app.expiresAt') },
+  { key: 'usedAt', title: $t('app.usedAt') },
+  { key: 'createdAt', title: $t('app.createdAt') },
+  { key: 'updatedAt', title: $t('app.updatedAt') },
+] as const));
+const columns = computed<TableColumnsType<CouponApi.Coupon>>(() => ([
+  { title: $t('app.couponId'), dataIndex: 'id', width: 100 },
+  { title: $t('app.userId'), dataIndex: 'userId', width: 100 },
+  { title: $t('app.emailNickname'), key: 'user', width: 230 },
+  { title: $t('app.type'), key: 'type', width: 120 },
+  { title: $t('app.amount'), key: 'amount', width: 130 },
+  { title: $t('app.status'), key: 'status', width: 100 },
+  { title: $t('app.source'), key: 'source', width: 140 },
+  ...timeFields.value
     .filter((item) => item.key !== 'updatedAt')
     .map((item) => ({ title: item.title, dataIndex: item.key, width: 180 })),
-  { title: '操作', key: 'actions', width: 150, fixed: 'right' },
-];
+  { title: $t('app.actions'), key: 'actions', width: 150, fixed: 'right' },
+]));
 function display(value: unknown) {
   return value === null || value === undefined || value === '' ? '—' : value;
 }
@@ -160,7 +161,7 @@ function validReward(
     (allowZero ? Number(amount) < 0 : Number(amount) <= 0)
   ) {
     message.warning(
-      `金额须${allowZero ? '大于等于' : '大于'} 0，最多两位小数，最大 99999999.99`,
+      $t('app.amountMustBeValue0HaveAtMostTwoDecimal', { value1: allowZero ? $t('app.greaterThanOrEqual') : $t('app.greaterThan') }),
     );
     return false;
   }
@@ -171,7 +172,7 @@ function validReward(
     days < 1 ||
     days > 365_000
   ) {
-    message.warning('有效天数须为 1～365000 的整数');
+    message.warning($t('app.validityMustBeAnIntegerBetween1And365000Days'));
     return false;
   }
   return true;
@@ -188,7 +189,7 @@ async function saveConfig() {
       enabled: form.enabled,
     });
     editOpen.value = false;
-    message.success('奖励配置已保存');
+    message.success($t('app.rewardSettingsSaved'));
     await loadConfigs();
   } catch {
     /* The shared interceptor reports the backend message. */
@@ -203,7 +204,7 @@ async function loadList(page = query.value.page ?? 1) {
       !dates.value[1]?.isValid() ||
       dates.value[0].isAfter(dates.value[1], 'day'))
   ) {
-    message.warning('请选择正确的创建日期范围');
+    message.warning($t('app.selectAValidCreationDateRange'));
     return;
   }
   query.value.page = page;
@@ -279,12 +280,12 @@ async function sendCoupon() {
     !Number.isSafeInteger(form.userId) ||
     form.userId <= 0
   ) {
-    message.warning('请输入有效的用户 ID（正整数）');
+    message.warning($t('app.enterAValidUserIdPositiveInteger'));
     return;
   }
   if (!validReward(form.amount, form.validDays, false)) return;
   if (form.remark.length > 255) {
-    message.warning('备注最多 255 个字符');
+    message.warning($t('app.remarksCannotExceed255Characters'));
     return;
   }
   sending.value = true;
@@ -296,7 +297,7 @@ async function sendCoupon() {
       ...(form.remark ? { remark: form.remark } : {}),
     });
     sendOpen.value = false;
-    message.success('优惠券已派发');
+    message.success($t('app.couponGranted'));
     activeTab.value = 'users';
     await loadList(1);
   } catch {
@@ -310,7 +311,7 @@ async function disableCoupon(id: number, status: CouponApi.Status) {
   disabling.value = id;
   try {
     await disableCouponApi(id);
-    message.success('优惠券已禁用');
+    message.success($t('app.couponDisabled'));
   } catch {
     /* Refresh even if the coupon expired or was used before the request. */
   } finally {
@@ -328,26 +329,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="优惠券管理" description="管理注册、认证奖励配置及用户优惠券">
+  <Page :title="$t('app.couponManagement')" :description="$t('app.manageRegistrationAndVerificationRewardsAndUserCoupons')">
     <Tabs v-model:active-key="activeTab">
-      <Tabs.TabPane key="config" tab="奖励配置">
-        <Alert class="mb-4" type="info" show-icon message="奖励配置说明">
+      <Tabs.TabPane key="config" :tab="$t('app.rewardSettings')">
+        <Alert class="mb-4" type="info" show-icon :message="$t('app.aboutRewardSettings')">
           <template #description>
-            <div>
-              调整金额不会改变已发放优惠券的面额；关闭配置停止生成对应的新奖励券。
-            </div>
-            <div>
-              已发放的认证奖励券仍可在认证通过后解锁；认证券有效期从解锁时开始，使用当时配置的有效天数。
-            </div>
+            <div>{{ $t('app.changingTheAmountDoesNotAffectExistingCouponsDisablingA') }}</div>
+            <div>{{ $t('app.existingVerificationCouponsCanStillUnlockAfterApprovalTheirValidity') }}</div>
           </template>
         </Alert>
         <Spin :spinning="configLoading">
-          <Empty v-if="configError" description="奖励配置加载失败">
-            <Button @click="loadConfigs">重新加载</Button>
+          <Empty v-if="configError" :description="$t('app.failedToLoadRewardSettings')">
+            <Button @click="loadConfigs">{{ $t('app.reload') }}</Button>
           </Empty>
           <Empty
             v-else-if="!configLoading && configs.length === 0"
-            description="暂无奖励配置"
+            :description="$t('app.noRewardSettings')"
           />
           <div class="grid gap-4 lg:grid-cols-2">
             <Card
@@ -357,33 +354,31 @@ onMounted(() => {
             >
               <template #extra>
                 <Tag :color="config.enabled ? 'green' : 'default'">
-                  {{ config.enabled ? '已启用' : '已关闭' }}
+                  {{ config.enabled ? $t('app.enabled') : $t('app.off') }}
                 </Tag>
               </template>
               <Descriptions :column="1">
-                <Descriptions.Item label="奖励类型">
+                <Descriptions.Item :label="$t('app.rewardType')">
                   {{ typeLabels[config.type] }}
                 </Descriptions.Item>
-                <Descriptions.Item label="金额">
-                  <span class="text-2xl font-semibold"
-                    >₱{{ config.amount }}</span
-                  >
+                <Descriptions.Item :label="$t('app.amount')">
+                  <span class="text-2xl font-semibold">₱{{ config.amount }}</span>
                 </Descriptions.Item>
-                <Descriptions.Item label="有效天数">
-                  {{ config.validDays }} 天
-                </Descriptions.Item>
+                <Descriptions.Item :label="$t('app.validityInDays')">
+                  {{ $t('app.valueDays', { value1: config.validDays }) }}
+</Descriptions.Item>
               </Descriptions>
-              <Button type="primary" @click="openEdit(config)">编辑配置</Button>
+              <Button type="primary" @click="openEdit(config)">{{ $t('app.editSettings') }}</Button>
             </Card>
           </div>
         </Spin>
       </Tabs.TabPane>
-      <Tabs.TabPane key="users" tab="用户优惠券">
+      <Tabs.TabPane key="users" :tab="$t('app.userCoupons')">
         <div class="mb-4 flex flex-wrap items-center gap-3">
           <Input
             v-model:value="query.keyword"
             class="w-60"
-            placeholder="用户 ID、邮箱或昵称"
+            :placeholder="$t('app.userIdEmailOrNickname')"
             allow-clear
             @change="query.page = 1"
             @press-enter="loadList(1)"
@@ -392,7 +387,7 @@ onMounted(() => {
             v-model:value="query.type"
             class="w-36"
             :options="options(typeLabels)"
-            placeholder="全部类型"
+            :placeholder="$t('app.allTypes')"
             allow-clear
             @change="loadList(1)"
           />
@@ -400,7 +395,7 @@ onMounted(() => {
             v-model:value="query.status"
             class="w-36"
             :options="options(statusLabels)"
-            placeholder="全部状态"
+            :placeholder="$t('app.allStatuses')"
             allow-clear
             @change="loadList(1)"
           />
@@ -408,31 +403,29 @@ onMounted(() => {
             v-model:value="query.source"
             class="w-40"
             :options="options(sourceLabels)"
-            placeholder="全部来源"
+            :placeholder="$t('app.allSources')"
             allow-clear
             @change="loadList(1)"
           />
           <DatePicker.RangePicker
             v-model:value="dates"
-            :placeholder="['创建开始日期', '创建结束日期']"
+            :placeholder="[$t('app.creationStartDate'), $t('app.creationEndDate')]"
             format="YYYY-MM-DD"
             @change="loadList(1)"
           />
           <Space>
-            <Button :loading="loading" @click="loadList(1)">搜索</Button
-            ><Button @click="resetQuery">重置</Button
-            ><Button type="primary" @click="openSend">派发优惠券</Button>
+            <Button :loading="loading" @click="loadList(1)">{{ $t('app.search2') }}</Button><Button @click="resetQuery">{{ $t('app.reset') }}</Button><Button type="primary" @click="openSend">{{ $t('app.grantCoupon') }}</Button>
           </Space>
         </div>
         <Alert
           v-if="listError"
           class="mb-4"
           type="error"
-          message="优惠券列表加载失败"
+          :message="$t('app.failedToLoadCoupons')"
           show-icon
         >
           <template #action>
-            <Button size="small" @click="loadList()"> 重新加载 </Button>
+            <Button size="small" @click="loadList()">{{ $t('app.reload') }}</Button>
           </template>
         </Alert>
         <Table
@@ -447,7 +440,7 @@ onMounted(() => {
             total,
             showSizeChanger: true,
             pageSizeOptions: ['10', '20', '50', '100'],
-            showTotal: (count: number) => `共 ${count} 条`,
+            showTotal: (count: number) => $t('app.valueRecords', { value1: count }),
           }"
           @change="handleTableChange"
         >
@@ -474,12 +467,10 @@ onMounted(() => {
             </template>
             <template v-else-if="column.key === 'actions'">
               <Space>
-                <Button size="small" type="link" @click="loadDetail(record.id)">
-                  详情
-                </Button>
+                <Button size="small" type="link" @click="loadDetail(record.id)">{{ $t('app.details') }}</Button>
                 <Popconfirm
                   v-if="record.status === 0 || record.status === 1"
-                  title="确定禁用该优惠券吗？禁用后用户将无法使用。"
+                  :title="$t('app.disableThisCouponTheUserWillNoLongerBeAble')"
                   :disabled="disabling !== undefined"
                   @confirm="disableCoupon(record.id, record.status)"
                 >
@@ -490,8 +481,8 @@ onMounted(() => {
                     :disabled="disabling !== undefined"
                     :loading="disabling === record.id"
                   >
-                    禁用
-                  </Button>
+{{ $t('app.disable') }}
+</Button>
                 </Popconfirm>
               </Space>
             </template>
@@ -502,7 +493,7 @@ onMounted(() => {
     </Tabs>
     <Modal
       v-model:open="editOpen"
-      title="编辑奖励配置"
+      :title="$t('app.editRewardSettings')"
       :confirm-loading="saving"
       :closable="!saving"
       :mask-closable="!saving"
@@ -511,10 +502,10 @@ onMounted(() => {
       @ok="saveConfig"
     >
       <Form layout="vertical" :disabled="saving">
-        <Form.Item label="奖励类型">
+        <Form.Item :label="$t('app.rewardType')">
           <Input :value="typeLabels[editType]" disabled />
         </Form.Item>
-        <Form.Item label="金额（₱）" required>
+        <Form.Item :label="$t('app.amount2')" required>
           <InputNumber
             v-model:value="editForm.amount"
             string-mode
@@ -524,7 +515,7 @@ onMounted(() => {
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="有效天数" required>
+        <Form.Item :label="$t('app.validityInDays')" required>
           <InputNumber
             v-model:value="editForm.validDays"
             :min="1"
@@ -532,15 +523,15 @@ onMounted(() => {
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="启用状态" required>
+        <Form.Item :label="$t('app.enabledStatus')" required>
           <Switch v-model:checked="editForm.enabled" />
         </Form.Item>
       </Form>
     </Modal>
     <Modal
       v-model:open="sendOpen"
-      title="派发优惠券"
-      ok-text="确认派发"
+      :title="$t('app.grantCoupon')"
+      :ok-text="$t('app.confirmGrant')"
       :confirm-loading="sending"
       :closable="!sending"
       :mask-closable="!sending"
@@ -552,19 +543,19 @@ onMounted(() => {
         class="mb-4"
         type="info"
         show-icon
-        message="派发后立即生效，有效期从派发时间开始计算。同一用户可拥有多张管理员派发券。"
+        :message="$t('app.theCouponBecomesAvailableImmediatelyAndItsValidityStartsWhen')"
       />
       <Form layout="vertical" :disabled="sending">
-        <Form.Item label="用户 ID" required>
+        <Form.Item :label="$t('app.userId')" required>
           <InputNumber
             v-model:value="sendForm.userId"
             :min="1"
             :max="Number.MAX_SAFE_INTEGER"
             class="w-full"
-            placeholder="请输入已存在的用户 ID"
+            :placeholder="$t('app.enterAnExistingUserId')"
           />
         </Form.Item>
-        <Form.Item label="金额（₱）" required>
+        <Form.Item :label="$t('app.amount2')" required>
           <InputNumber
             v-model:value="sendForm.amount"
             string-mode
@@ -574,7 +565,7 @@ onMounted(() => {
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="有效天数" required>
+        <Form.Item :label="$t('app.validityInDays')" required>
           <InputNumber
             v-model:value="sendForm.validDays"
             :min="1"
@@ -582,7 +573,7 @@ onMounted(() => {
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="备注">
+        <Form.Item :label="$t('app.remarks')">
           <Input.TextArea
             v-model:value="sendForm.remark"
             :maxlength="255"
@@ -594,43 +585,43 @@ onMounted(() => {
     </Modal>
     <Drawer
       v-model:open="detailOpen"
-      title="优惠券详情"
+      :title="$t('app.couponDetails')"
       width="min(640px, 100vw)"
     >
       <Spin :spinning="detailLoading">
         <Descriptions v-if="detail" :column="1" bordered>
-          <Descriptions.Item label="券 ID">{{ detail.id }}</Descriptions.Item>
-          <Descriptions.Item label="类型">
+          <Descriptions.Item :label="$t('app.couponId')">{{ detail.id }}</Descriptions.Item>
+          <Descriptions.Item :label="$t('app.type')">
             {{ typeLabels[detail.type] }}
           </Descriptions.Item>
-          <Descriptions.Item label="金额">
+          <Descriptions.Item :label="$t('app.amount')">
             ₱{{ detail.amount }}
           </Descriptions.Item>
-          <Descriptions.Item label="状态">
+          <Descriptions.Item :label="$t('app.status')">
             <Tag :color="statusColors[detail.status]">
               {{ statusLabels[detail.status] }}
             </Tag>
           </Descriptions.Item>
-          <Descriptions.Item label="用户头像">
+          <Descriptions.Item :label="$t('app.userAvatar')">
             <Avatar
               v-if="detail.avatar"
               :src="avatarUrl(detail.avatar)"
               :size="48"
             /><span v-else>—</span>
           </Descriptions.Item>
-          <Descriptions.Item label="用户 ID">
+          <Descriptions.Item :label="$t('app.userId')">
             {{ detail.userId }}
           </Descriptions.Item>
-          <Descriptions.Item label="邮箱">
+          <Descriptions.Item :label="$t('app.email')">
             {{ display(detail.email) }}
           </Descriptions.Item>
-          <Descriptions.Item label="昵称">
+          <Descriptions.Item :label="$t('app.nickname')">
             {{ display(detail.nickname) }}
           </Descriptions.Item>
-          <Descriptions.Item label="来源">
+          <Descriptions.Item :label="$t('app.source')">
             {{ sourceLabels[detail.source] }}
           </Descriptions.Item>
-          <Descriptions.Item label="备注">
+          <Descriptions.Item :label="$t('app.remarks')">
             <span class="whitespace-pre-wrap break-all">{{
               display(detail.remark)
             }}</span>
@@ -641,7 +632,7 @@ onMounted(() => {
               detail.orderId !== undefined &&
               detail.orderId !== ''
             "
-            label="关联订单 ID"
+            :label="$t('app.linkedOrderId')"
           >
             {{ detail.orderId }}
           </Descriptions.Item>
@@ -653,10 +644,8 @@ onMounted(() => {
             {{ display(detail[field.key]) }}
           </Descriptions.Item>
         </Descriptions>
-        <Empty v-else-if="!detailLoading" description="优惠券详情加载失败">
-          <Button @click="detailId !== undefined && loadDetail(detailId)">
-            重新加载
-          </Button>
+        <Empty v-else-if="!detailLoading" :description="$t('app.failedToLoadCouponDetails')">
+          <Button @click="detailId !== undefined && loadDetail(detailId)">{{ $t('app.reload') }}</Button>
         </Empty>
       </Spin>
     </Drawer>

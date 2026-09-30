@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import type { EchartsUIType } from '@vben/plugins/echarts';
 
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
+import { i18n } from '@vben/locales';
 import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
+
+import { $t } from '#/locales';
 
 const chartRef = ref<EchartsUIType>();
 const { renderEcharts } = useEcharts(chartRef);
 
-onMounted(() => {
+function renderChart() {
   renderEcharts({
     grid: {
       bottom: 0,
@@ -38,7 +41,7 @@ onMounted(() => {
       trigger: 'axis',
     },
     xAxis: {
-      data: Array.from({ length: 12 }).map((_item, index) => `${index + 1}月`),
+      data: Array.from({ length: 12 }).map((_item, index) => $t('app.monthValue', { value1: index + 1 })),
       type: 'category',
     },
     yAxis: {
@@ -47,7 +50,9 @@ onMounted(() => {
       type: 'value',
     },
   });
-});
+}
+onMounted(renderChart);
+watch(() => i18n.global.locale.value, renderChart);
 </script>
 
 <template>

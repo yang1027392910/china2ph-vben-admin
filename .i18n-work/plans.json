@@ -1,0 +1,7696 @@
+[
+  {
+    "file": "src\\components\\rich-text-editor\\index.vue",
+    "edits": [
+      {
+        "start": 303,
+        "end": 310,
+        "id": 0,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1086,
+        "end": 1095,
+        "id": 1,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1974,
+        "end": 1992,
+        "id": 2,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 2078,
+        "end": 2096,
+        "id": 3,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 2165,
+        "end": 2167,
+        "id": 4,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 2248,
+        "end": 2268,
+        "id": 5,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 2391,
+        "end": 2411,
+        "id": 6,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\layouts\\basic.vue",
+    "edits": [
+      {
+        "start": 767,
+        "end": 773,
+        "id": 7,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 806,
+        "end": 820,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 833,
+        "end": 846,
+        "id": 9,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 920,
+        "end": 924,
+        "id": 10,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 958,
+        "end": 972,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 985,
+        "end": 995,
+        "id": 11,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1115,
+        "end": 1129,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1142,
+        "end": 1152,
+        "id": 12,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1231,
+        "end": 1236,
+        "id": 13,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1270,
+        "end": 1284,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1297,
+        "end": 1303,
+        "id": 14,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1382,
+        "end": 1387,
+        "id": 13,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1421,
+        "end": 1435,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1448,
+        "end": 1456,
+        "id": 15,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1566,
+        "end": 1571,
+        "id": 13,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1605,
+        "end": 1619,
+        "id": 8,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1632,
+        "end": 1642,
+        "id": 16,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\router\\routes\\modules\\manage.ts",
+    "edits": [
+      {
+        "start": 195,
+        "end": 201,
+        "id": 17,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 413,
+        "end": 420,
+        "id": 18,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 630,
+        "end": 636,
+        "id": 19,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 901,
+        "end": 909,
+        "id": 20,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1155,
+        "end": 1164,
+        "id": 21,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1401,
+        "end": 1407,
+        "id": 22,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1650,
+        "end": 1660,
+        "id": 23,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1919,
+        "end": 1925,
+        "id": 24,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2193,
+        "end": 2199,
+        "id": 25,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2407,
+        "end": 2413,
+        "id": 26,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2667,
+        "end": 2673,
+        "id": 27,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2922,
+        "end": 2930,
+        "id": 28,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3168,
+        "end": 3174,
+        "id": 29,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3419,
+        "end": 3426,
+        "id": 30,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3694,
+        "end": 3701,
+        "id": 31,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\router\\routes\\modules\\order.ts",
+    "edits": [
+      {
+        "start": 239,
+        "end": 245,
+        "id": 32,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\analytics\\analytics-visits-data.vue",
+    "edits": [
+      {
+        "start": 357,
+        "end": 361,
+        "id": 33,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 363,
+        "end": 367,
+        "id": 34,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 435,
+        "end": 439,
+        "id": 35,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 478,
+        "end": 483,
+        "id": 36,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 567,
+        "end": 572,
+        "id": 37,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 611,
+        "end": 616,
+        "id": 38,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 655,
+        "end": 659,
+        "id": 39,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1048,
+        "end": 1052,
+        "id": 33,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1214,
+        "end": 1218,
+        "id": 34,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue",
+    "edits": [
+      {
+        "start": 615,
+        "end": 619,
+        "id": 40,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 653,
+        "end": 657,
+        "id": 41,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 691,
+        "end": 697,
+        "id": 42,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 731,
+        "end": 735,
+        "id": 43,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 844,
+        "end": 850,
+        "id": 44,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\analytics\\analytics-visits-source.vue",
+    "edits": [
+      {
+        "start": 680,
+        "end": 686,
+        "id": 45,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 721,
+        "end": 727,
+        "id": 46,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 761,
+        "end": 767,
+        "id": 47,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 801,
+        "end": 807,
+        "id": 48,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1251,
+        "end": 1257,
+        "id": 49,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\analytics\\analytics-visits.vue",
+    "edits": [
+      {
+        "start": 900,
+        "end": 915,
+        "id": 50,
+        "args": [
+          "index + 1"
+        ],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\analytics\\index.vue",
+    "edits": [
+      {
+        "start": 717,
+        "end": 722,
+        "id": 51,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 740,
+        "end": 746,
+        "id": 52,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 833,
+        "end": 838,
+        "id": 53,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 856,
+        "end": 862,
+        "id": 54,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 955,
+        "end": 960,
+        "id": 55,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 978,
+        "end": 984,
+        "id": 56,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1071,
+        "end": 1076,
+        "id": 57,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1094,
+        "end": 1100,
+        "id": 58,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1200,
+        "end": 1206,
+        "id": 59,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1249,
+        "end": 1255,
+        "id": 60,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1702,
+        "end": 1714,
+        "id": 61,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 1838,
+        "end": 1850,
+        "id": 49,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 1968,
+        "end": 1980,
+        "id": 49,
+        "args": [],
+        "kind": "attribute:title"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\dashboard\\workspace\\index.vue",
+    "edits": [
+      {
+        "start": 809,
+        "end": 825,
+        "id": 62,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 862,
+        "end": 867,
+        "id": 63,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 997,
+        "end": 1010,
+        "id": 64,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1047,
+        "end": 1052,
+        "id": 65,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1172,
+        "end": 1187,
+        "id": 66,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1224,
+        "end": 1230,
+        "id": 67,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1386,
+        "end": 1402,
+        "id": 68,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1572,
+        "end": 1588,
+        "id": 69,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1625,
+        "end": 1630,
+        "id": 70,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1754,
+        "end": 1772,
+        "id": 71,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1809,
+        "end": 1814,
+        "id": 72,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2093,
+        "end": 2097,
+        "id": 73,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2185,
+        "end": 2190,
+        "id": 74,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2289,
+        "end": 2293,
+        "id": 75,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2405,
+        "end": 2411,
+        "id": 17,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2561,
+        "end": 2567,
+        "id": 76,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2685,
+        "end": 2689,
+        "id": 77,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2807,
+        "end": 2837,
+        "id": 78,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2883,
+        "end": 2893,
+        "id": 79,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2938,
+        "end": 2959,
+        "id": 80,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3005,
+        "end": 3013,
+        "id": 81,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3059,
+        "end": 3087,
+        "id": 82,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3133,
+        "end": 3139,
+        "id": 83,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3185,
+        "end": 3211,
+        "id": 84,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3257,
+        "end": 3265,
+        "id": 85,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3311,
+        "end": 3344,
+        "id": 86,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3390,
+        "end": 3400,
+        "id": 87,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3499,
+        "end": 3530,
+        "id": 88,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3542,
+        "end": 3546,
+        "id": 10,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3559,
+        "end": 3563,
+        "id": 89,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3615,
+        "end": 3631,
+        "id": 90,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3643,
+        "end": 3650,
+        "id": 91,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3663,
+        "end": 3667,
+        "id": 92,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3719,
+        "end": 3737,
+        "id": 93,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3749,
+        "end": 3754,
+        "id": 13,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3767,
+        "end": 3772,
+        "id": 94,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3824,
+        "end": 3851,
+        "id": 95,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3863,
+        "end": 3868,
+        "id": 96,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3939,
+        "end": 3975,
+        "id": 97,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3987,
+        "end": 3992,
+        "id": 98,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4005,
+        "end": 4009,
+        "id": 99,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4061,
+        "end": 4083,
+        "id": 100,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4095,
+        "end": 4100,
+        "id": 101,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4113,
+        "end": 4117,
+        "id": 102,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4169,
+        "end": 4187,
+        "id": 93,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4199,
+        "end": 4204,
+        "id": 101,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4217,
+        "end": 4221,
+        "id": 89,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4273,
+        "end": 4295,
+        "id": 103,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4338,
+        "end": 4342,
+        "id": 89,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4394,
+        "end": 4426,
+        "id": 104,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5173,
+        "end": 5239,
+        "id": 105,
+        "args": [
+          "userStore.userInfo?.realName"
+        ],
+        "kind": "text"
+      },
+      {
+        "start": 5280,
+        "end": 5296,
+        "id": 106,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 5465,
+        "end": 5475,
+        "id": 107,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5552,
+        "end": 5564,
+        "id": 108,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5713,
+        "end": 5725,
+        "id": 109,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5817,
+        "end": 5829,
+        "id": 110,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5873,
+        "end": 5885,
+        "id": 49,
+        "args": [],
+        "kind": "attribute:title"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\demos\\antd\\index.vue",
+    "edits": [
+      {
+        "start": 690,
+        "end": 696,
+        "id": 111,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 750,
+        "end": 779,
+        "id": 112,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 784,
+        "end": 812,
+        "id": 113,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 840,
+        "end": 850,
+        "id": 114,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 1132,
+        "end": 1136,
+        "id": 115,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1184,
+        "end": 1188,
+        "id": 116,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1231,
+        "end": 1235,
+        "id": 117,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1278,
+        "end": 1282,
+        "id": 118,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1419,
+        "end": 1423,
+        "id": 115,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1481,
+        "end": 1485,
+        "id": 116,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1538,
+        "end": 1542,
+        "id": 117,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 1595,
+        "end": 1599,
+        "id": 118,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\banner\\index.vue",
+    "edits": [
+      {
+        "start": 1183,
+        "end": 1187,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1213,
+        "end": 1217,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1244,
+        "end": 1248,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1307,
+        "end": 1311,
+        "id": 122,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1344,
+        "end": 1348,
+        "id": 123,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1382,
+        "end": 1386,
+        "id": 4,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1415,
+        "end": 1420,
+        "id": 124,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1480,
+        "end": 1484,
+        "id": 73,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1514,
+        "end": 1519,
+        "id": 125,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1553,
+        "end": 1558,
+        "id": 126,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1669,
+        "end": 1673,
+        "id": 127,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1734,
+        "end": 1740,
+        "id": 128,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1807,
+        "end": 1811,
+        "id": 129,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1872,
+        "end": 1877,
+        "id": 130,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1944,
+        "end": 1950,
+        "id": 131,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2025,
+        "end": 2030,
+        "id": 132,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2118,
+        "end": 2122,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2180,
+        "end": 2184,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2246,
+        "end": 2252,
+        "id": 135,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2321,
+        "end": 2327,
+        "id": 136,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2392,
+        "end": 2396,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5007,
+        "end": 5013,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5994,
+        "end": 6003,
+        "id": 139,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6320,
+        "end": 6333,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6625,
+        "end": 6633,
+        "id": 141,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6790,
+        "end": 6796,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7085,
+        "end": 7098,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7392,
+        "end": 7400,
+        "id": 141,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7559,
+        "end": 7565,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8976,
+        "end": 8983,
+        "id": 143,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9051,
+        "end": 9058,
+        "id": 144,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9150,
+        "end": 9159,
+        "id": 145,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9479,
+        "end": 9485,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9570,
+        "end": 9576,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9950,
+        "end": 9956,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10060,
+        "end": 10066,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10383,
+        "end": 10389,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10453,
+        "end": 10459,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10585,
+        "end": 10602,
+        "id": 152,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10706,
+        "end": 10717,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10818,
+        "end": 10838,
+        "id": 154,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 10968,
+        "end": 10978,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11240,
+        "end": 11242,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11288,
+        "end": 11290,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11351,
+        "end": 11360,
+        "id": 157,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11653,
+        "end": 11667,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 12005,
+        "end": 12035,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12083,
+        "end": 12096,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 12340,
+        "end": 12374,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12841,
+        "end": 12845,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12848,
+        "end": 12852,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12979,
+        "end": 12984,
+        "id": 125,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12987,
+        "end": 12991,
+        "id": 73,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 13248,
+        "end": 13265,
+        "id": 157,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 13408,
+        "end": 13418,
+        "id": 129,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13481,
+        "end": 13499,
+        "id": 162,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 13547,
+        "end": 13558,
+        "id": 130,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13615,
+        "end": 13633,
+        "id": 163,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 13706,
+        "end": 13716,
+        "id": 127,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14056,
+        "end": 14058,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14131,
+        "end": 14143,
+        "id": 131,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14319,
+        "end": 14331,
+        "id": 128,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14503,
+        "end": 14514,
+        "id": 132,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14640,
+        "end": 14650,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14834,
+        "end": 14844,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15044,
+        "end": 15056,
+        "id": 135,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15425,
+        "end": 15437,
+        "id": 136,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15911,
+        "end": 15928,
+        "id": 165,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 16071,
+        "end": 16081,
+        "id": 129,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16142,
+        "end": 16160,
+        "id": 162,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 16208,
+        "end": 16219,
+        "id": 130,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16274,
+        "end": 16292,
+        "id": 163,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 16365,
+        "end": 16375,
+        "id": 127,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16727,
+        "end": 16729,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 16802,
+        "end": 16814,
+        "id": 131,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16988,
+        "end": 17000,
+        "id": 128,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17201,
+        "end": 17212,
+        "id": 132,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17336,
+        "end": 17346,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17528,
+        "end": 17538,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17736,
+        "end": 17748,
+        "id": 135,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18119,
+        "end": 18131,
+        "id": 136,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\category\\index.vue",
+    "edits": [
+      {
+        "start": 817,
+        "end": 823,
+        "id": 166,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 866,
+        "end": 870,
+        "id": 167,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1030,
+        "end": 1036,
+        "id": 168,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1083,
+        "end": 1087,
+        "id": 169,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1136,
+        "end": 1140,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1187,
+        "end": 1191,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1242,
+        "end": 1246,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2950,
+        "end": 2956,
+        "id": 170,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3020,
+        "end": 3026,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4021,
+        "end": 4030,
+        "id": 171,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4108,
+        "end": 4118,
+        "id": 172,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4690,
+        "end": 4696,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4760,
+        "end": 4766,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4922,
+        "end": 4931,
+        "id": 139,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5244,
+        "end": 5257,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5532,
+        "end": 5538,
+        "id": 173,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5693,
+        "end": 5699,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5984,
+        "end": 5997,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6274,
+        "end": 6280,
+        "id": 173,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6437,
+        "end": 6443,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6875,
+        "end": 6884,
+        "id": 171,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6962,
+        "end": 6972,
+        "id": 172,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7582,
+        "end": 7588,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7652,
+        "end": 7658,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7919,
+        "end": 7924,
+        "id": 174,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7988,
+        "end": 7994,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8123,
+        "end": 8137,
+        "id": 28,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8236,
+        "end": 8238,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8297,
+        "end": 8301,
+        "id": 175,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8559,
+        "end": 8561,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8590,
+        "end": 8603,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8814,
+        "end": 8848,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9192,
+        "end": 9214,
+        "id": 176,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9374,
+        "end": 9378,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9381,
+        "end": 9385,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9637,
+        "end": 9649,
+        "id": 175,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 9733,
+        "end": 9745,
+        "id": 168,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9848,
+        "end": 9858,
+        "id": 169,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9953,
+        "end": 9963,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10133,
+        "end": 10143,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10646,
+        "end": 10648,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 10762,
+        "end": 10774,
+        "id": 177,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10950,
+        "end": 10962,
+        "id": 168,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11063,
+        "end": 11073,
+        "id": 169,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11166,
+        "end": 11176,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11344,
+        "end": 11354,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11888,
+        "end": 11890,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\coupon\\index.vue",
+    "edits": [
+      {
+        "start": 700,
+        "end": 706,
+        "id": 178,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 711,
+        "end": 717,
+        "id": 179,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 722,
+        "end": 728,
+        "id": 180,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 760,
+        "end": 765,
+        "id": 181,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 772,
+        "end": 777,
+        "id": 182,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 784,
+        "end": 789,
+        "id": 183,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 796,
+        "end": 801,
+        "id": 184,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 808,
+        "end": 813,
+        "id": 185,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 844,
+        "end": 852,
+        "id": 186,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 857,
+        "end": 864,
+        "id": 187,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2282,
+        "end": 2288,
+        "id": 188,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2321,
+        "end": 2327,
+        "id": 189,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2357,
+        "end": 2363,
+        "id": 190,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2396,
+        "end": 2402,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2435,
+        "end": 2441,
+        "id": 192,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2522,
+        "end": 2528,
+        "id": 193,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2572,
+        "end": 2579,
+        "id": 194,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2627,
+        "end": 2636,
+        "id": 195,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2676,
+        "end": 2680,
+        "id": 196,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2720,
+        "end": 2724,
+        "id": 197,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2766,
+        "end": 2770,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2812,
+        "end": 2816,
+        "id": 198,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3000,
+        "end": 3004,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4273,
+        "end": 4330,
+        "id": 199,
+        "args": [
+          "allowZero ? '大于等于' : '大于'"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 4507,
+        "end": 4528,
+        "id": 200,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4978,
+        "end": 4987,
+        "id": 201,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5367,
+        "end": 5381,
+        "id": 202,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7712,
+        "end": 7730,
+        "id": 203,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7867,
+        "end": 7881,
+        "id": 204,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8158,
+        "end": 8166,
+        "id": 205,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8552,
+        "end": 8560,
+        "id": 206,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8926,
+        "end": 8939,
+        "id": 18,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8940,
+        "end": 8971,
+        "id": 207,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 9048,
+        "end": 9058,
+        "id": 208,
+        "args": [],
+        "kind": "attribute:tab"
+      },
+      {
+        "start": 9110,
+        "end": 9126,
+        "id": 209,
+        "args": [],
+        "kind": "attribute:message"
+      },
+      {
+        "start": 9179,
+        "end": 9241,
+        "id": 210,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9265,
+        "end": 9338,
+        "id": 211,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9461,
+        "end": 9483,
+        "id": 212,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 9526,
+        "end": 9530,
+        "id": 213,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9651,
+        "end": 9671,
+        "id": 214,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 10023,
+        "end": 10028,
+        "id": 215,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10031,
+        "end": 10036,
+        "id": 216,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10165,
+        "end": 10177,
+        "id": 217,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10299,
+        "end": 10309,
+        "id": 197,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10506,
+        "end": 10518,
+        "id": 218,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10538,
+        "end": 10579,
+        "id": 219,
+        "args": [
+          "config.validDays"
+        ],
+        "kind": "text"
+      },
+      {
+        "start": 10693,
+        "end": 10697,
+        "id": 220,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 10814,
+        "end": 10825,
+        "id": 221,
+        "args": [],
+        "kind": "attribute:tab"
+      },
+      {
+        "start": 10984,
+        "end": 11009,
+        "id": 222,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11260,
+        "end": 11278,
+        "id": 223,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11491,
+        "end": 11509,
+        "id": 224,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11722,
+        "end": 11740,
+        "id": 225,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11907,
+        "end": 11915,
+        "id": 226,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11917,
+        "end": 11925,
+        "id": 227,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12085,
+        "end": 12087,
+        "id": 228,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12137,
+        "end": 12139,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12202,
+        "end": 12207,
+        "id": 229,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12349,
+        "end": 12368,
+        "id": 230,
+        "args": [],
+        "kind": "attribute:message"
+      },
+      {
+        "start": 12481,
+        "end": 12487,
+        "id": 213,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12942,
+        "end": 12956,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 14157,
+        "end": 14195,
+        "id": 231,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14319,
+        "end": 14348,
+        "id": 232,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 14738,
+        "end": 14780,
+        "id": 121,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 15047,
+        "end": 15061,
+        "id": 233,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 15325,
+        "end": 15337,
+        "id": 217,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15438,
+        "end": 15451,
+        "id": 234,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15710,
+        "end": 15722,
+        "id": 218,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15930,
+        "end": 15942,
+        "id": 235,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16104,
+        "end": 16117,
+        "id": 229,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 16124,
+        "end": 16138,
+        "id": 236,
+        "args": [],
+        "kind": "attribute:ok-text"
+      },
+      {
+        "start": 16418,
+        "end": 16465,
+        "id": 237,
+        "args": [],
+        "kind": "attribute:message"
+      },
+      {
+        "start": 16545,
+        "end": 16558,
+        "id": 194,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16739,
+        "end": 16765,
+        "id": 238,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 16819,
+        "end": 16832,
+        "id": 234,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17094,
+        "end": 17106,
+        "id": 218,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17314,
+        "end": 17324,
+        "id": 239,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17581,
+        "end": 17594,
+        "id": 240,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 17759,
+        "end": 17771,
+        "id": 193,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17837,
+        "end": 17847,
+        "id": 196,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17951,
+        "end": 17961,
+        "id": 197,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18056,
+        "end": 18066,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18250,
+        "end": 18262,
+        "id": 241,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18486,
+        "end": 18499,
+        "id": 194,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18593,
+        "end": 18603,
+        "id": 242,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18705,
+        "end": 18715,
+        "id": 243,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18820,
+        "end": 18830,
+        "id": 198,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18938,
+        "end": 18948,
+        "id": 239,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 19296,
+        "end": 19311,
+        "id": 244,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 19673,
+        "end": 19696,
+        "id": 245,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 19772,
+        "end": 19800,
+        "id": 213,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\email-code\\index.vue",
+    "edits": [
+      {
+        "start": 858,
+        "end": 862,
+        "id": 242,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 923,
+        "end": 928,
+        "id": 246,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 987,
+        "end": 993,
+        "id": 247,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1054,
+        "end": 1058,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1121,
+        "end": 1127,
+        "id": 248,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1198,
+        "end": 1204,
+        "id": 249,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1275,
+        "end": 1282,
+        "id": 250,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1337,
+        "end": 1343,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1439,
+        "end": 1445,
+        "id": 251,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1476,
+        "end": 1482,
+        "id": 252,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1516,
+        "end": 1522,
+        "id": 253,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1586,
+        "end": 1590,
+        "id": 254,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1615,
+        "end": 1620,
+        "id": 183,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1645,
+        "end": 1650,
+        "id": 184,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1766,
+        "end": 1770,
+        "id": 254,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1802,
+        "end": 1807,
+        "id": 183,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1842,
+        "end": 1847,
+        "id": 184,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1888,
+        "end": 1893,
+        "id": 184,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1928,
+        "end": 1933,
+        "id": 183,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1970,
+        "end": 1974,
+        "id": 254,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2086,
+        "end": 2091,
+        "id": 255,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2124,
+        "end": 2128,
+        "id": 118,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2159,
+        "end": 2163,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2199,
+        "end": 2203,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2244,
+        "end": 2249,
+        "id": 255,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2288,
+        "end": 2292,
+        "id": 118,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4286,
+        "end": 4301,
+        "id": 21,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 4360,
+        "end": 4370,
+        "id": 242,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 4459,
+        "end": 4478,
+        "id": 257,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 4526,
+        "end": 4538,
+        "id": 247,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 4701,
+        "end": 4718,
+        "id": 258,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 4766,
+        "end": 4776,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 4941,
+        "end": 4958,
+        "id": 258,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 5102,
+        "end": 5128,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 5178,
+        "end": 5180,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\home-hot\\index.vue",
+    "edits": [
+      {
+        "start": 1881,
+        "end": 1885,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1911,
+        "end": 1915,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1942,
+        "end": 1946,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2182,
+        "end": 2188,
+        "id": 259,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2253,
+        "end": 2257,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2315,
+        "end": 2321,
+        "id": 260,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2394,
+        "end": 2400,
+        "id": 261,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2490,
+        "end": 2496,
+        "id": 262,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2557,
+        "end": 2561,
+        "id": 263,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2621,
+        "end": 2625,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2687,
+        "end": 2693,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2762,
+        "end": 2766,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3469,
+        "end": 3487,
+        "id": 264,
+        "args": [
+          "categoryId"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 4189,
+        "end": 4204,
+        "id": 265,
+        "args": [
+          "item.id"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 5905,
+        "end": 5911,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6288,
+        "end": 6296,
+        "id": 266,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6587,
+        "end": 6595,
+        "id": 267,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7379,
+        "end": 7386,
+        "id": 268,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7450,
+        "end": 7459,
+        "id": 269,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7557,
+        "end": 7567,
+        "id": 172,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7720,
+        "end": 7726,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7815,
+        "end": 7821,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8156,
+        "end": 8162,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8226,
+        "end": 8232,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8445,
+        "end": 8459,
+        "id": 270,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8563,
+        "end": 8575,
+        "id": 259,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 8673,
+        "end": 8677,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8798,
+        "end": 8809,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 8910,
+        "end": 8928,
+        "id": 262,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 9062,
+        "end": 9072,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9338,
+        "end": 9360,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9406,
+        "end": 9408,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9469,
+        "end": 9475,
+        "id": 271,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9772,
+        "end": 9786,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 10026,
+        "end": 10039,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10287,
+        "end": 10321,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 10793,
+        "end": 10797,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10800,
+        "end": 10804,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11183,
+        "end": 11197,
+        "id": 271,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 11303,
+        "end": 11313,
+        "id": 272,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11518,
+        "end": 11537,
+        "id": 268,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11615,
+        "end": 11627,
+        "id": 259,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11753,
+        "end": 11774,
+        "id": 269,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11828,
+        "end": 11838,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12017,
+        "end": 12027,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\home-navigation\\index.vue",
+    "edits": [
+      {
+        "start": 1099,
+        "end": 1104,
+        "id": 273,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1160,
+        "end": 1164,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1190,
+        "end": 1194,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1221,
+        "end": 1225,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1282,
+        "end": 1288,
+        "id": 274,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1318,
+        "end": 1324,
+        "id": 275,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1353,
+        "end": 1358,
+        "id": 276,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1927,
+        "end": 1931,
+        "id": 129,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1992,
+        "end": 1996,
+        "id": 277,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2057,
+        "end": 2061,
+        "id": 278,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2120,
+        "end": 2124,
+        "id": 279,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2185,
+        "end": 2191,
+        "id": 131,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2258,
+        "end": 2263,
+        "id": 132,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2332,
+        "end": 2336,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2394,
+        "end": 2398,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2460,
+        "end": 2464,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4665,
+        "end": 4672,
+        "id": 143,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4739,
+        "end": 4746,
+        "id": 280,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4812,
+        "end": 4819,
+        "id": 281,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4921,
+        "end": 4929,
+        "id": 282,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5516,
+        "end": 5522,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6520,
+        "end": 6530,
+        "id": 283,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6696,
+        "end": 6709,
+        "id": 284,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6782,
+        "end": 6812,
+        "id": 285,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6916,
+        "end": 6932,
+        "id": 286,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7092,
+        "end": 7103,
+        "id": 287,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7167,
+        "end": 7178,
+        "id": 288,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7499,
+        "end": 7505,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7594,
+        "end": 7600,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7946,
+        "end": 7952,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8060,
+        "end": 8066,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8275,
+        "end": 8281,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8389,
+        "end": 8395,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8541,
+        "end": 8553,
+        "id": 24,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8657,
+        "end": 8667,
+        "id": 129,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 8766,
+        "end": 8785,
+        "id": 143,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 8919,
+        "end": 8929,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9195,
+        "end": 9197,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9243,
+        "end": 9245,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9306,
+        "end": 9312,
+        "id": 289,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9609,
+        "end": 9623,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 9924,
+        "end": 9954,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 10002,
+        "end": 10022,
+        "id": 290,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10270,
+        "end": 10304,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 10976,
+        "end": 10980,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10983,
+        "end": 10987,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11252,
+        "end": 11266,
+        "id": 289,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 11417,
+        "end": 11427,
+        "id": 129,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11490,
+        "end": 11507,
+        "id": 273,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11555,
+        "end": 11565,
+        "id": 277,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11721,
+        "end": 11731,
+        "id": 278,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12069,
+        "end": 12100,
+        "id": 291,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 12520,
+        "end": 12554,
+        "id": 292,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12627,
+        "end": 12639,
+        "id": 131,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12811,
+        "end": 12822,
+        "id": 132,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13093,
+        "end": 13103,
+        "id": 279,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13327,
+        "end": 13337,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13521,
+        "end": 13531,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13840,
+        "end": 13854,
+        "id": 293,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 14005,
+        "end": 14015,
+        "id": 129,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14123,
+        "end": 14133,
+        "id": 277,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14270,
+        "end": 14280,
+        "id": 278,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14614,
+        "end": 14645,
+        "id": 291,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 15016,
+        "end": 15050,
+        "id": 292,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 15123,
+        "end": 15135,
+        "id": 131,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15305,
+        "end": 15316,
+        "id": 132,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15541,
+        "end": 15551,
+        "id": 279,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15771,
+        "end": 15781,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15963,
+        "end": 15973,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\login-log\\index.vue",
+    "edits": [
+      {
+        "start": 807,
+        "end": 813,
+        "id": 294,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 878,
+        "end": 884,
+        "id": 295,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 947,
+        "end": 953,
+        "id": 296,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1012,
+        "end": 1016,
+        "id": 297,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1079,
+        "end": 1085,
+        "id": 298,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1140,
+        "end": 1146,
+        "id": 299,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1239,
+        "end": 1243,
+        "id": 118,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1276,
+        "end": 1280,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1399,
+        "end": 1403,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1436,
+        "end": 1440,
+        "id": 118,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1474,
+        "end": 1478,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1514,
+        "end": 1518,
+        "id": 256,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1557,
+        "end": 1561,
+        "id": 118,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3604,
+        "end": 3616,
+        "id": 22,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 3675,
+        "end": 3687,
+        "id": 294,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 3778,
+        "end": 3797,
+        "id": 300,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 3845,
+        "end": 3858,
+        "id": 250,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 3914,
+        "end": 3934,
+        "id": 301,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 3974,
+        "end": 3986,
+        "id": 295,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 4148,
+        "end": 4165,
+        "id": 258,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 4309,
+        "end": 4335,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 4385,
+        "end": 4387,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\logistics-supplier\\index.vue",
+    "edits": [
+      {
+        "start": 1080,
+        "end": 1084,
+        "id": 302,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1165,
+        "end": 1169,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1195,
+        "end": 1199,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1226,
+        "end": 1230,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1293,
+        "end": 1297,
+        "id": 302,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1306,
+        "end": 1310,
+        "id": 302,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1325,
+        "end": 1329,
+        "id": 303,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1338,
+        "end": 1342,
+        "id": 303,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1357,
+        "end": 1361,
+        "id": 304,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1370,
+        "end": 1374,
+        "id": 304,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1389,
+        "end": 1393,
+        "id": 305,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1402,
+        "end": 1406,
+        "id": 305,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1462,
+        "end": 1466,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1492,
+        "end": 1496,
+        "id": 302,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1505,
+        "end": 1509,
+        "id": 302,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1524,
+        "end": 1528,
+        "id": 303,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1537,
+        "end": 1541,
+        "id": 303,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1865,
+        "end": 1872,
+        "id": 306,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1935,
+        "end": 1941,
+        "id": 307,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2039,
+        "end": 2045,
+        "id": 308,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2135,
+        "end": 2139,
+        "id": 309,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2212,
+        "end": 2218,
+        "id": 310,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2310,
+        "end": 2314,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2372,
+        "end": 2376,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2438,
+        "end": 2444,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2513,
+        "end": 2517,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4613,
+        "end": 4619,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6176,
+        "end": 6185,
+        "id": 139,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6499,
+        "end": 6512,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6800,
+        "end": 6811,
+        "id": 311,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6966,
+        "end": 6972,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7258,
+        "end": 7271,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7561,
+        "end": 7572,
+        "id": 311,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7729,
+        "end": 7735,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8433,
+        "end": 8443,
+        "id": 312,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8520,
+        "end": 8529,
+        "id": 313,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8604,
+        "end": 8613,
+        "id": 314,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8689,
+        "end": 8698,
+        "id": 315,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8812,
+        "end": 8822,
+        "id": 316,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9302,
+        "end": 9312,
+        "id": 312,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9383,
+        "end": 9392,
+        "id": 313,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9461,
+        "end": 9470,
+        "id": 314,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9540,
+        "end": 9549,
+        "id": 315,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9657,
+        "end": 9667,
+        "id": 316,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9827,
+        "end": 9833,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9920,
+        "end": 9926,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10317,
+        "end": 10323,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10429,
+        "end": 10435,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10765,
+        "end": 10771,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10835,
+        "end": 10841,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10969,
+        "end": 10982,
+        "id": 31,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 11086,
+        "end": 11097,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11198,
+        "end": 11222,
+        "id": 317,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11354,
+        "end": 11366,
+        "id": 307,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11575,
+        "end": 11585,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11849,
+        "end": 11851,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11897,
+        "end": 11899,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11960,
+        "end": 11965,
+        "id": 318,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12260,
+        "end": 12274,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 12538,
+        "end": 12540,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 12583,
+        "end": 12596,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 12737,
+        "end": 12742,
+        "id": 319,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12745,
+        "end": 12749,
+        "id": 161,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12927,
+        "end": 12931,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12934,
+        "end": 12938,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 13754,
+        "end": 13769,
+        "id": 320,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 13943,
+        "end": 13956,
+        "id": 306,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14018,
+        "end": 14036,
+        "id": 321,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 14450,
+        "end": 14452,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14525,
+        "end": 14537,
+        "id": 307,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14730,
+        "end": 14742,
+        "id": 308,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 14840,
+        "end": 14859,
+        "id": 322,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 14919,
+        "end": 14929,
+        "id": 309,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15156,
+        "end": 15168,
+        "id": 310,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15359,
+        "end": 15369,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15553,
+        "end": 15563,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15872,
+        "end": 15887,
+        "id": 323,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 16061,
+        "end": 16074,
+        "id": 306,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16134,
+        "end": 16152,
+        "id": 321,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 16578,
+        "end": 16580,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 16653,
+        "end": 16665,
+        "id": 307,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16856,
+        "end": 16868,
+        "id": 308,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16936,
+        "end": 16955,
+        "id": 322,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 17003,
+        "end": 17013,
+        "id": 309,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17238,
+        "end": 17250,
+        "id": 310,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17439,
+        "end": 17449,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17631,
+        "end": 17641,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\order\\index.vue",
+    "edits": [
+      {
+        "start": 1348,
+        "end": 1355,
+        "id": 324,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1410,
+        "end": 1416,
+        "id": 325,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1459,
+        "end": 1464,
+        "id": 326,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1508,
+        "end": 1512,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1575,
+        "end": 1581,
+        "id": 327,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1630,
+        "end": 1636,
+        "id": 328,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1685,
+        "end": 1691,
+        "id": 329,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1738,
+        "end": 1744,
+        "id": 330,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1792,
+        "end": 1796,
+        "id": 239,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1859,
+        "end": 1865,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1910,
+        "end": 1914,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2031,
+        "end": 2038,
+        "id": 331,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2093,
+        "end": 2099,
+        "id": 332,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2146,
+        "end": 2153,
+        "id": 333,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2198,
+        "end": 2202,
+        "id": 309,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2243,
+        "end": 2247,
+        "id": 334,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2314,
+        "end": 2318,
+        "id": 335,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2362,
+        "end": 2366,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4035,
+        "end": 4040,
+        "id": 336,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4074,
+        "end": 4079,
+        "id": 337,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4112,
+        "end": 4123,
+        "id": 338,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5216,
+        "end": 5240,
+        "id": 339,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5570,
+        "end": 5576,
+        "id": 328,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5596,
+        "end": 5602,
+        "id": 328,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5621,
+        "end": 5627,
+        "id": 327,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5647,
+        "end": 5653,
+        "id": 327,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5661,
+        "end": 5668,
+        "id": 324,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5681,
+        "end": 5687,
+        "id": 325,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5701,
+        "end": 5707,
+        "id": 325,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5721,
+        "end": 5726,
+        "id": 326,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5741,
+        "end": 5746,
+        "id": 326,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5758,
+        "end": 5762,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5779,
+        "end": 5785,
+        "id": 329,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5803,
+        "end": 5809,
+        "id": 329,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5827,
+        "end": 5833,
+        "id": 330,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5852,
+        "end": 5858,
+        "id": 330,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5870,
+        "end": 5874,
+        "id": 239,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5889,
+        "end": 5895,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5911,
+        "end": 5917,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5932,
+        "end": 5938,
+        "id": 192,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5954,
+        "end": 5960,
+        "id": 192,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6653,
+        "end": 6668,
+        "id": 340,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8848,
+        "end": 8856,
+        "id": 341,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9047,
+        "end": 9057,
+        "id": 342,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9310,
+        "end": 9321,
+        "id": 343,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9453,
+        "end": 9460,
+        "id": 344,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9983,
+        "end": 9995,
+        "id": 345,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10217,
+        "end": 10226,
+        "id": 346,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10467,
+        "end": 10479,
+        "id": 32,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10480,
+        "end": 10512,
+        "id": 347,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 10663,
+        "end": 10674,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10755,
+        "end": 10773,
+        "id": 348,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 10813,
+        "end": 10824,
+        "id": 326,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10906,
+        "end": 10926,
+        "id": 349,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 10966,
+        "end": 10976,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11056,
+        "end": 11076,
+        "id": 350,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 11186,
+        "end": 11190,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11227,
+        "end": 11229,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 11348,
+        "end": 11370,
+        "id": 351,
+        "args": [],
+        "kind": "attribute:message"
+      },
+      {
+        "start": 11701,
+        "end": 11715,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 12020,
+        "end": 12027,
+        "id": 352,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12030,
+        "end": 12036,
+        "id": 353,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12471,
+        "end": 12483,
+        "id": 354,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 12780,
+        "end": 12784,
+        "id": 355,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13136,
+        "end": 13140,
+        "id": 356,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13836,
+        "end": 13840,
+        "id": 357,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14352,
+        "end": 14358,
+        "id": 358,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14554,
+        "end": 14576,
+        "id": 359,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 14607,
+        "end": 14609,
+        "id": 360,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 14702,
+        "end": 14714,
+        "id": 356,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 14977,
+        "end": 14987,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15024,
+        "end": 15044,
+        "id": 350,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 15080,
+        "end": 15092,
+        "id": 330,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15159,
+        "end": 15181,
+        "id": 361,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 15225,
+        "end": 15235,
+        "id": 239,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 15397,
+        "end": 15411,
+        "id": 362,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 15670,
+        "end": 15728,
+        "id": 363,
+        "args": [
+          "selectedItem?.id"
+        ],
+        "kind": "text"
+      },
+      {
+        "start": 15775,
+        "end": 15787,
+        "id": 364,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\procurement-contact\\index.vue",
+    "edits": [
+      {
+        "start": 1020,
+        "end": 1024,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1050,
+        "end": 1054,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1081,
+        "end": 1085,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1439,
+        "end": 1445,
+        "id": 365,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1537,
+        "end": 1542,
+        "id": 366,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1632,
+        "end": 1636,
+        "id": 367,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1709,
+        "end": 1713,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1771,
+        "end": 1775,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1837,
+        "end": 1843,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1912,
+        "end": 1918,
+        "id": 192,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1987,
+        "end": 1991,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4134,
+        "end": 4140,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4901,
+        "end": 4910,
+        "id": 368,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4986,
+        "end": 4994,
+        "id": 369,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5078,
+        "end": 5088,
+        "id": 172,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5409,
+        "end": 5415,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5501,
+        "end": 5507,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5882,
+        "end": 5888,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5993,
+        "end": 5999,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6327,
+        "end": 6333,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6397,
+        "end": 6403,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6530,
+        "end": 6542,
+        "id": 25,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 6646,
+        "end": 6658,
+        "id": 365,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 6760,
+        "end": 6764,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6889,
+        "end": 6899,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 7162,
+        "end": 7164,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 7210,
+        "end": 7212,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 7273,
+        "end": 7277,
+        "id": 370,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 7571,
+        "end": 7585,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 7935,
+        "end": 7965,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8013,
+        "end": 8026,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8271,
+        "end": 8305,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8470,
+        "end": 8474,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8477,
+        "end": 8481,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8750,
+        "end": 8762,
+        "id": 370,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 8907,
+        "end": 8919,
+        "id": 365,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9106,
+        "end": 9117,
+        "id": 366,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9215,
+        "end": 9240,
+        "id": 371,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 9326,
+        "end": 9336,
+        "id": 367,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9532,
+        "end": 9542,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 9726,
+        "end": 9736,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10045,
+        "end": 10057,
+        "id": 372,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10202,
+        "end": 10214,
+        "id": 365,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10399,
+        "end": 10410,
+        "id": 366,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10506,
+        "end": 10531,
+        "id": 371,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 10617,
+        "end": 10627,
+        "id": 367,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10821,
+        "end": 10831,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11013,
+        "end": 11023,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\product\\index.vue",
+    "edits": [
+      {
+        "start": 3583,
+        "end": 3587,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3840,
+        "end": 3844,
+        "id": 129,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3893,
+        "end": 3898,
+        "id": 373,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3947,
+        "end": 3953,
+        "id": 374,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4004,
+        "end": 4010,
+        "id": 375,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4069,
+        "end": 4075,
+        "id": 376,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4134,
+        "end": 4141,
+        "id": 377,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4194,
+        "end": 4198,
+        "id": 378,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4251,
+        "end": 4258,
+        "id": 379,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4348,
+        "end": 4352,
+        "id": 380,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4401,
+        "end": 4405,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4456,
+        "end": 4460,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4534,
+        "end": 4538,
+        "id": 381,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4587,
+        "end": 4593,
+        "id": 382,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4656,
+        "end": 4660,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5592,
+        "end": 5596,
+        "id": 383,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5633,
+        "end": 5638,
+        "id": 384,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5678,
+        "end": 5683,
+        "id": 385,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8310,
+        "end": 8325,
+        "id": 264,
+        "args": [
+          "item.id"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 9330,
+        "end": 9344,
+        "id": 386,
+        "args": [
+          "userId"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 9843,
+        "end": 9847,
+        "id": 387,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 9862,
+        "end": 9973,
+        "id": 388,
+        "args": [
+          "removedUserIds\n      .map((userId) => getUserOptionLabel(userId))\n      .join('、')"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 9987,
+        "end": 9993,
+        "id": 389,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10106,
+        "end": 10117,
+        "id": 390,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10255,
+        "end": 10261,
+        "id": 391,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10294,
+        "end": 10300,
+        "id": 392,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11632,
+        "end": 11641,
+        "id": 393,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 14358,
+        "end": 14368,
+        "id": 394,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 14933,
+        "end": 14946,
+        "id": 395,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 16278,
+        "end": 16286,
+        "id": 396,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 16383,
+        "end": 16391,
+        "id": 397,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 17106,
+        "end": 17112,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 17966,
+        "end": 17974,
+        "id": 267,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 19474,
+        "end": 19499,
+        "id": 386,
+        "args": [
+          "permission.userId"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 19912,
+        "end": 19922,
+        "id": 398,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 20160,
+        "end": 20169,
+        "id": 139,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 20489,
+        "end": 20502,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 20671,
+        "end": 20679,
+        "id": 399,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 20836,
+        "end": 20842,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 21137,
+        "end": 21150,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 21401,
+        "end": 21409,
+        "id": 141,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 21503,
+        "end": 21509,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 21801,
+        "end": 21814,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 21985,
+        "end": 21993,
+        "id": 399,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 22152,
+        "end": 22158,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 22462,
+        "end": 22475,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 22730,
+        "end": 22738,
+        "id": 141,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 22832,
+        "end": 22838,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 24863,
+        "end": 24872,
+        "id": 400,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 25037,
+        "end": 25045,
+        "id": 401,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 25823,
+        "end": 25838,
+        "id": 402,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 25921,
+        "end": 25929,
+        "id": 403,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 25993,
+        "end": 26001,
+        "id": 404,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 27036,
+        "end": 27045,
+        "id": 400,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 27388,
+        "end": 27394,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 27458,
+        "end": 27464,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 28582,
+        "end": 28588,
+        "id": 405,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 28679,
+        "end": 28685,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 28905,
+        "end": 28910,
+        "id": 174,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 29013,
+        "end": 29025,
+        "id": 26,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 29159,
+        "end": 29177,
+        "id": 259,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 29336,
+        "end": 29342,
+        "id": 406,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 29406,
+        "end": 29425,
+        "id": 407,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 29545,
+        "end": 29566,
+        "id": 400,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 29709,
+        "end": 29711,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 29770,
+        "end": 29774,
+        "id": 408,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 30237,
+        "end": 30239,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 30268,
+        "end": 30281,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 30335,
+        "end": 30337,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 30497,
+        "end": 30501,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 30504,
+        "end": 30508,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 30804,
+        "end": 30812,
+        "id": 409,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 31315,
+        "end": 31323,
+        "id": 409,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 31899,
+        "end": 31907,
+        "id": 409,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 32283,
+        "end": 32295,
+        "id": 408,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 32466,
+        "end": 32478,
+        "id": 262,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 32588,
+        "end": 32600,
+        "id": 410,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 32808,
+        "end": 32827,
+        "id": 407,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 32887,
+        "end": 32898,
+        "id": 373,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 33777,
+        "end": 33789,
+        "id": 411,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 34120,
+        "end": 34132,
+        "id": 412,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 34623,
+        "end": 34635,
+        "id": 413,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 35382,
+        "end": 35384,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 35457,
+        "end": 35469,
+        "id": 374,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 36356,
+        "end": 36368,
+        "id": 411,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 36699,
+        "end": 36711,
+        "id": 412,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 37202,
+        "end": 37214,
+        "id": 413,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 37931,
+        "end": 37933,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 38006,
+        "end": 38018,
+        "id": 414,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 38219,
+        "end": 38232,
+        "id": 377,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 38356,
+        "end": 38366,
+        "id": 378,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 38488,
+        "end": 38498,
+        "id": 380,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 38620,
+        "end": 38630,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 38967,
+        "end": 38979,
+        "id": 415,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 39150,
+        "end": 39162,
+        "id": 262,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 39270,
+        "end": 39282,
+        "id": 410,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 39488,
+        "end": 39507,
+        "id": 407,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 39567,
+        "end": 39578,
+        "id": 373,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 40469,
+        "end": 40481,
+        "id": 411,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 40812,
+        "end": 40824,
+        "id": 412,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 41315,
+        "end": 41327,
+        "id": 413,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 42076,
+        "end": 42078,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 42151,
+        "end": 42163,
+        "id": 374,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 43062,
+        "end": 43074,
+        "id": 411,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 43405,
+        "end": 43417,
+        "id": 412,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 43908,
+        "end": 43920,
+        "id": 413,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 44635,
+        "end": 44637,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 44736,
+        "end": 44748,
+        "id": 416,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 44985,
+        "end": 44997,
+        "id": 414,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 45196,
+        "end": 45209,
+        "id": 377,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 45331,
+        "end": 45341,
+        "id": 378,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 45461,
+        "end": 45471,
+        "id": 380,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 45591,
+        "end": 45601,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 45893,
+        "end": 45900,
+        "id": 417,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 45930,
+        "end": 45947,
+        "id": 418,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 46306,
+        "end": 46319,
+        "id": 306,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 46575,
+        "end": 46585,
+        "id": 419,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 46705,
+        "end": 46715,
+        "id": 420,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 46860,
+        "end": 46872,
+        "id": 421,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 47213,
+        "end": 47243,
+        "id": 422,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 47505,
+        "end": 47523,
+        "id": 423,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 49010,
+        "end": 49064,
+        "id": 424,
+        "args": [],
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\supplier\\index.vue",
+    "edits": [
+      {
+        "start": 1168,
+        "end": 1172,
+        "id": 119,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1198,
+        "end": 1202,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1229,
+        "end": 1233,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1404,
+        "end": 1411,
+        "id": 425,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1474,
+        "end": 1481,
+        "id": 306,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1540,
+        "end": 1544,
+        "id": 426,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1607,
+        "end": 1613,
+        "id": 427,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1879,
+        "end": 1885,
+        "id": 428,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1960,
+        "end": 1964,
+        "id": 133,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2022,
+        "end": 2026,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2088,
+        "end": 2094,
+        "id": 191,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2163,
+        "end": 2167,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5267,
+        "end": 5273,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6923,
+        "end": 6932,
+        "id": 139,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7377,
+        "end": 7390,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7694,
+        "end": 7705,
+        "id": 311,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 7862,
+        "end": 7868,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8460,
+        "end": 8473,
+        "id": 140,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8842,
+        "end": 8850,
+        "id": 141,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 8950,
+        "end": 8956,
+        "id": 142,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10499,
+        "end": 10509,
+        "id": 312,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10576,
+        "end": 10583,
+        "id": 429,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10659,
+        "end": 10668,
+        "id": 430,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 10752,
+        "end": 10762,
+        "id": 172,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11090,
+        "end": 11096,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11183,
+        "end": 11189,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11571,
+        "end": 11577,
+        "id": 148,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 11683,
+        "end": 11689,
+        "id": 149,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12010,
+        "end": 12016,
+        "id": 150,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12080,
+        "end": 12086,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12214,
+        "end": 12227,
+        "id": 30,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 12331,
+        "end": 12342,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12443,
+        "end": 12467,
+        "id": 431,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 12599,
+        "end": 12609,
+        "id": 426,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12707,
+        "end": 12723,
+        "id": 426,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 12855,
+        "end": 12865,
+        "id": 134,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 13129,
+        "end": 13131,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13177,
+        "end": 13179,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13240,
+        "end": 13245,
+        "id": 318,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13540,
+        "end": 13554,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 13837,
+        "end": 13839,
+        "id": 159,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 13882,
+        "end": 13895,
+        "id": 160,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 14036,
+        "end": 14041,
+        "id": 319,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 14044,
+        "end": 14048,
+        "id": 161,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 15390,
+        "end": 15394,
+        "id": 432,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 15397,
+        "end": 15401,
+        "id": 433,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 15597,
+        "end": 15601,
+        "id": 120,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 15604,
+        "end": 15608,
+        "id": 121,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 16002,
+        "end": 16017,
+        "id": 434,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 16191,
+        "end": 16204,
+        "id": 306,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 16266,
+        "end": 16288,
+        "id": 312,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 16702,
+        "end": 16704,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 16804,
+        "end": 16817,
+        "id": 425,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17162,
+        "end": 17164,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 17237,
+        "end": 17247,
+        "id": 426,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17309,
+        "end": 17325,
+        "id": 435,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 17373,
+        "end": 17385,
+        "id": 427,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 17484,
+        "end": 17506,
+        "id": 436,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 17629,
+        "end": 17647,
+        "id": 437,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 17884,
+        "end": 17894,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18078,
+        "end": 18088,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18288,
+        "end": 18302,
+        "id": 438,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18535,
+        "end": 18545,
+        "id": 367,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 18666,
+        "end": 18688,
+        "id": 439,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 18857,
+        "end": 18872,
+        "id": 440,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 19046,
+        "end": 19059,
+        "id": 306,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 19119,
+        "end": 19141,
+        "id": 312,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 19567,
+        "end": 19569,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 19669,
+        "end": 19682,
+        "id": 425,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 20039,
+        "end": 20041,
+        "id": 164,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 20114,
+        "end": 20124,
+        "id": 426,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 20184,
+        "end": 20200,
+        "id": 435,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 20248,
+        "end": 20260,
+        "id": 427,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 20357,
+        "end": 20379,
+        "id": 436,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 20500,
+        "end": 20518,
+        "id": 437,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 20753,
+        "end": 20763,
+        "id": 133,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 20945,
+        "end": 20955,
+        "id": 120,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 21153,
+        "end": 21167,
+        "id": 438,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 21398,
+        "end": 21408,
+        "id": 367,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 21527,
+        "end": 21549,
+        "id": 439,
+        "args": [],
+        "kind": "attribute:placeholder"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\user\\index.vue",
+    "edits": [
+      {
+        "start": 1207,
+        "end": 1211,
+        "id": 243,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1266,
+        "end": 1270,
+        "id": 242,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1319,
+        "end": 1327,
+        "id": 441,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1386,
+        "end": 1391,
+        "id": 442,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1450,
+        "end": 1456,
+        "id": 443,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1517,
+        "end": 1522,
+        "id": 444,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1581,
+        "end": 1585,
+        "id": 445,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1632,
+        "end": 1636,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3266,
+        "end": 3272,
+        "id": 138,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 3975,
+        "end": 3982,
+        "id": 446,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4044,
+        "end": 4051,
+        "id": 257,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4203,
+        "end": 4209,
+        "id": 146,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4297,
+        "end": 4303,
+        "id": 147,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4467,
+        "end": 4472,
+        "id": 174,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 4720,
+        "end": 4726,
+        "id": 151,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5069,
+        "end": 5081,
+        "id": 19,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5082,
+        "end": 5100,
+        "id": 447,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 5251,
+        "end": 5271,
+        "id": 349,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 5375,
+        "end": 5377,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 5436,
+        "end": 5440,
+        "id": 448,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 5930,
+        "end": 5943,
+        "id": 449,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 5997,
+        "end": 5999,
+        "id": 161,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 6228,
+        "end": 6231,
+        "id": 450,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6234,
+        "end": 6237,
+        "id": 451,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6519,
+        "end": 6531,
+        "id": 448,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 6611,
+        "end": 6621,
+        "id": 452,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 6724,
+        "end": 6734,
+        "id": 242,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 6838,
+        "end": 6848,
+        "id": 445,
+        "args": [],
+        "kind": "attribute:label"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\manage\\user-verification\\index.vue",
+    "edits": [
+      {
+        "start": 1254,
+        "end": 1259,
+        "id": 453,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1284,
+        "end": 1289,
+        "id": 454,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1314,
+        "end": 1319,
+        "id": 455,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1448,
+        "end": 1453,
+        "id": 453,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1486,
+        "end": 1491,
+        "id": 454,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1522,
+        "end": 1527,
+        "id": 455,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1660,
+        "end": 1665,
+        "id": 326,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1732,
+        "end": 1736,
+        "id": 452,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1803,
+        "end": 1809,
+        "id": 456,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1870,
+        "end": 1874,
+        "id": 242,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1935,
+        "end": 1941,
+        "id": 457,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2012,
+        "end": 2018,
+        "id": 458,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2108,
+        "end": 2112,
+        "id": 426,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2175,
+        "end": 2181,
+        "id": 459,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2269,
+        "end": 2273,
+        "id": 134,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2336,
+        "end": 2342,
+        "id": 460,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2405,
+        "end": 2411,
+        "id": 461,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2480,
+        "end": 2486,
+        "id": 462,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 2557,
+        "end": 2561,
+        "id": 137,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 5208,
+        "end": 5220,
+        "id": 463,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6234,
+        "end": 6243,
+        "id": 464,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6597,
+        "end": 6604,
+        "id": 465,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6607,
+        "end": 6614,
+        "id": 466,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6743,
+        "end": 6751,
+        "id": 467,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 6962,
+        "end": 6976,
+        "id": 20,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 6977,
+        "end": 7004,
+        "id": 468,
+        "args": [],
+        "kind": "attribute:description"
+      },
+      {
+        "start": 7063,
+        "end": 7074,
+        "id": 153,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 7165,
+        "end": 7192,
+        "id": 469,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 7278,
+        "end": 7290,
+        "id": 470,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 7461,
+        "end": 7479,
+        "id": 224,
+        "args": [],
+        "kind": "attribute:placeholder"
+      },
+      {
+        "start": 7623,
+        "end": 7649,
+        "id": 155,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 7699,
+        "end": 7701,
+        "id": 156,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 8012,
+        "end": 8026,
+        "id": 158,
+        "args": [
+          "count"
+        ],
+        "kind": "expression"
+      },
+      {
+        "start": 9152,
+        "end": 9182,
+        "id": 231,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9413,
+        "end": 9447,
+        "id": 471,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9650,
+        "end": 9684,
+        "id": 472,
+        "args": [],
+        "kind": "text"
+      },
+      {
+        "start": 9984,
+        "end": 9998,
+        "id": 473,
+        "args": [],
+        "kind": "attribute:title"
+      },
+      {
+        "start": 10114,
+        "end": 10126,
+        "id": 474,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10216,
+        "end": 10227,
+        "id": 326,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10330,
+        "end": 10340,
+        "id": 452,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10443,
+        "end": 10455,
+        "id": 456,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10555,
+        "end": 10565,
+        "id": 242,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10665,
+        "end": 10675,
+        "id": 426,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10784,
+        "end": 10794,
+        "id": 475,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 10896,
+        "end": 10908,
+        "id": 457,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11011,
+        "end": 11023,
+        "id": 458,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11140,
+        "end": 11152,
+        "id": 427,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11273,
+        "end": 11285,
+        "id": 459,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 11800,
+        "end": 11812,
+        "id": 470,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12011,
+        "end": 12023,
+        "id": 462,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12138,
+        "end": 12150,
+        "id": 460,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12251,
+        "end": 12263,
+        "id": 461,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12367,
+        "end": 12379,
+        "id": 192,
+        "args": [],
+        "kind": "attribute:label"
+      },
+      {
+        "start": 12681,
+        "end": 12687,
+        "id": 476,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12690,
+        "end": 12696,
+        "id": 477,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12739,
+        "end": 12747,
+        "id": 478,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12750,
+        "end": 12758,
+        "id": 479,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12886,
+        "end": 12892,
+        "id": 460,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 12895,
+        "end": 12901,
+        "id": 480,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 13089,
+        "end": 13110,
+        "id": 481,
+        "args": [],
+        "kind": "attribute:placeholder"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\_core\\profile\\base-setting.vue",
+    "edits": [
+      {
+        "start": 371,
+        "end": 376,
+        "id": 482,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 418,
+        "end": 422,
+        "id": 381,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 463,
+        "end": 467,
+        "id": 483,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 636,
+        "end": 640,
+        "id": 452,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 723,
+        "end": 728,
+        "id": 326,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 901,
+        "end": 905,
+        "id": 445,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 995,
+        "end": 1001,
+        "id": 484,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\_core\\profile\\index.vue",
+    "edits": [
+      {
+        "start": 490,
+        "end": 496,
+        "id": 485,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 538,
+        "end": 544,
+        "id": 486,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 589,
+        "end": 595,
+        "id": 252,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 640,
+        "end": 647,
+        "id": 487,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 751,
+        "end": 763,
+        "id": 488,
+        "args": [],
+        "kind": "attribute:title"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\_core\\profile\\notification-setting.vue",
+    "edits": [
+      {
+        "start": 242,
+        "end": 248,
+        "id": 489,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 269,
+        "end": 288,
+        "id": 490,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 369,
+        "end": 375,
+        "id": 491,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 396,
+        "end": 412,
+        "id": 492,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 488,
+        "end": 494,
+        "id": 493,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 515,
+        "end": 531,
+        "id": 494,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\_core\\profile\\password-setting.vue",
+    "edits": [
+      {
+        "start": 334,
+        "end": 339,
+        "id": 495,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 424,
+        "end": 432,
+        "id": 496,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 501,
+        "end": 506,
+        "id": 497,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 623,
+        "end": 631,
+        "id": 498,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 704,
+        "end": 710,
+        "id": 499,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 827,
+        "end": 837,
+        "id": 500,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 993,
+        "end": 1003,
+        "id": 500,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1038,
+        "end": 1048,
+        "id": 500,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1131,
+        "end": 1143,
+        "id": 501,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 1282,
+        "end": 1290,
+        "id": 502,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  },
+  {
+    "file": "src\\views\\_core\\profile\\security-setting.vue",
+    "edits": [
+      {
+        "start": 238,
+        "end": 244,
+        "id": 489,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 265,
+        "end": 275,
+        "id": 503,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 356,
+        "end": 362,
+        "id": 504,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 383,
+        "end": 402,
+        "id": 505,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 486,
+        "end": 492,
+        "id": 506,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 513,
+        "end": 536,
+        "id": 507,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 617,
+        "end": 623,
+        "id": 508,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 644,
+        "end": 666,
+        "id": 509,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 746,
+        "end": 754,
+        "id": 510,
+        "args": [],
+        "kind": "expression"
+      },
+      {
+        "start": 775,
+        "end": 800,
+        "id": 511,
+        "args": [],
+        "kind": "expression"
+      }
+    ]
+  }
+]

@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue';
 
-import { onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
 import { Button, Form, Input, Select, Space, Table, Tag } from 'ant-design-vue';
 
 import { getEmailCodeLogListApi } from '#/api';
+import { $t } from '#/locales';
 
 type EmailCodeRecord = {
   code: string;
@@ -33,47 +34,47 @@ const records = ref<EmailCodeRecord[]>([]);
 const total = ref(0);
 const queryLoading = ref(false);
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id', width: 90 },
-  { title: '邮箱', dataIndex: 'email', key: 'email', width: 220 },
-  { title: '验证码', dataIndex: 'code', key: 'code', width: 120 },
-  { title: '业务场景', dataIndex: 'scene', key: 'scene', width: 140 },
-  { title: '状态', dataIndex: 'status', key: 'status', width: 110 },
-  { title: '发送状态', dataIndex: 'sendStatus', key: 'sendStatus', width: 120 },
-  { title: '过期时间', dataIndex: 'expireTime', key: 'expireTime', width: 180 },
-  { title: 'IP 地址', dataIndex: 'ip', key: 'ip', width: 150 },
-  { title: '创建时间', dataIndex: 'createdAt', key: 'createdAt', width: 180 },
-];
+  { title: $t('app.email'), dataIndex: 'email', key: 'email', width: 220 },
+  { title: $t('app.verificationCode'), dataIndex: 'code', key: 'code', width: 120 },
+  { title: $t('app.purpose'), dataIndex: 'scene', key: 'scene', width: 140 },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status', width: 110 },
+  { title: $t('app.deliveryStatus'), dataIndex: 'sendStatus', key: 'sendStatus', width: 120 },
+  { title: $t('app.expirationTime'), dataIndex: 'expireTime', key: 'expireTime', width: 180 },
+  { title: $t('app.ipAddress'), dataIndex: 'ip', key: 'ip', width: 150 },
+  { title: $t('app.createdAt'), dataIndex: 'createdAt', key: 'createdAt', width: 180 },
+]));
 
-const sceneOptions = [
-  { label: '登录验证', value: 'login' },
-  { label: '修改密码', value: 'password' },
-  { label: '绑定邮箱', value: 'bind_email' },
-];
+const sceneOptions = computed(() => ([
+  { label: $t('app.loginVerification'), value: 'login' },
+  { label: $t('app.changePassword'), value: 'password' },
+  { label: $t('app.linkEmail'), value: 'bind_email' },
+]));
 
-const statusOptions = [
-  { label: '有效', value: 0 },
-  { label: '已使用', value: 1 },
-  { label: '已过期', value: 2 },
-];
+const statusOptions = computed(() => ([
+  { label: $t('app.valid'), value: 0 },
+  { label: $t('app.used'), value: 1 },
+  { label: $t('app.expired'), value: 2 },
+]));
 
-const statusMap: Record<string, { color: string; text: string }> = {
-  0: { color: 'green', text: '有效' },
-  1: { color: 'blue', text: '已使用' },
-  2: { color: 'default', text: '已过期' },
-  expired: { color: 'default', text: '已过期' },
-  used: { color: 'blue', text: '已使用' },
-  valid: { color: 'green', text: '有效' },
-};
+const statusMap = computed<Record<string, { color: string; text: string }>>(() => ({
+  0: { color: 'green', text: $t('app.valid') },
+  1: { color: 'blue', text: $t('app.used') },
+  2: { color: 'default', text: $t('app.expired') },
+  expired: { color: 'default', text: $t('app.expired') },
+  used: { color: 'blue', text: $t('app.used') },
+  valid: { color: 'green', text: $t('app.valid') },
+}));
 
-const sendStatusMap: Record<string, { color: string; text: string }> = {
-  0: { color: 'default', text: '待发送' },
-  1: { color: 'green', text: '成功' },
-  2: { color: 'red', text: '失败' },
-  failed: { color: 'red', text: '失败' },
-  pending: { color: 'default', text: '待发送' },
-  success: { color: 'green', text: '成功' },
-};
+const sendStatusMap = computed<Record<string, { color: string; text: string }>>(() => ({
+  0: { color: 'default', text: $t('app.pendingDelivery') },
+  1: { color: 'green', text: $t('app.success') },
+  2: { color: 'red', text: $t('app.failed') },
+  failed: { color: 'red', text: $t('app.failed') },
+  pending: { color: 'default', text: $t('app.pendingDelivery') },
+  success: { color: 'green', text: $t('app.success') },
+}));
 
 function normalizeRecords(data: any): EmailCodeRecord[] {
   const list = Array.isArray(data)
@@ -139,13 +140,13 @@ function handleTableChange(pagination: TableProps['pagination']) {
 
 function getStatusMeta(status: number | string) {
   return (
-    statusMap[String(status)] ?? { color: 'default', text: String(status) }
+    statusMap.value[String(status)] ?? { color: 'default', text: String(status) }
   );
 }
 
 function getSendStatusMeta(status: number | string) {
   return (
-    sendStatusMap[String(status)] ?? { color: 'default', text: String(status) }
+    sendStatusMap.value[String(status)] ?? { color: 'default', text: String(status) }
   );
 }
 
@@ -155,39 +156,37 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="邮箱验证码记录">
+  <Page :title="$t('app.emailVerificationCodes')">
     <Form class="mb-4" layout="inline">
-      <Form.Item label="邮箱">
+      <Form.Item :label="$t('app.email')">
         <Input
           v-model:value="filters.email"
           allow-clear
-          placeholder="请输入邮箱"
+          :placeholder="$t('app.enterAnEmailAddress')"
         />
       </Form.Item>
-      <Form.Item label="业务场景">
+      <Form.Item :label="$t('app.purpose')">
         <Select
           v-model:value="filters.scene"
           :options="sceneOptions"
           allow-clear
           class="record-filter-select"
-          placeholder="请选择"
+          :placeholder="$t('app.selectAnOption')"
         />
       </Form.Item>
-      <Form.Item label="状态">
+      <Form.Item :label="$t('app.status')">
         <Select
           v-model:value="filters.status"
           :options="statusOptions"
           allow-clear
           class="record-filter-select"
-          placeholder="请选择"
+          :placeholder="$t('app.selectAnOption')"
         />
       </Form.Item>
       <Form.Item>
         <Space>
-          <Button :loading="queryLoading" type="primary" @click="handleSearch">
-            查询
-          </Button>
-          <Button @click="resetFilters">重置</Button>
+          <Button :loading="queryLoading" type="primary" @click="handleSearch">{{ $t('app.search') }}</Button>
+          <Button @click="resetFilters">{{ $t('app.reset') }}</Button>
         </Space>
       </Form.Item>
     </Form>

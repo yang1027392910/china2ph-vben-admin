@@ -1,0 +1,3831 @@
+[
+  {
+    "id": 0,
+    "text": "请输入内容",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 1,
+    "text": "请输入链接地址",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 2,
+    "text": "列表",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 3,
+    "text": "编号",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 4,
+    "text": "链接",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue",
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 5,
+    "text": "清除格式",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 6,
+    "text": "AI生成",
+    "files": [
+      "src\\components\\rich-text-editor\\index.vue"
+    ]
+  },
+  {
+    "id": 7,
+    "text": "3小时前",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 8,
+    "text": "描述信息描述信息描述信息",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 9,
+    "text": "收到了 14 份新周报",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 10,
+    "text": "刚刚",
+    "files": [
+      "src\\layouts\\basic.vue",
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 11,
+    "text": "朱偏右 回复了你",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 12,
+    "text": "曲丽丽 评论了你",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 13,
+    "text": "1天前",
+    "files": [
+      "src\\layouts\\basic.vue",
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 14,
+    "text": "代办提醒",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 15,
+    "text": "跳转系统管理",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 16,
+    "text": "跳转外部链接示例",
+    "files": [
+      "src\\layouts\\basic.vue"
+    ]
+  },
+  {
+    "id": 17,
+    "text": "系统管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 18,
+    "text": "优惠券管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 19,
+    "text": "用户管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 20,
+    "text": "用户认证管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 21,
+    "text": "邮箱验证码记录",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 22,
+    "text": "登录日志",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 23,
+    "text": "Banner管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts"
+    ]
+  },
+  {
+    "id": 24,
+    "text": "首页导航",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 25,
+    "text": "客服管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 26,
+    "text": "商品管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 27,
+    "text": "商品列表",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts"
+    ]
+  },
+  {
+    "id": 28,
+    "text": "商品分类管理",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 29,
+    "text": "首页热门",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts"
+    ]
+  },
+  {
+    "id": 30,
+    "text": "商品供应商",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 31,
+    "text": "物流供应商",
+    "files": [
+      "src\\router\\routes\\modules\\manage.ts",
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 32,
+    "text": "订单管理",
+    "files": [
+      "src\\router\\routes\\modules\\order.ts",
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 33,
+    "text": "访问",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 34,
+    "text": "趋势",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 35,
+    "text": "网页",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 36,
+    "text": "移动端",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 37,
+    "text": "客户端",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 38,
+    "text": "第三方",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 39,
+    "text": "其它",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-data.vue"
+    ]
+  },
+  {
+    "id": 40,
+    "text": "外包",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue"
+    ]
+  },
+  {
+    "id": 41,
+    "text": "定制",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue"
+    ]
+  },
+  {
+    "id": 42,
+    "text": "技术支持",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue"
+    ]
+  },
+  {
+    "id": 43,
+    "text": "远程",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue"
+    ]
+  },
+  {
+    "id": 44,
+    "text": "商业占比",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-sales.vue"
+    ]
+  },
+  {
+    "id": 45,
+    "text": "搜索引擎",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-source.vue"
+    ]
+  },
+  {
+    "id": 46,
+    "text": "直接访问",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-source.vue"
+    ]
+  },
+  {
+    "id": 47,
+    "text": "邮件营销",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-source.vue"
+    ]
+  },
+  {
+    "id": 48,
+    "text": "联盟广告",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-source.vue"
+    ]
+  },
+  {
+    "id": 49,
+    "text": "访问来源",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits-source.vue",
+      "src\\views\\dashboard\\analytics\\index.vue",
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 50,
+    "text": "{value1}月",
+    "files": [
+      "src\\views\\dashboard\\analytics\\analytics-visits.vue"
+    ]
+  },
+  {
+    "id": 51,
+    "text": "用户量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 52,
+    "text": "总用户量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 53,
+    "text": "访问量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 54,
+    "text": "总访问量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 55,
+    "text": "下载量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 56,
+    "text": "总下载量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 57,
+    "text": "使用量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 58,
+    "text": "总使用量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 59,
+    "text": "流量趋势",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 60,
+    "text": "月访问量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 61,
+    "text": "访问数量",
+    "files": [
+      "src\\views\\dashboard\\analytics\\index.vue"
+    ]
+  },
+  {
+    "id": 62,
+    "text": "不要等待机会，而要创造机会。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 63,
+    "text": "开源组",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 64,
+    "text": "现在的你决定将来的你。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 65,
+    "text": "算法组",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 66,
+    "text": "没有什么才能比努力更重要。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 67,
+    "text": "上班摸鱼",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 68,
+    "text": "热情和欲望可以突破一切难关。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 69,
+    "text": "健康的身体是实现目标的基石。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 70,
+    "text": "技术牛",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 71,
+    "text": "路是走出来的，而不是空想出来的。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 72,
+    "text": "架构组",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 73,
+    "text": "首页",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue",
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 74,
+    "text": "仪表盘",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 75,
+    "text": "组件",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 76,
+    "text": "权限管理",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 77,
+    "text": "图表",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 78,
+    "text": "审查最近提交到Git仓库的前端代码，确保代码质量和规范。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 79,
+    "text": "审查前端代码提交",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 80,
+    "text": "检查并优化系统性能，降低CPU使用率。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 81,
+    "text": "系统性能优化",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 82,
+    "text": "进行系统安全检查，确保没有安全漏洞或未授权的访问。 ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 83,
+    "text": "安全检查",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 84,
+    "text": "更新项目中的所有npm依赖包，确保使用最新版本。",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 85,
+    "text": "更新项目依赖",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 86,
+    "text": "修复用户报告的页面UI显示问题，确保在不同浏览器中显示一致。 ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 87,
+    "text": "修复UI显示问题",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 88,
+    "text": "在 <a>开源组</a> 创建了项目 <a>Vue</a>",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 89,
+    "text": "威廉",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 90,
+    "text": "关注了 <a>威廉</a> ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 91,
+    "text": "1个小时前",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 92,
+    "text": "艾文",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 93,
+    "text": "发布了 <a>个人动态</a> ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 94,
+    "text": "克里斯",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 95,
+    "text": "发表文章 <a>如何编写一个Vite插件</a> ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 96,
+    "text": "2天前",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 97,
+    "text": "回复了 <a>杰克</a> 的问题 <a>如何进行项目优化？</a>",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 98,
+    "text": "3天前",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 99,
+    "text": "皮特",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 100,
+    "text": "关闭了问题 <a>如何运行项目</a> ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 101,
+    "text": "1周前",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 102,
+    "text": "杰克",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 103,
+    "text": "推送了代码到 <a>Github</a>",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 104,
+    "text": "发表文章 <a>如何编写使用 Admin Vben</a> ",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 105,
+    "text": "早安, {value1}, 开始您一天的工作吧！",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 106,
+    "text": "今日晴，20℃ - 32℃！",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 107,
+    "text": "项目",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 108,
+    "text": "最新动态",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 109,
+    "text": "快捷导航",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 110,
+    "text": "待办事项",
+    "files": [
+      "src\\views\\dashboard\\workspace\\index.vue"
+    ]
+  },
+  {
+    "id": 111,
+    "text": "说点啥呢",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 112,
+    "text": "支持多语言，主题功能集成切换等",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 113,
+    "text": "Ant Design Vue组件使用演示",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 114,
+    "text": "按钮",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 115,
+    "text": "信息",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 116,
+    "text": "错误",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 117,
+    "text": "警告",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue"
+    ]
+  },
+  {
+    "id": 118,
+    "text": "成功",
+    "files": [
+      "src\\views\\demos\\antd\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 119,
+    "text": "全部",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 120,
+    "text": "启用",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 121,
+    "text": "禁用",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 122,
+    "text": "商品",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 123,
+    "text": "分类",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 124,
+    "text": "无跳转",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 125,
+    "text": "客服页",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 126,
+    "text": "登录页",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 127,
+    "text": "图片",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 128,
+    "text": "页面类型",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 129,
+    "text": "标题",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 130,
+    "text": "副标题",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 131,
+    "text": "跳转类型",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 132,
+    "text": "跳转值",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 133,
+    "text": "排序",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 134,
+    "text": "状态",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 135,
+    "text": "开始时间",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 136,
+    "text": "结束时间",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 137,
+    "text": "操作",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 138,
+    "text": "查询失败",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 139,
+    "text": "请选择图片文件",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 140,
+    "text": "上传接口未返回图片地址",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 141,
+    "text": "图片上传成功",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 142,
+    "text": "上传失败",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 143,
+    "text": "请输入标题",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 144,
+    "text": "请上传图片",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 145,
+    "text": "请选择展示时间",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 146,
+    "text": "新增成功",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 147,
+    "text": "新增失败",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 148,
+    "text": "更新成功",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 149,
+    "text": "更新失败",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 150,
+    "text": "删除成功",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 151,
+    "text": "删除失败",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 152,
+    "text": "Banner 管理",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 153,
+    "text": "关键词",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 154,
+    "text": "标题/副标题",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 155,
+    "text": "查询",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 156,
+    "text": "重置",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 157,
+    "text": "新增 Banner",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 158,
+    "text": "共 {value1} 条",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 159,
+    "text": "编辑",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 160,
+    "text": "确定删除？",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 161,
+    "text": "删除",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\home-navigation\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 162,
+    "text": "首页大促",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 163,
+    "text": "限时优惠",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 164,
+    "text": "上传",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue",
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 165,
+    "text": "编辑 Banner",
+    "files": [
+      "src\\views\\manage\\banner\\index.vue"
+    ]
+  },
+  {
+    "id": 166,
+    "text": "电子产品",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 167,
+    "text": "手机",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 168,
+    "text": "分类名称",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 169,
+    "text": "别名",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 170,
+    "text": "查询成功",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 171,
+    "text": "请输入分类名称",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 172,
+    "text": "请输入正确的排序",
+    "files": [
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 173,
+    "text": "上传成功",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 174,
+    "text": "已删除",
+    "files": [
+      "src\\views\\manage\\category\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 175,
+    "text": "新增分类",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 176,
+    "text": "图片加载失败，请确认文件服务可以正常访问",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 177,
+    "text": "编辑分类",
+    "files": [
+      "src\\views\\manage\\category\\index.vue"
+    ]
+  },
+  {
+    "id": 178,
+    "text": "注册奖励",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 179,
+    "text": "认证奖励",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 180,
+    "text": "系统派发",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 181,
+    "text": "未解锁",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 182,
+    "text": "可使用",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 183,
+    "text": "已使用",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 184,
+    "text": "已过期",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 185,
+    "text": "已禁用",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 186,
+    "text": "系统自动发放",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 187,
+    "text": "管理员派发",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 188,
+    "text": "激活时间",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 189,
+    "text": "到期时间",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 190,
+    "text": "使用时间",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 191,
+    "text": "创建时间",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 192,
+    "text": "更新时间",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 193,
+    "text": "券 ID",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 194,
+    "text": "用户 ID",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 195,
+    "text": "邮箱 / 昵称",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 196,
+    "text": "类型",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 197,
+    "text": "金额",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 198,
+    "text": "来源",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 199,
+    "text": "金额须{value1} 0，最多两位小数，最大 99999999.99",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 200,
+    "text": "有效天数须为 1～365000 的整数",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 201,
+    "text": "奖励配置已保存",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 202,
+    "text": "请选择正确的创建日期范围",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 203,
+    "text": "请输入有效的用户 ID（正整数）",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 204,
+    "text": "备注最多 255 个字符",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 205,
+    "text": "优惠券已派发",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 206,
+    "text": "优惠券已禁用",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 207,
+    "text": "管理注册、认证奖励配置及用户优惠券",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 208,
+    "text": "奖励配置",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 209,
+    "text": "奖励配置说明",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 210,
+    "text": "调整金额不会改变已发放优惠券的面额；关闭配置停止生成对应的新奖励券。",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 211,
+    "text": "已发放的认证奖励券仍可在认证通过后解锁；认证券有效期从解锁时开始，使用当时配置的有效天数。",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 212,
+    "text": "奖励配置加载失败",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 213,
+    "text": "重新加载",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 214,
+    "text": "暂无奖励配置",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 215,
+    "text": "已启用",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 216,
+    "text": "已关闭",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 217,
+    "text": "奖励类型",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 218,
+    "text": "有效天数",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 219,
+    "text": "{value1} 天",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 220,
+    "text": "编辑配置",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 221,
+    "text": "用户优惠券",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 222,
+    "text": "用户 ID、邮箱或昵称",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 223,
+    "text": "全部类型",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 224,
+    "text": "全部状态",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 225,
+    "text": "全部来源",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 226,
+    "text": "创建开始日期",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 227,
+    "text": "创建结束日期",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 228,
+    "text": "搜索",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 229,
+    "text": "派发优惠券",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 230,
+    "text": "优惠券列表加载失败",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 231,
+    "text": "详情",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 232,
+    "text": "确定禁用该优惠券吗？禁用后用户将无法使用。",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 233,
+    "text": "编辑奖励配置",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 234,
+    "text": "金额（₱）",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 235,
+    "text": "启用状态",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 236,
+    "text": "确认派发",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 237,
+    "text": "派发后立即生效，有效期从派发时间开始计算。同一用户可拥有多张管理员派发券。",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 238,
+    "text": "请输入已存在的用户 ID",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 239,
+    "text": "备注",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 240,
+    "text": "优惠券详情",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 241,
+    "text": "用户头像",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 242,
+    "text": "邮箱",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\user\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 243,
+    "text": "昵称",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 244,
+    "text": "关联订单 ID",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 245,
+    "text": "优惠券详情加载失败",
+    "files": [
+      "src\\views\\manage\\coupon\\index.vue"
+    ]
+  },
+  {
+    "id": 246,
+    "text": "验证码",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 247,
+    "text": "业务场景",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 248,
+    "text": "发送状态",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 249,
+    "text": "过期时间",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 250,
+    "text": "IP 地址",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 251,
+    "text": "登录验证",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 252,
+    "text": "修改密码",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\_core\\profile\\index.vue"
+    ]
+  },
+  {
+    "id": 253,
+    "text": "绑定邮箱",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 254,
+    "text": "有效",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 255,
+    "text": "待发送",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue"
+    ]
+  },
+  {
+    "id": 256,
+    "text": "失败",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 257,
+    "text": "请输入邮箱",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 258,
+    "text": "请选择",
+    "files": [
+      "src\\views\\manage\\email-code\\index.vue",
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 259,
+    "text": "热门类型",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 260,
+    "text": "商品ID",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 261,
+    "text": "所属类目",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 262,
+    "text": "商品标题",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 263,
+    "text": "封面",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 264,
+    "text": "分类 {value1}",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 265,
+    "text": "商品 {value1}",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 266,
+    "text": "产品查询失败",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 267,
+    "text": "分类查询失败",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue",
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 268,
+    "text": "请选择产品",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 269,
+    "text": "请选择热门类型",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 270,
+    "text": "首页热门产品",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 271,
+    "text": "新增热门产品",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 272,
+    "text": "产品",
+    "files": [
+      "src\\views\\manage\\home-hot\\index.vue"
+    ]
+  },
+  {
+    "id": 273,
+    "text": "待处理",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 274,
+    "text": "站内路径",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 275,
+    "text": "外部链接",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 276,
+    "text": "不跳转",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 277,
+    "text": "数值",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 278,
+    "text": "图标",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 279,
+    "text": "颜色",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 280,
+    "text": "请输入数值",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 281,
+    "text": "请选择图标",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 282,
+    "text": "请输入跳转值",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 283,
+    "text": "图标列表加载失败",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 284,
+    "text": "请输入 Icon 名称",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 285,
+    "text": "Icon 名称格式应类似 solar:icon-name",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 286,
+    "text": "该 Icon 已在下拉选项中",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 287,
+    "text": "Icon 新增成功",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 288,
+    "text": "Icon 新增失败",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 289,
+    "text": "新增首页导航",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 290,
+    "text": "确定删除这条首页导航吗？",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 291,
+    "text": "输入 Icon 名称或从下拉中选择",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 292,
+    "text": "增加",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 293,
+    "text": "编辑首页导航",
+    "files": [
+      "src\\views\\manage\\home-navigation\\index.vue"
+    ]
+  },
+  {
+    "id": 294,
+    "text": "登录账号",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 295,
+    "text": "登录状态",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 296,
+    "text": "登录地点",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 297,
+    "text": "设备",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 298,
+    "text": "操作系统",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 299,
+    "text": "登录时间",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 300,
+    "text": "请输入账号",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 301,
+    "text": "请输入 IP",
+    "files": [
+      "src\\views\\manage\\login-log\\index.vue"
+    ]
+  },
+  {
+    "id": 302,
+    "text": "海运",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 303,
+    "text": "空运",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 304,
+    "text": "陆运",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 305,
+    "text": "快递",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 306,
+    "text": "供应商名称",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 307,
+    "text": "运输方式",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 308,
+    "text": "配送时效",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 309,
+    "text": "单价",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 310,
+    "text": "计价方式",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 311,
+    "text": "Logo 上传成功",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 312,
+    "text": "请输入供应商名称",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 313,
+    "text": "请选择运输方式",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 314,
+    "text": "请输入配送时效",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 315,
+    "text": "请选择计价方式",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 316,
+    "text": "请输入正确的单价",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 317,
+    "text": "供应商名称/运输方式",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 318,
+    "text": "新增供应商",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 319,
+    "text": "删除中",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 320,
+    "text": "新增物流供应商",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 321,
+    "text": "顺丰海运",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 322,
+    "text": "7-15天",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 323,
+    "text": "编辑物流供应商",
+    "files": [
+      "src\\views\\manage\\logistics-supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 324,
+    "text": "订单 ID",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 325,
+    "text": "订单编号",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 326,
+    "text": "用户名",
+    "files": [
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue",
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 327,
+    "text": "支付状态",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 328,
+    "text": "支付方式",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 329,
+    "text": "订单金额",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 330,
+    "text": "配送方式",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 331,
+    "text": "明细 ID",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 332,
+    "text": "商品名称",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 333,
+    "text": "商品 ID",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 334,
+    "text": "数量",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 335,
+    "text": "小计",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 336,
+    "text": "未支付",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 337,
+    "text": "待审批",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 338,
+    "text": "已支付（Paid）",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 339,
+    "text": "支付已批准：Paid / Completed",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 340,
+    "text": "订单列表返回格式不符合预期",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 341,
+    "text": "状态不能为空",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 342,
+    "text": "配送方式不能为空",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 343,
+    "text": "请至少修改一项内容",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 344,
+    "text": "订单已更新",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 345,
+    "text": "商品数量必须为正整数",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 346,
+    "text": "商品数量已更新",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 347,
+    "text": "查询订单、查看商品明细及修改订单信息",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 348,
+    "text": "搜索订单",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 349,
+    "text": "请输入用户名",
+    "files": [
+      "src\\views\\manage\\order\\index.vue",
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 350,
+    "text": "请输入状态值",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 351,
+    "text": "订单加载失败，请重新查询",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 352,
+    "text": "查看并审批",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 353,
+    "text": "查看详情",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 354,
+    "text": "订单详情",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 355,
+    "text": "订单信息",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 356,
+    "text": "编辑订单",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 357,
+    "text": "商品明细",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 358,
+    "text": "修改数量",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 359,
+    "text": "订单详情加载失败",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 360,
+    "text": "重试",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 361,
+    "text": "请输入配送方式值",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 362,
+    "text": "修改商品数量",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 363,
+    "text": "明细 ID：{value1}。保存后将重新计算订单金额。",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 364,
+    "text": "商品数量",
+    "files": [
+      "src\\views\\manage\\order\\index.vue"
+    ]
+  },
+  {
+    "id": 365,
+    "text": "联系方式",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 366,
+    "text": "联系值",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 367,
+    "text": "描述",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue",
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 368,
+    "text": "请选择联系方式",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 369,
+    "text": "请输入联系值",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 370,
+    "text": "新增客服",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 371,
+    "text": "请输入账号、链接或号码",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 372,
+    "text": "编辑客服",
+    "files": [
+      "src\\views\\manage\\procurement-contact\\index.vue"
+    ]
+  },
+  {
+    "id": 373,
+    "text": "封面图",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 374,
+    "text": "产品图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 375,
+    "text": "分类ID",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 376,
+    "text": "中国价格",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 377,
+    "text": "菲律宾价格",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 378,
+    "text": "库存",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 379,
+    "text": "最低起订量",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 380,
+    "text": "销量",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 381,
+    "text": "用户",
+    "files": [
+      "src\\views\\manage\\product\\index.vue",
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 382,
+    "text": "用户ID",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 383,
+    "text": "新增",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 384,
+    "text": "待移除",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 385,
+    "text": "已授权",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 386,
+    "text": "用户 {value1}",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 387,
+    "text": "取消",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 388,
+    "text": "将移除 {value1} 的供应商联系方式查看权限，保存后生效。",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 389,
+    "text": "确认移除",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 390,
+    "text": "确认移除授权用户？",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 391,
+    "text": "复制成功",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 392,
+    "text": "复制失败",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 393,
+    "text": "暂无可预览图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 394,
+    "text": "暂无可翻译的图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 395,
+    "text": "翻译接口未返回图片地址",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 396,
+    "text": "图片翻译成功",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 397,
+    "text": "图片翻译失败",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 398,
+    "text": "授权用户加载失败",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 399,
+    "text": "封面上传成功",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 400,
+    "text": "请输入商品标题",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 401,
+    "text": "请先选择商品",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 402,
+    "text": "AI生成接口未返回商品描述",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 403,
+    "text": "AI生成成功",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 404,
+    "text": "AI生成失败",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 405,
+    "text": "保存成功",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 406,
+    "text": "全部分类",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 407,
+    "text": "请选择分类",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 408,
+    "text": "新增商品",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 409,
+    "text": "图片加载失败",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 410,
+    "text": "产品类型",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 411,
+    "text": "查看图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 412,
+    "text": "删除图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 413,
+    "text": "翻译图片",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 414,
+    "text": "销售类型",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 415,
+    "text": "编辑商品",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 416,
+    "text": "商品描述",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 417,
+    "text": "供应商联系方式",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 418,
+    "text": "开启供应商联系方式",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 419,
+    "text": "微信",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 420,
+    "text": "电话",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 421,
+    "text": "授权用户",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 422,
+    "text": "请选择可查看供应商联系方式的用户",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 423,
+    "text": "暂无用户",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 424,
+    "text": "复制",
+    "files": [
+      "src\\views\\manage\\product\\index.vue"
+    ]
+  },
+  {
+    "id": 425,
+    "text": "供应商图片",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 426,
+    "text": "城市",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 427,
+    "text": "主营产品",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 428,
+    "text": "展示联系",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 429,
+    "text": "请输入城市",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 430,
+    "text": "请输入主营产品",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 431,
+    "text": "供应商名称/主营产品",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 432,
+    "text": "展示",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 433,
+    "text": "隐藏",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 434,
+    "text": "新增商品供应商",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 435,
+    "text": "义乌",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 436,
+    "text": "手机配件、日用品",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 437,
+    "text": "100件",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 438,
+    "text": "展示联系方式",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 439,
+    "text": "请输入供应商描述",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 440,
+    "text": "编辑商品供应商",
+    "files": [
+      "src\\views\\manage\\supplier\\index.vue"
+    ]
+  },
+  {
+    "id": 441,
+    "text": "IP 归属地",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 442,
+    "text": "邀请码",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 443,
+    "text": "邀请人数",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 444,
+    "text": "可抽奖",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 445,
+    "text": "角色",
+    "files": [
+      "src\\views\\manage\\user\\index.vue",
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 446,
+    "text": "请输入姓名",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 447,
+    "text": "用户列表",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 448,
+    "text": "新建用户",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 449,
+    "text": "确定删除?",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 450,
+    "text": "是",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 451,
+    "text": "否",
+    "files": [
+      "src\\views\\manage\\user\\index.vue"
+    ]
+  },
+  {
+    "id": 452,
+    "text": "姓名",
+    "files": [
+      "src\\views\\manage\\user\\index.vue",
+      "src\\views\\manage\\user-verification\\index.vue",
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 453,
+    "text": "待审核",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 454,
+    "text": "已通过",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 455,
+    "text": "已拒绝",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 456,
+    "text": "联系电话",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 457,
+    "text": "店铺名称",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 458,
+    "text": "经营类型",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 459,
+    "text": "店铺照片",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 460,
+    "text": "审核备注",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 461,
+    "text": "申请时间",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 462,
+    "text": "审核时间",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 463,
+    "text": "用户认证列表加载失败",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 464,
+    "text": "请填写拒绝原因",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 465,
+    "text": "审核已通过",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 466,
+    "text": "已拒绝申请",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 467,
+    "text": "审核操作失败",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 468,
+    "text": "审核用户提交的店铺认证资料",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 469,
+    "text": "姓名、电话、邮箱或店铺名称",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 470,
+    "text": "审核状态",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 471,
+    "text": "通过",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 472,
+    "text": "拒绝",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 473,
+    "text": "认证申请详情",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 474,
+    "text": "申请ID",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 475,
+    "text": "地址",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 476,
+    "text": "确认通过",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 477,
+    "text": "确认拒绝",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 478,
+    "text": "通过认证申请",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 479,
+    "text": "拒绝认证申请",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 480,
+    "text": "拒绝原因",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 481,
+    "text": "请输入审核备注",
+    "files": [
+      "src\\views\\manage\\user-verification\\index.vue"
+    ]
+  },
+  {
+    "id": 482,
+    "text": "管理员",
+    "files": [
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 483,
+    "text": "测试",
+    "files": [
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 484,
+    "text": "个人简介",
+    "files": [
+      "src\\views\\_core\\profile\\base-setting.vue"
+    ]
+  },
+  {
+    "id": 485,
+    "text": "基本设置",
+    "files": [
+      "src\\views\\_core\\profile\\index.vue"
+    ]
+  },
+  {
+    "id": 486,
+    "text": "安全设置",
+    "files": [
+      "src\\views\\_core\\profile\\index.vue"
+    ]
+  },
+  {
+    "id": 487,
+    "text": "新消息提醒",
+    "files": [
+      "src\\views\\_core\\profile\\index.vue"
+    ]
+  },
+  {
+    "id": 488,
+    "text": "个人中心",
+    "files": [
+      "src\\views\\_core\\profile\\index.vue"
+    ]
+  },
+  {
+    "id": 489,
+    "text": "账户密码",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue",
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 490,
+    "text": "其他用户的消息将以站内信的形式通知",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue"
+    ]
+  },
+  {
+    "id": 491,
+    "text": "系统消息",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue"
+    ]
+  },
+  {
+    "id": 492,
+    "text": "系统消息将以站内信的形式通知",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue"
+    ]
+  },
+  {
+    "id": 493,
+    "text": "待办任务",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue"
+    ]
+  },
+  {
+    "id": 494,
+    "text": "待办任务将以站内信的形式通知",
+    "files": [
+      "src\\views\\_core\\profile\\notification-setting.vue"
+    ]
+  },
+  {
+    "id": 495,
+    "text": "旧密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 496,
+    "text": "请输入旧密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 497,
+    "text": "新密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 498,
+    "text": "请输入新密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 499,
+    "text": "确认密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 500,
+    "text": "请再次输入新密码",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 501,
+    "text": "两次输入的密码不一致",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 502,
+    "text": "密码修改成功",
+    "files": [
+      "src\\views\\_core\\profile\\password-setting.vue"
+    ]
+  },
+  {
+    "id": 503,
+    "text": "当前密码强度：强",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 504,
+    "text": "密保手机",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 505,
+    "text": "已绑定手机：138****8293",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 506,
+    "text": "密保问题",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 507,
+    "text": "未设置密保问题，密保问题可有效保护账户安全",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 508,
+    "text": "备用邮箱",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 509,
+    "text": "已绑定邮箱：ant***sign.com",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 510,
+    "text": "MFA 设备",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  },
+  {
+    "id": 511,
+    "text": "未绑定 MFA 设备，绑定后，可以进行二次确认",
+    "files": [
+      "src\\views\\_core\\profile\\security-setting.vue"
+    ]
+  }
+]

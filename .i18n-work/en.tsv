@@ -1,0 +1,512 @@
+﻿0	Enter content
+1	Enter a link URL
+2	Bulleted list
+3	Numbered list
+4	Link
+5	Clear formatting
+6	Generate with AI
+7	3 hours ago
+8	Notification details
+9	Received 14 new weekly reports
+10	Just now
+11	Zhu Pianyou replied to you
+12	Qu Lili commented on your post
+13	1 day ago
+14	Task reminder
+15	Open system management
+16	Open an external link example
+17	System Management
+18	Coupon Management
+19	User Management
+20	User Verification
+21	Email Verification Codes
+22	Login Logs
+23	Banner Management
+24	Home Navigation
+25	Customer Support
+26	Product Management
+27	Product List
+28	Product Categories
+29	Featured Products
+30	Product Suppliers
+31	Logistics Suppliers
+32	Order Management
+33	Visits
+34	Trend
+35	Web
+36	Mobile
+37	Desktop
+38	Third party
+39	Other
+40	Outsourcing
+41	Customization
+42	Technical support
+43	Remote services
+44	Business breakdown
+45	Search engines
+46	Direct visits
+47	Email marketing
+48	Affiliate ads
+49	Traffic sources
+50	Month {value1}
+51	Users
+52	Total users
+53	Visits
+54	Total visits
+55	Downloads
+56	Total downloads
+57	Usage
+58	Total usage
+59	Traffic trends
+60	Monthly visits
+61	Visit count
+62	Do not wait for opportunities. Create them.
+63	Open Source Team
+64	Who you are today shapes who you will be tomorrow.
+65	Algorithms Team
+66	No talent matters more than hard work.
+67	Break Room
+68	Passion and determination can overcome any obstacle.
+69	Good health is the foundation for achieving your goals.
+70	Tech Experts
+71	Progress comes from taking action, not just imagining it.
+72	Architecture Team
+73	Home
+74	Dashboard
+75	Components
+76	Access Management
+77	Charts
+78	Review recent frontend commits in Git for code quality and consistency.
+79	Review frontend commits
+80	Check and optimize system performance to reduce CPU usage.
+81	Optimize system performance
+82	Check system security for vulnerabilities and unauthorized access.
+83	Security check
+84	Update all npm dependencies in the project to their latest versions.
+85	Update project dependencies
+86	Fix reported UI issues and ensure a consistent experience across browsers.
+87	Fix UI issues
+88	Created project <a>Vue</a> in <a>Open Source Team</a>
+89	William
+90	Followed <a>William</a>
+91	1 hour ago
+92	Evan
+93	Published a <a>status update</a>
+94	Chris
+95	Published <a>How to write a Vite plugin</a>
+96	2 days ago
+97	Replied to <a>Jack</a> about <a>How to optimize a project</a>
+98	3 days ago
+99	Peter
+100	Closed the issue <a>How to run the project</a>
+101	1 week ago
+102	Jack
+103	Pushed code to <a>GitHub</a>
+104	Published <a>How to use Vben Admin</a>
+105	Good morning, {value1}. Time to start your day!
+106	Sunny today, 20°C–32°C!
+107	Projects
+108	Recent activity
+109	Quick navigation
+110	Tasks
+111	Say something
+112	Includes language switching and theme controls
+113	Ant Design Vue component examples
+114	Button
+115	Information
+116	Error
+117	Warning
+118	Success
+119	All
+120	Enable
+121	Disable
+122	Product
+123	Category
+124	No redirect
+125	Support page
+126	Login page
+127	Image
+128	Page type
+129	Title
+130	Subtitle
+131	Link type
+132	Link target
+133	Sort order
+134	Status
+135	Start time
+136	End time
+137	Actions
+138	Query failed
+139	Select an image file
+140	The upload response did not include an image URL
+141	Image uploaded
+142	Upload failed
+143	Enter a title
+144	Upload an image
+145	Select a display period
+146	Created successfully
+147	Creation failed
+148	Updated successfully
+149	Update failed
+150	Deleted successfully
+151	Deletion failed
+152	Banner Management
+153	Keyword
+154	Title or subtitle
+155	Search
+156	Reset
+157	Add banner
+158	{value1} records
+159	Edit
+160	Delete this item?
+161	Delete
+162	Homepage sale
+163	Limited time offer
+164	Upload
+165	Edit banner
+166	Electronics
+167	Mobile phones
+168	Category name
+169	Alias
+170	Query completed
+171	Enter a category name
+172	Enter a valid sort order
+173	Uploaded successfully
+174	Deleted
+175	Add category
+176	Image failed to load. Check that the file server is accessible.
+177	Edit category
+178	Registration reward
+179	Verification reward
+180	System grant
+181	Locked
+182	Available
+183	Used
+184	Expired
+185	Disabled
+186	Automatically issued
+187	Admin grant
+188	Activated at
+189	Expires at
+190	Used at
+191	Created at
+192	Updated at
+193	Coupon ID
+194	User ID
+195	Email / Nickname
+196	Type
+197	Amount
+198	Source
+199	Amount must be {value1} 0, have at most two decimal places, and not exceed 99999999.99
+200	Validity must be an integer between 1 and 365000 days
+201	Reward settings saved
+202	Select a valid creation date range
+203	Enter a valid user ID (positive integer)
+204	Remarks cannot exceed 255 characters
+205	Coupon granted
+206	Coupon disabled
+207	Manage registration and verification rewards and user coupons
+208	Reward settings
+209	About reward settings
+210	Changing the amount does not affect existing coupons. Disabling a reward stops new coupons from being issued.
+211	Existing verification coupons can still unlock after approval. Their validity starts at unlock time, using the validity setting in effect at that time.
+212	Failed to load reward settings
+213	Reload
+214	No reward settings
+215	Enabled
+216	Off
+217	Reward type
+218	Validity in days
+219	{value1} days
+220	Edit settings
+221	User coupons
+222	User ID, email, or nickname
+223	All types
+224	All statuses
+225	All sources
+226	Creation start date
+227	Creation end date
+228	Search
+229	Grant coupon
+230	Failed to load coupons
+231	Details
+232	Disable this coupon? The user will no longer be able to use it.
+233	Edit reward settings
+234	Amount (₱)
+235	Enabled status
+236	Confirm grant
+237	The coupon becomes available immediately, and its validity starts when issued. A user may hold multiple admin-issued coupons.
+238	Enter an existing user ID
+239	Remarks
+240	Coupon details
+241	User avatar
+242	Email
+243	Nickname
+244	Linked order ID
+245	Failed to load coupon details
+246	Verification code
+247	Purpose
+248	Delivery status
+249	Expiration time
+250	IP address
+251	Login verification
+252	Change password
+253	Link email
+254	Valid
+255	Pending delivery
+256	Failed
+257	Enter an email address
+258	Select an option
+259	Featured type
+260	Product ID
+261	Category
+262	Product title
+263	Cover
+264	Category {value1}
+265	Product {value1}
+266	Failed to load products
+267	Failed to load categories
+268	Select a product
+269	Select a featured type
+270	Homepage featured products
+271	Add featured product
+272	Product
+273	Pending
+274	Internal path
+275	External link
+276	No navigation
+277	Value
+278	Icon
+279	Color
+280	Enter a value
+281	Select an icon
+282	Enter a link target
+283	Failed to load icons
+284	Enter an icon name
+285	Use an icon name such as solar:icon-name
+286	This icon is already in the list
+287	Icon added
+288	Failed to add icon
+289	Add home navigation
+290	Delete this home navigation item?
+291	Enter an icon name or select one
+292	Add
+293	Edit home navigation
+294	Login account
+295	Login status
+296	Login location
+297	Device
+298	Operating system
+299	Login time
+300	Enter an account
+301	Enter an IP address
+302	Sea freight
+303	Air freight
+304	Road freight
+305	Express delivery
+306	Supplier name
+307	Shipping method
+308	Delivery time
+309	Unit price
+310	Pricing method
+311	Logo uploaded
+312	Enter a supplier name
+313	Select a shipping method
+314	Enter a delivery time
+315	Select a pricing method
+316	Enter a valid unit price
+317	Supplier name or shipping method
+318	Add supplier
+319	Deleting
+320	Add logistics supplier
+321	SF Sea Freight
+322	7–15 days
+323	Edit logistics supplier
+324	Order ID
+325	Order number
+326	Username
+327	Payment status
+328	Payment method
+329	Order amount
+330	Delivery method
+331	Item ID
+332	Product name
+333	Product ID
+334	Quantity
+335	Subtotal
+336	Unpaid
+337	Pending approval
+338	Paid
+339	Payment approved: Paid / Completed
+340	Unexpected order list response format
+341	Status is required
+342	Delivery method is required
+343	Change at least one field
+344	Order updated
+345	Quantity must be a positive integer
+346	Quantity updated
+347	Search orders, view items, and edit order details
+348	Search orders
+349	Enter a username
+350	Enter a status value
+351	Failed to load orders. Please try again.
+352	Review payment
+353	View details
+354	Order details
+355	Order information
+356	Edit order
+357	Order items
+358	Edit quantity
+359	Failed to load order details
+360	Retry
+361	Enter a delivery method value
+362	Edit item quantity
+363	Item ID: {value1}. Saving will recalculate the order amount.
+364	Item quantity
+365	Contact method
+366	Contact value
+367	Description
+368	Select a contact method
+369	Enter a contact value
+370	Add support contact
+371	Enter an account, link, or phone number
+372	Edit support contact
+373	Cover image
+374	Product images
+375	Category ID
+376	China price
+377	Philippines price
+378	Stock
+379	Minimum order quantity
+380	Sales
+381	User
+382	User ID
+383	Add
+384	Pending removal
+385	Authorized
+386	User {value1}
+387	Cancel
+388	Remove {value1}'s access to supplier contact details. This takes effect after saving.
+389	Confirm removal
+390	Remove authorized user?
+391	Copied
+392	Copy failed
+393	No images to preview
+394	No images to translate
+395	The translation response did not include an image URL
+396	Image translated
+397	Image translation failed
+398	Failed to load authorized users
+399	Cover uploaded
+400	Enter a product title
+401	Select a product first
+402	The AI response did not include a product description
+403	AI generation completed
+404	AI generation failed
+405	Saved successfully
+406	All categories
+407	Select a category
+408	Add product
+409	Image failed to load
+410	Product type
+411	View image
+412	Delete image
+413	Translate image
+414	Sale type
+415	Edit product
+416	Product description
+417	Supplier contact details
+418	Show supplier contact details
+419	WeChat
+420	Phone
+421	Authorized users
+422	Select users who can view supplier contact details
+423	No users
+424	Copy
+425	Supplier image
+426	City
+427	Main products
+428	Show contact
+429	Enter a city
+430	Enter the main products
+431	Supplier name or main products
+432	Show
+433	Hide
+434	Add product supplier
+435	Yiwu
+436	Phone accessories, household essentials
+437	100 units
+438	Show contact details
+439	Enter a supplier description
+440	Edit product supplier
+441	IP location
+442	Invitation code
+443	Invited users
+444	Eligible for lucky draw
+445	Roles
+446	Enter a name
+447	User list
+448	Create user
+449	Delete this item?
+450	Yes
+451	No
+452	Name
+453	Pending review
+454	Approved
+455	Rejected
+456	Contact phone
+457	Store name
+458	Business type
+459	Store photos
+460	Review remarks
+461	Applied at
+462	Reviewed at
+463	Failed to load verification requests
+464	Enter a reason for rejection
+465	Verification approved
+466	Application rejected
+467	Review failed
+468	Review store verification documents submitted by users
+469	Name, phone, email, or store name
+470	Review status
+471	Approve
+472	Reject
+473	Verification request details
+474	Application ID
+475	Address
+476	Confirm approval
+477	Confirm rejection
+478	Approve verification request
+479	Reject verification request
+480	Rejection reason
+481	Enter review remarks
+482	Administrator
+483	Test
+484	Bio
+485	Basic settings
+486	Security settings
+487	Notifications
+488	Profile
+489	Account password
+490	Receive messages from other users as in-app notifications
+491	System messages
+492	Receive system messages as in-app notifications
+493	Tasks
+494	Receive task reminders as in-app notifications
+495	Current password
+496	Enter your current password
+497	New password
+498	Enter a new password
+499	Confirm password
+500	Enter your new password again
+501	Passwords do not match
+502	Password changed
+503	Current password strength: Strong
+504	Recovery phone
+505	Linked phone: 138****8293
+506	Security questions
+507	No security questions set. Add them to help protect your account.
+508	Recovery email
+509	Linked email: ant***sign.com
+510	MFA device
+511	No MFA device linked. Link one to enable two-step verification.

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { UploadProps } from 'ant-design-vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
@@ -27,6 +27,7 @@ import {
   updateCategoryApi,
   uploadAdminFileApi,
 } from '#/api';
+import { $t } from '#/locales';
 
 type Category = {
   alice?: string;
@@ -48,19 +49,19 @@ type CategoryForm = {
 const uploadOrigin = import.meta.env.VITE_UPLOAD_ORIGIN || '';
 
 const categories = ref<Category[]>([
-  { id: 1, name: '电子产品', sort: 1, status: '1' },
-  { id: 2, name: '手机', sort: 2, status: '1' },
+  { id: 1, get name() { return $t('app.electronics'); }, sort: 1, status: '1' },
+  { id: 2, get name() { return $t('app.mobilePhones'); }, sort: 2, status: '1' },
 ]);
 
-const columns = [
+const columns = computed(() => ([
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: 'Icon', dataIndex: 'icon', key: 'icon' },
-  { title: '分类名称', dataIndex: 'name', key: 'name' },
-  { title: '别名', dataIndex: 'alice', key: 'alice' },
-  { title: '排序', dataIndex: 'sort', key: 'sort' },
-  { title: '状态', dataIndex: 'status', key: 'status' },
-  { title: '操作', key: 'actions' },
-];
+  { title: $t('app.categoryName'), dataIndex: 'name', key: 'name' },
+  { title: $t('app.alias'), dataIndex: 'alice', key: 'alice' },
+  { title: $t('app.sortOrder'), dataIndex: 'sort', key: 'sort' },
+  { title: $t('app.status'), dataIndex: 'status', key: 'status' },
+  { title: $t('app.actions'), key: 'actions' },
+]));
 
 const queryLoading = ref(false);
 const deleteLoadingId = ref<number | string>('');
@@ -140,9 +141,9 @@ async function queryCategories() {
     queryLoading.value = true;
     const responseData = await getCategoryListApi({ status: '1' });
     categories.value = normalizeCategories(responseData);
-    message.success('查询成功');
+    message.success($t('app.queryCompleted'));
   } catch (error: any) {
-    message.error(error?.message || '查询失败');
+    message.error(error?.message || $t('app.queryFailed'));
   } finally {
     queryLoading.value = false;
   }
@@ -189,12 +190,12 @@ async function createCategory() {
   };
 
   if (!payload.name) {
-    message.error('请输入分类名称');
+    message.error($t('app.enterACategoryName'));
     return;
   }
 
   if (!Number.isFinite(payload.sort)) {
-    message.error('请输入正确的排序');
+    message.error($t('app.enterAValidSortOrder'));
     return;
   }
 
@@ -213,9 +214,9 @@ async function createCategory() {
       status: createdCategory?.status || payload.status,
     });
     createVisible.value = false;
-    message.success('新增成功');
+    message.success($t('app.createdSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '新增失败');
+    message.error(error?.message || $t('app.creationFailed'));
   } finally {
     createLoading.value = false;
   }
@@ -223,7 +224,7 @@ async function createCategory() {
 
 function beforeIconUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    message.error('请选择图片文件');
+    message.error($t('app.selectAnImageFile'));
     return false;
   }
   return true;
@@ -237,7 +238,7 @@ const uploadIcon: UploadProps['customRequest'] = async (options) => {
     const iconUrl = getUploadedIconUrl(responseData);
 
     if (!iconUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     createForm.value.icon = iconUrl;
@@ -250,12 +251,12 @@ const uploadIcon: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('上传成功');
+    message.success($t('app.uploadedSuccessfully'));
   } catch (error: any) {
     createForm.value.icon = '';
     iconFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -267,7 +268,7 @@ const uploadEditIcon: UploadProps['customRequest'] = async (options) => {
     const iconUrl = getUploadedIconUrl(responseData);
 
     if (!iconUrl) {
-      throw new Error('上传接口未返回图片地址');
+      throw new Error($t('app.theUploadResponseDidNotIncludeAnImageUrl'));
     }
 
     editForm.value.icon = iconUrl;
@@ -280,12 +281,12 @@ const uploadEditIcon: UploadProps['customRequest'] = async (options) => {
       },
     ];
     options.onSuccess?.(responseData);
-    message.success('上传成功');
+    message.success($t('app.uploadedSuccessfully'));
   } catch (error: any) {
     editForm.value.icon = '';
     editIconFileList.value = [];
     options.onError?.(error);
-    message.error(error?.message || '上传失败');
+    message.error(error?.message || $t('app.uploadFailed'));
   }
 };
 
@@ -311,12 +312,12 @@ async function saveEdit() {
   };
 
   if (!payload.name) {
-    message.error('请输入分类名称');
+    message.error($t('app.enterACategoryName'));
     return;
   }
 
   if (!Number.isFinite(payload.sort)) {
-    message.error('请输入正确的排序');
+    message.error($t('app.enterAValidSortOrder'));
     return;
   }
 
@@ -337,9 +338,9 @@ async function saveEdit() {
       categories.value[idx] = nextCategory;
     }
     editVisible.value = false;
-    message.success('更新成功');
+    message.success($t('app.updatedSuccessfully'));
   } catch (error: any) {
-    message.error(error?.message || '更新失败');
+    message.error(error?.message || $t('app.updateFailed'));
   } finally {
     editLoading.value = false;
   }
@@ -350,9 +351,9 @@ async function remove(id: number | string) {
     deleteLoadingId.value = id;
     await deleteCategoryApi(id);
     categories.value = categories.value.filter((i) => i.id !== id);
-    message.success('已删除');
+    message.success($t('app.deleted'));
   } catch (error: any) {
-    message.error(error?.message || '删除失败');
+    message.error(error?.message || $t('app.deletionFailed'));
   } finally {
     deleteLoadingId.value = '';
   }
@@ -364,26 +365,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <Page title="商品分类管理">
+  <Page :title="$t('app.productCategories')">
     <div class="mb-4 flex gap-2">
-      <Button :loading="queryLoading" @click="queryCategories">查询</Button>
-      <Button type="primary" @click="openCreate">新增分类</Button>
+      <Button :loading="queryLoading" @click="queryCategories">{{ $t('app.search') }}</Button>
+      <Button type="primary" @click="openCreate">{{ $t('app.addCategory') }}</Button>
     </div>
 
     <Table :columns="columns" :data-source="categories" row-key="id">
       <template #bodyCell="{ record, column }">
         <template v-if="column.key === 'actions'">
           <Space>
-            <a @click="edit(record as Category)">编辑</a>
-            <Popconfirm title="确定删除？" @confirm="() => remove(record.id)">
+            <a @click="edit(record as Category)">{{ $t('app.edit') }}</a>
+            <Popconfirm :title="$t('app.deleteThisItem')" @confirm="() => remove(record.id)">
               <Button
                 :loading="deleteLoadingId === record.id"
                 danger
                 size="small"
                 type="link"
               >
-                删除
-              </Button>
+{{ $t('app.delete') }}
+</Button>
             </Popconfirm>
           </Space>
         </template>
@@ -394,12 +395,12 @@ onMounted(() => {
             :src="resolveImageUrl(record.icon)"
             :width="32"
             class="category-icon"
-            @error="message.error('图片加载失败，请确认文件服务可以正常访问')"
+            @error="message.error($t('app.imageFailedToLoadCheckThatTheFileServerIs'))"
           />
           <span v-else>-</span>
         </template>
         <template v-else-if="column.key === 'status'">
-          {{ record.status === '1' ? '启用' : '禁用' }}
+          {{ record.status === '1' ? $t('app.enable') : $t('app.disable') }}
         </template>
         <template v-else>
           {{ record[column.dataIndex as keyof Category] }}
@@ -410,24 +411,24 @@ onMounted(() => {
     <Modal
       v-model:open="createVisible"
       :confirm-loading="createLoading"
-      title="新增分类"
+      :title="$t('app.addCategory')"
       @ok="createCategory"
     >
       <Form layout="vertical">
-        <Form.Item label="分类名称" required>
+        <Form.Item :label="$t('app.categoryName')" required>
           <Input v-model:value="createForm.name" />
         </Form.Item>
-        <Form.Item label="别名">
+        <Form.Item :label="$t('app.alias')">
           <Input v-model:value="createForm.alice" />
         </Form.Item>
-        <Form.Item label="排序">
+        <Form.Item :label="$t('app.sortOrder')">
           <InputNumber
             v-model:value="createForm.sort"
             :min="0"
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="启用">
+        <Form.Item :label="$t('app.enable')">
           <Switch
             v-model:checked="createForm.status"
             checked-value="1"
@@ -444,31 +445,31 @@ onMounted(() => {
             accept="image/*"
             list-type="picture-card"
           >
-            <div>上传</div>
+            <div>{{ $t('app.upload') }}</div>
           </Upload>
         </Form.Item>
       </Form>
     </Modal>
 
-    <Modal v-model:open="editVisible" title="编辑分类" @ok="saveEdit">
+    <Modal v-model:open="editVisible" :title="$t('app.editCategory')" @ok="saveEdit">
       <Form layout="vertical">
         <Form.Item label="ID">
           <Input v-model:value="editForm.id" disabled />
         </Form.Item>
-        <Form.Item label="分类名称" required>
+        <Form.Item :label="$t('app.categoryName')" required>
           <Input v-model:value="editForm.name" />
         </Form.Item>
-        <Form.Item label="别名">
+        <Form.Item :label="$t('app.alias')">
           <Input v-model:value="editForm.alice" />
         </Form.Item>
-        <Form.Item label="排序">
+        <Form.Item :label="$t('app.sortOrder')">
           <InputNumber
             v-model:value="editForm.sort"
             :min="0"
             class="w-full"
           />
         </Form.Item>
-        <Form.Item label="启用">
+        <Form.Item :label="$t('app.enable')">
           <Switch
             v-model:checked="editForm.status"
             checked-value="1"
@@ -486,7 +487,7 @@ onMounted(() => {
             accept="image/*"
             list-type="picture-card"
           >
-            <div>上传</div>
+            <div>{{ $t('app.upload') }}</div>
           </Upload>
         </Form.Item>
       </Form>

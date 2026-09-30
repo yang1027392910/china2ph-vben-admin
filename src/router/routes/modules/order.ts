@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
     path: '/management/orders',
     component: () => import('#/views/manage/order/index.vue'),
     meta: {
-      title: '订单管理',
+      title: 'app.orderManagement',
       icon: 'lucide:shopping-bag',
       order: 22,
     },
