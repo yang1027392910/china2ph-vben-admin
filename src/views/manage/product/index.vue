@@ -31,6 +31,7 @@ import {
   addProductContactPermissionApi,
   aiGenerateProductApi,
   createProductApi,
+  deleteProductApi,
   deleteProductContactPermissionApi,
   getAdminUserListApi,
   getCategoryListApi,
@@ -1075,10 +1076,15 @@ async function updateProduct() {
   }
 }
 
-function remove(id: number | string) {
-  products.value = products.value.filter((i) => i.id !== id);
-  total.value = Math.max(total.value - 1, 0);
-  message.success($t('app.deleted'));
+async function remove(id: number | string) {
+  try {
+    await deleteProductApi(id);
+    products.value = products.value.filter((i) => i.id !== id);
+    total.value = Math.max(total.value - 1, 0);
+    message.success($t('app.deleted'));
+  } catch (error: any) {
+    message.error(error?.message || $t('app.deletionFailed'));
+  }
 }
 
 onMounted(() => {

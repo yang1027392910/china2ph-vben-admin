@@ -115,6 +115,10 @@ export function updateProductApi(data: ProductApi.ProductUpdatePayload) {
   );
 }
 
+export function deleteProductApi(id: number | string) {
+  return requestClient.delete(`/admin/product/list/${id}`);
+}
+
 export function aiGenerateProductApi(data: ProductApi.ProductAiGeneratePayload) {
   return requestClient.post<ProductApi.ProductAiGenerateResponse>(
     '/admin/product/ai-generate',
